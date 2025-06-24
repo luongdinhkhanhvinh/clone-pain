@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  benjamin-moore-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: benjamin-moore-clone
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    volumes:
+      # Mount logs directory to persist PM2 logs
+      - ./logs:/app/logs
+    networks:
+      - benjamin-moore-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  benjamin-moore-network:
+    driver: bridge
+
+volumes:
+  logs:
+    driver: local
