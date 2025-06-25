@@ -1,11 +1,31 @@
 "use client"
 
 import { useState } from "react"
-import { useCart, type CartItem } from "@/lib/cart-context"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
-import { ShoppingCart, Check } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { User, Mail } from "lucide-react"
+
+interface CustomerFormData {
+  firstName: string
+  lastName: string
+  email: string
+  phone: string
+  address: string
+  city: string
+  state: string
+  zipCode: string
+  projectType: string
+  message: string
+  selectedProduct: string
+  finish: string
+  size: string
+}
 
 interface AddToCartButtonProps {
   product: {
@@ -21,11 +41,24 @@ interface AddToCartButtonProps {
 }
 
 export function AddToCartButton({ product, className }: AddToCartButtonProps) {
-  const { dispatch } = useCart()
+  const [isOpen, setIsOpen] = useState(false)
   const [finish, setFinish] = useState("Eggshell")
   const [size, setSize] = useState("1 Gallon")
-  const [isAdding, setIsAdding] = useState(false)
-  const [justAdded, setJustAdded] = useState(false)
+  const [formData, setFormData] = useState<CustomerFormData>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    address: "",
+    city: "",
+    state: "",
+    zipCode: "",
+    projectType: "",
+    message: "",
+    selectedProduct: product.name,
+    finish: "Eggshell",
+    size: "1 Gallon",
+  })
 
   const finishes = ["Flat", "Eggshell", "Satin", "Semi-Gloss", "Gloss"]
   const sizes = [
@@ -38,32 +71,42 @@ export function AddToCartButton({ product, className }: AddToCartButtonProps) {
   const selectedSize = sizes.find((s) => s.value === size)
   const finalPrice = selectedSize?.price || product.price
 
-  const handleAddToCart = async () => {
-    setIsAdding(true)
+  const handleInputChange = (field: keyof CustomerFormData, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }))
+  }
 
-    const cartItem: Omit<CartItem, "quantity"> = {
-      id: `${product.id}-${finish}-${size}`,
-      name: product.name,
-      code: product.code,
-      price: finalPrice,
-      image: product.image,
-      category: product.category,
-      finish,
-      size,
-      hex: product.hex,
-    }
-
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 500))
-
-    dispatch({ type: "ADD_ITEM", payload: cartItem })
-    dispatch({ type: "OPEN_CART" })
-
-    setIsAdding(false)
-    setJustAdded(true)
-
-    // Reset the "just added" state after 2 seconds
-    setTimeout(() => setJustAdded(false), 2000)
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log("Customer order submitted:", {
+      ...formData,
+      product: {
+        id: product.id,
+        name: product.name,
+        code: product.code,
+        price: finalPrice,
+        finish,
+        size,
+      },
+    })
+    // Handle form submission logic here
+    alert("Đơn hàng đã được gửi thành công! Chúng tôi sẽ liên hệ với bạn sớm.")
+    setIsOpen(false)
+    // Reset form
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      address: "",
+      city: "",
+      state: "",
+      zipCode: "",
+      projectType: "",
+      message: "",
+      selectedProduct: product.name,
+      finish: "Eggshell",
+      size: "1 Gallon",
+    })
   }
 
   return (
@@ -121,30 +164,161 @@ export function AddToCartButton({ product, className }: AddToCartButtonProps) {
         </div>
       </div>
 
-      <Button
-        onClick={handleAddToCart}
-        disabled={isAdding}
-        className="w-full"
-        size="lg"
-        variant={justAdded ? "secondary" : "default"}
-      >
-        {isAdding ? (
-          <>
-            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-            Adding to Cart...
-          </>
-        ) : justAdded ? (
-          <>
-            <Check className="w-4 h-4 mr-2" />
-            Added to Cart!
-          </>
-        ) : (
-          <>
-            <ShoppingCart className="w-4 h-4 mr-2" />
-            Add to Cart
-          </>
-        )}
-      </Button>
+      <Sheet open={isOpen} onOpenChange={setIsOpen}>
+        <SheetTrigger asChild>
+          <Button className="w-full" size="lg">
+            <User className="w-4 h-4 mr-2" />
+            Đặt hàng ngay
+          </Button>
+        </SheetTrigger>
+        <SheetContent className="w-full sm:max-w-lg bg-white">
+          <SheetHeader>
+            <SheetTitle className="font-display text-xl">Thông tin đặt hàng</SheetTitle>
+          </SheetHeader>
+
+          <ScrollArea className="flex-1 -mx-6 px-6 bg-white">
+            <div className="py-4">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">
+                    Đặt hàng: {product.name}
+                  </CardTitle>
+                  <p className="text-sm text-slate-600">
+                    {finish} - {size} - ${finalPrice.toFixed(2)}
+                  </p>
+                </CardHeader>
+                <CardContent>
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    {/* Personal Information */}
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="firstName">Họ</Label>
+                        <Input
+                          id="firstName"
+                          value={formData.firstName}
+                          onChange={(e) => handleInputChange("firstName", e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="lastName">Tên</Label>
+                        <Input
+                          id="lastName"
+                          value={formData.lastName}
+                          onChange={(e) => handleInputChange("lastName", e.target.value)}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="email">Email</Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => handleInputChange("email", e.target.value)}
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="phone">Số điện thoại</Label>
+                      <Input
+                        id="phone"
+                        type="tel"
+                        value={formData.phone}
+                        onChange={(e) => handleInputChange("phone", e.target.value)}
+                        required
+                      />
+                    </div>
+
+                    {/* Address Information */}
+                    <div>
+                      <Label htmlFor="address">Địa chỉ</Label>
+                      <Input
+                        id="address"
+                        value={formData.address}
+                        onChange={(e) => handleInputChange("address", e.target.value)}
+                        required
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="city">Thành phố</Label>
+                        <Input
+                          id="city"
+                          value={formData.city}
+                          onChange={(e) => handleInputChange("city", e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="state">Tỉnh/Thành</Label>
+                        <Select value={formData.state} onValueChange={(value) => handleInputChange("state", value)}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Chọn tỉnh/thành" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="hanoi">Hà Nội</SelectItem>
+                            <SelectItem value="hcm">TP. Hồ Chí Minh</SelectItem>
+                            <SelectItem value="danang">Đà Nẵng</SelectItem>
+                            <SelectItem value="haiphong">Hải Phòng</SelectItem>
+                            <SelectItem value="cantho">Cần Thơ</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="zipCode">Mã bưu điện</Label>
+                      <Input
+                        id="zipCode"
+                        value={formData.zipCode}
+                        onChange={(e) => handleInputChange("zipCode", e.target.value)}
+                      />
+                    </div>
+
+                    {/* Project Information */}
+                    <div>
+                      <Label htmlFor="projectType">Loại dự án</Label>
+                      <Select value={formData.projectType} onValueChange={(value) => handleInputChange("projectType", value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Chọn loại dự án" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="residential">Nhà ở</SelectItem>
+                          <SelectItem value="commercial">Thương mại</SelectItem>
+                          <SelectItem value="industrial">Công nghiệp</SelectItem>
+                          <SelectItem value="renovation">Cải tạo</SelectItem>
+                          <SelectItem value="new-construction">Xây dựng mới</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="message">Ghi chú</Label>
+                      <Textarea
+                        id="message"
+                        placeholder="Mô tả chi tiết về dự án của bạn..."
+                        value={formData.message}
+                        onChange={(e) => handleInputChange("message", e.target.value)}
+                        rows={3}
+                      />
+                    </div>
+
+                    <Button type="submit" className="w-full" size="lg">
+                      <Mail className="w-4 h-4 mr-2" />
+                      Gửi đơn hàng
+                    </Button>
+                  </form>
+                </CardContent>
+              </Card>
+            </div>
+          </ScrollArea>
+        </SheetContent>
+      </Sheet>
     </div>
   )
 }

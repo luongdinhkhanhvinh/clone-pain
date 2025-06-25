@@ -10,8 +10,8 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
-import { CartDrawer } from "@/components/cart/cart-drawer"
-import { Search, MapPin, User } from "lucide-react"
+import { CustomerFormDrawer } from "@/components/cart/customer-form-drawer"
+import { Search, MapPin } from "lucide-react"
 
 export function Header() {
   return (
@@ -57,7 +57,7 @@ export function Header() {
                 <NavigationMenuTrigger className="text-slate-700 hover:text-slate-900 font-medium">
                   Paint Colors
                 </NavigationMenuTrigger>
-                <NavigationMenuContent>
+                <NavigationMenuContent className="bg-white border-white">
                   <div className="grid gap-3 p-8 w-[500px]">
                     <NavigationMenuLink asChild>
                       <Link href="/colors" className="block p-4 hover:bg-slate-50 rounded-sm transition-colors">
@@ -85,7 +85,7 @@ export function Header() {
                 <NavigationMenuTrigger className="text-slate-700 hover:text-slate-900 font-medium">
                   Products
                 </NavigationMenuTrigger>
-                <NavigationMenuContent>
+                <NavigationMenuContent className="bg-white border-white">
                   <div className="grid gap-3 p-8 w-[500px]">
                     <NavigationMenuLink asChild>
                       <Link href="/products" className="block p-4 hover:bg-slate-50 rounded-sm transition-colors">
@@ -143,11 +143,7 @@ export function Header() {
               />
             </div>
 
-            <Button variant="ghost" size="icon" className="text-slate-700 hover:text-slate-900">
-              <User className="w-4 h-4" />
-            </Button>
-
-            <CartDrawer />
+            <CustomerFormDrawer />
 
             <Button className="hidden lg:block" size="default">
               Shop Online
