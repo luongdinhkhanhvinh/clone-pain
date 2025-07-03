@@ -21,8 +21,8 @@ public/locales/
 │   ├── products.json       # Products page translations
 │   ├── professionals.json  # Professionals page translations
 │   ├── color-match.json    # Color matching page translations
-│   ├── paint-colors.json   # Paint colors page translations
-│   └── paint-ideas.json    # Paint ideas page translations
+│   ├── wood-colors.json   # wood colors page translations
+│   └── wood-ideas.json    # wood ideas page translations
 └── vi/
     ├── common.json          # Vietnamese common translations
     ├── home.json           # Vietnamese home page translations

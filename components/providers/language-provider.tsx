@@ -53,8 +53,8 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       loadTranslations(savedLocale, 'products'),
       loadTranslations(savedLocale, 'professionals'),
       loadTranslations(savedLocale, 'color-match'),
-      loadTranslations(savedLocale, 'paint-colors'),
-      loadTranslations(savedLocale, 'paint-ideas'),
+      loadTranslations(savedLocale, 'wood-colors'),
+      loadTranslations(savedLocale, 'wood-ideas'),
       loadTranslations(savedLocale, 'components')
     ]).then(() => setIsLoaded(true))
   }, [])
@@ -71,8 +71,8 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       loadTranslations(newLocale, 'products'),
       loadTranslations(newLocale, 'professionals'),
       loadTranslations(newLocale, 'color-match'),
-      loadTranslations(newLocale, 'paint-colors'),
-      loadTranslations(newLocale, 'paint-ideas'),
+      loadTranslations(newLocale, 'wood-colors'),
+      loadTranslations(newLocale, 'wood-ideas'),
       loadTranslations(newLocale, 'components')
     ])
   }

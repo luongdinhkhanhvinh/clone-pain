@@ -316,7 +316,7 @@ export function ColorCard({ color, size = "small", showCategory = false }: Color
             {color.orderPercentage && (
               <div className="flex items-center justify-between mt-2">
                 <span className="text-xs text-blue-600 font-medium">
-                  {color.orderPercentage} đặt hàng
+                  {color.orderPercentage}
                 </span>
               </div>
             )}

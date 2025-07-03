@@ -1,0 +1,163 @@
+{
+  "title": "Wood Ideas & Design Inspiration",
+  "description": "Explore trending color combinations, room ideas, and professional design tips",
+  "tabs": {
+    "inspiration": "Room Inspiration",
+    "trending": "Trending Colors",
+    "schemes": "Color Schemes",
+    "tips": "Expert Tips"
+  },
+  "rooms": {
+    "allRooms": "All Rooms",
+    "livingRoom": "Living Room",
+    "bedroom": "Bedroom",
+    "kitchen": "Kitchen",
+    "bathroom": "Bathroom",
+    "diningRoom": "Dining Room",
+    "homeOffice": "Home Office",
+    "exterior": "Exterior"
+  },
+  "styles": {
+    "allStyles": "All Styles",
+    "modern": "Modern",
+    "traditional": "Traditional",
+    "farmhouse": "Farmhouse",
+    "minimalist": "Minimalist",
+    "bohemian": "Bohemian",
+    "industrial": "Industrial",
+    "coastal": "Coastal"
+  },
+  "filters": {
+    "searchPlaceholder": "Search inspiration...",
+    "roomType": "Room Type",
+    "style": "Style",
+    "showing": "Showing",
+    "inspiration": "inspiration",
+    "inspirations": "inspirations"
+  },
+  "colorSchemes": {
+    "sereneSanctuary": {
+      "name": "Serene Sanctuary",
+      "description": "Calming blues and soft whites create a peaceful retreat"
+    },
+    "warmEarthTones": {
+      "name": "Warm Earth Tones",
+      "description": "Rich terracotta and warm beiges for a cozy atmosphere"
+    },
+    "freshKitchenGreens": {
+      "name": "Fresh Kitchen Greens",
+      "description": "Sage and mint greens with crisp white accents"
+    },
+    "boldStatementWall": {
+      "name": "Bold Statement Wall",
+      "description": "Deep navy creates drama with gold accents"
+    },
+    "spaLikeBathroom": {
+      "name": "Spa-Like Bathroom",
+      "description": "Soft grays and whites for a clean, relaxing feel"
+    },
+    "cozyHomeOffice": {
+      "name": "Cozy Home Office",
+      "description": "Warm grays with pops of energizing orange"
+    }
+  },
+  "trending": {
+    "title": "2024 Color Trends",
+    "description": "Discover the colors shaping interior design this year",
+    "exploreColor": "Explore This Color",
+    "viewDetails": "View Details",
+    "trends": {
+      "oceanInspired": "Ocean Inspired",
+      "warmNeutrals": "Warm Neutrals",
+      "naturesPalette": "Nature's Palette",
+      "softRomance": "Soft Romance"
+    },
+    "categories": {
+      "warmNeutrals": {
+        "title": "Warm Neutrals",
+        "description": "Cozy beiges and soft browns create inviting spaces"
+      },
+      "boldJewelTones": {
+        "title": "Bold Jewel Tones",
+        "description": "Rich emeralds and sapphires make dramatic statements"
+      },
+      "softPastels": {
+        "title": "Soft Pastels",
+        "description": "Gentle hues perfect for creating calm, peaceful environments"
+      }
+    }
+  },
+  "schemes": {
+    "title": "Curated Color Schemes",
+    "description": "Professional color combinations for every style",
+    "useScheme": "Use This Scheme",
+    "types": {
+      "monochromaticBlues": {
+        "name": "Monochromatic Blues",
+        "description": "Various shades of blue create depth and sophistication"
+      },
+      "complementaryContrast": {
+        "name": "Complementary Contrast",
+        "description": "Orange and green opposites create vibrant energy"
+      },
+      "analogousHarmony": {
+        "name": "Analogous Harmony",
+        "description": "Adjacent colors on the wheel for natural flow"
+      },
+      "triadicBalance": {
+        "name": "Triadic Balance",
+        "description": "Three evenly spaced colors create dynamic balance"
+      },
+      "splitComplementary": {
+        "name": "Split Complementary",
+        "description": "Base color with two adjacent to its complement"
+      },
+      "tetradicSquare": {
+        "name": "Tetradic Square",
+        "description": "Four colors forming a square on the color wheel"
+      }
+    }
+  },
+  "tips": {
+    "title": "Expert Wood Tips",
+    "description": "Professional advice for perfect results",
+    "quickTips": {
+      "rule60-30-10": {
+        "title": "The 60-30-10 Rule",
+        "description": "Use 60% dominant color, 30% secondary color, and 10% accent color for balanced rooms."
+      },
+      "testColors": {
+        "title": "Test Colors in Different Light",
+        "description": "Wood large swatches and observe them throughout the day in various lighting conditions."
+      },
+      "considerFunction": {
+        "title": "Consider Room Function",
+        "description": "Choose energizing colors for workspaces and calming tones for bedrooms."
+      }
+    },
+    "detailedTips": {
+      "choosingFinish": {
+        "title": "Choosing the Right Finish",
+        "content": "Flat finishes hide imperfections but are harder to clean. Satin and eggshell are great for most rooms. Semi-gloss works well in kitchens and bathrooms."
+      },
+      "primerEssential": {
+        "title": "Primer is Essential",
+        "content": "Always use primer when changing colors dramatically, wooding over dark colors, or wooding new drywall. It ensures better coverage and color accuracy."
+      },
+      "qualityTools": {
+        "title": "Quality Tools Matter",
+        "content": "Invest in high-quality brushes and rollers. They hold more wood, provide smoother application, and leave fewer marks."
+      },
+      "planColorFlow": {
+        "title": "Plan Your Color Flow",
+        "content": "Consider how colors flow from room to room. Use a consistent color palette throughout your home for cohesive design."
+      }
+    }
+  },
+  "actions": {
+    "getColors": "Get Colors",
+    "exploreThisColor": "Explore This Color",
+    "viewDetails": "View Details",
+    "useThisScheme": "Use This Scheme"
+  }
+}

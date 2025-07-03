@@ -6,7 +6,7 @@
     "viewTerms": "View Terms"
   },
   "hero": {
-    "badge": "Luxury Paint Solutions",
+    "badge": "Luxury wood Solutions",
     "title": "Silk-Like Luxury.",
     "subtitle": "Unmatched Elegance.",
     "description": "Experience our exclusive collection of over 3,500 sophisticated colors with silk-like finishes, crafted for the most discerning designers and luxury homeowners.",
@@ -18,18 +18,18 @@
     "colorName": "Silk Fern",
     "colorCode": "SLX-2144",
     "signatureColor": "Signature Color",
-    "imageAlt": "Sophisticated interior with SilkLux premium paint finish"
+    "imageAlt": "Sophisticated interior with SilkLux premium wood finish"
   },
   "features": {
     "title": "The SilkLux Difference",
-    "description": "Discover what sets our luxury paint solutions apart in quality, innovation, and sophisticated elegance.",
+    "description": "Discover what sets our luxury wood solutions apart in quality, innovation, and sophisticated elegance.",
     "curatedPalette": {
       "title": "Curated Luxury Palette",
       "description": "Expertly crafted colors with silk-like finishes, developed by our team of luxury design specialists."
     },
     "silkFormulation": {
       "title": "Silk-Like Formulation",
-      "description": "Advanced paint technology delivering exceptional silk-like texture, coverage, and luxurious finish quality."
+      "description": "Advanced wood technology delivering exceptional silk-like texture, coverage, and luxurious finish quality."
     },
     "designExpertise": {
       "title": "Luxury Design Expertise", 

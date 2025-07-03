@@ -2,96 +2,36 @@
 
 import type React from "react"
 
-import { useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
+import { useLanguage } from "@/components/providers/language-provider"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Textarea } from "@/components/ui/textarea"
 import {
-  Users,
   Award,
   BookOpen,
   Calculator,
-  Palette,
-  Phone,
+  CheckCircle,
+  DollarSign,
+  Download,
   Mail,
   MapPin,
-  Download,
+  Palette,
+  Phone,
   Star,
-  CheckCircle,
   TrendingUp,
-  Clock,
-  DollarSign,
   Truck,
+  Users
 } from "lucide-react"
-import { useLanguage } from "@/components/providers/language-provider"
+import Image from "next/image"
+import Link from "next/link"
+import { useState } from "react"
 
-const professionalProducts = [
-  {
-    name: "Advance Waterborne Interior Alkyd",
-    category: "Premium Interior",
-    description: "Self-leveling paint with the durability of oil in a waterborne formula",
-    features: ["Self-leveling", "Excellent flow", "Durable finish", "Low odor"],
-    coverage: "350-400 sq ft",
-    price: "Contact for pricing",
-    image: "/placeholder.svg?height=200&width=300",
-  },
-  {
-    name: "Aura Grand Entrance",
-    category: "Exterior Premium",
-    description: "Ultra-premium exterior paint with lifetime limited warranty",
-    features: ["Fade resistant", "Self-priming", "Mildew resistant", "Easy cleanup"],
-    coverage: "350-400 sq ft",
-    price: "Contact for pricing",
-    image: "/placeholder.svg?height=200&width=300",
-  },
-  {
-    name: "Corotech V160",
-    category: "Commercial",
-    description: "High-performance commercial coating for demanding environments",
-    features: ["High durability", "Chemical resistant", "Easy maintenance", "VOC compliant"],
-    coverage: "400-450 sq ft",
-    price: "Contact for pricing",
-    image: "/placeholder.svg?height=200&width=300",
-  },
-]
-
-const trainingPrograms = [
-  {
-    title: "Color Theory for Professionals",
-    duration: "4 hours",
-    format: "Online",
-    level: "Intermediate",
-    description: "Master color relationships and create stunning color schemes for clients",
-    topics: ["Color wheel fundamentals", "Undertones and LRV", "Color psychology", "Trend forecasting"],
-    price: "Free for trade members",
-  },
-  {
-    title: "Advanced Application Techniques",
-    duration: "8 hours",
-    format: "In-person",
-    level: "Advanced",
-    description: "Learn professional application methods for flawless finishes",
-    topics: ["Surface preparation", "Spray techniques", "Specialty finishes", "Problem solving"],
-    price: "$299",
-  },
-  {
-    title: "Business Development Workshop",
-    duration: "6 hours",
-    format: "Hybrid",
-    level: "All levels",
-    description: "Grow your painting business with proven strategies and tools",
-    topics: ["Marketing strategies", "Pricing models", "Customer relations", "Digital tools"],
-    price: "$199",
-  },
-]
-
+// Professional products will be generated dynamically with translations
 
 
 export default function ProfessionalsPage() {
@@ -144,6 +84,51 @@ export default function ProfessionalsPage() {
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
+  const professionalProducts = [
+    {
+      name: t('products.advanceWaterborne.name', 'professionals'),
+      category: t('products.advanceWaterborne.category', 'professionals'),
+      description: t('products.advanceWaterborne.description', 'professionals'),
+      features: [
+        t('products.advanceWaterborne.features.selfLeveling', 'professionals'),
+        t('products.advanceWaterborne.features.excellentFlow', 'professionals'),
+        t('products.advanceWaterborne.features.durableFinish', 'professionals'),
+        t('products.advanceWaterborne.features.lowOdor', 'professionals')
+      ],
+      coverage: t('products.advanceWaterborne.coverage', 'professionals'),
+      price: t('products.contactForPricing', 'professionals'),
+      image: "/placeholder.svg?height=200&width=300",
+    },
+    {
+      name: t('products.auraGrandEntrance.name', 'professionals'),
+      category: t('products.auraGrandEntrance.category', 'professionals'),
+      description: t('products.auraGrandEntrance.description', 'professionals'),
+      features: [
+        t('products.auraGrandEntrance.features.fadeResistant', 'professionals'),
+        t('products.auraGrandEntrance.features.selfPriming', 'professionals'),
+        t('products.auraGrandEntrance.features.mildewResistant', 'professionals'),
+        t('products.auraGrandEntrance.features.easyCleanup', 'professionals')
+      ],
+      coverage: t('products.auraGrandEntrance.coverage', 'professionals'),
+      price: t('products.contactForPricing', 'professionals'),
+      image: "/placeholder.svg?height=200&width=300",
+    },
+    {
+      name: t('products.corotechV160.name', 'professionals'),
+      category: t('products.corotechV160.category', 'professionals'),
+      description: t('products.corotechV160.description', 'professionals'),
+      features: [
+        t('products.corotechV160.features.highDurability', 'professionals'),
+        t('products.corotechV160.features.chemicalResistant', 'professionals'),
+        t('products.corotechV160.features.easyMaintenance', 'professionals'),
+        t('products.corotechV160.features.vocCompliant', 'professionals')
+      ],
+      coverage: t('products.corotechV160.coverage', 'professionals'),
+      price: t('products.contactForPricing', 'professionals'),
+      image: "/placeholder.svg?height=200&width=300",
+    },
+  ]
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     console.log("Form submitted:", formData)
@@ -175,8 +160,8 @@ export default function ProfessionalsPage() {
             </div>
             <div className="relative">
               <Image
-                src="/placeholder.svg?height=400&width=600"
-                alt="Professional painter at work"
+                src="/profess/chuyengia.jpg/?height=400&width=600"
+                alt={t('hero.imageAlt', 'professionals')}
                 width={600}
                 height={400}
                 className="rounded-lg shadow-2xl"
@@ -188,10 +173,10 @@ export default function ProfessionalsPage() {
 
       <div className="container mx-auto px-4 py-12">
         <Tabs defaultValue="benefits" className="w-full">
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="benefits">{t('benefits.title', 'professionals')}</TabsTrigger>
             <TabsTrigger value="products">{t('navigation.products')}</TabsTrigger>
-            <TabsTrigger value="training">{t('benefits.trainingPrograms.title', 'professionals')}</TabsTrigger>
+            {/* <TabsTrigger value="training">{t('benefits.trainingPrograms.title', 'professionals')}</TabsTrigger> */}
             <TabsTrigger value="tools">{t('tools.title', 'professionals')}</TabsTrigger>
             <TabsTrigger value="join">{t('form.title', 'professionals')}</TabsTrigger>
           </TabsList>
@@ -223,24 +208,21 @@ export default function ProfessionalsPage() {
               <div className="grid md:grid-cols-3 gap-8">
                 {[
                   {
-                    name: "Mike's Painting Co.",
-                    location: "Denver, CO",
-                    testimonial:
-                      "Benjamin Moore's trade program has helped us increase our margins by 25% while delivering superior quality to our clients.",
+                    name: t('testimonials.mikesWooding.name', 'professionals'),
+                    location: t('testimonials.mikesWooding.location', 'professionals'),
+                    testimonial: t('testimonials.mikesWooding.testimonial', 'professionals'),
                     rating: 5,
                   },
                   {
-                    name: "Elite Contractors",
-                    location: "Austin, TX",
-                    testimonial:
-                      "The training programs have elevated our team's skills and helped us win more high-end projects.",
+                    name: t('testimonials.eliteContractors.name', 'professionals'),
+                    location: t('testimonials.eliteContractors.location', 'professionals'),
+                    testimonial: t('testimonials.eliteContractors.testimonial', 'professionals'),
                     rating: 5,
                   },
                   {
-                    name: "Precision Painting",
-                    location: "Seattle, WA",
-                    testimonial:
-                      "Job site delivery and dedicated support have streamlined our operations significantly.",
+                    name: t('testimonials.precisionWooding.name', 'professionals'),
+                    location: t('testimonials.precisionWooding.location', 'professionals'),
+                    testimonial: t('testimonials.precisionWooding.testimonial', 'professionals'),
                     rating: 5,
                   },
                 ].map((story, index) => (
@@ -266,9 +248,9 @@ export default function ProfessionalsPage() {
           {/* Products Tab */}
           <TabsContent value="products" className="space-y-8">
             <div className="text-center">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Professional Products</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('products.title', 'professionals')}</h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Premium paint lines designed for professional applications and demanding projects
+                {t('products.description', 'professionals')}
               </p>
             </div>
 
@@ -293,7 +275,7 @@ export default function ProfessionalsPage() {
                       </div>
 
                       <div className="space-y-2">
-                        <p className="text-sm text-gray-600">Coverage: {product.coverage}</p>
+                        <p className="text-sm text-gray-600">{t('products.coverage', 'professionals')}: {product.coverage}</p>
                         <div className="flex flex-wrap gap-1">
                           {product.features.slice(0, 2).map((feature, featureIndex) => (
                             <Badge key={featureIndex} variant="outline" className="text-xs">
@@ -305,7 +287,7 @@ export default function ProfessionalsPage() {
 
                       <div className="flex items-center justify-between pt-4 border-t">
                         <span className="font-semibold text-gray-900">{product.price}</span>
-                        <Button size="sm">Get Quote</Button>
+                        <Button size="sm">{t('products.getQuote', 'professionals')}</Button>
                       </div>
                     </div>
                   </CardContent>
@@ -316,10 +298,10 @@ export default function ProfessionalsPage() {
             {/* Product Categories */}
             <div className="grid md:grid-cols-4 gap-6 mt-12">
               {[
-                { name: "Interior Paints", count: "25+ Products", icon: "🏠" },
-                { name: "Exterior Paints", count: "20+ Products", icon: "🏢" },
-                { name: "Commercial Coatings", count: "15+ Products", icon: "🏭" },
-                { name: "Specialty Finishes", count: "10+ Products", icon: "✨" },
+                { name: t('products.categories.interiorWoods.name', 'professionals'), count: t('products.categories.interiorWoods.count', 'professionals'), icon: "🏠" },
+                { name: t('products.categories.exteriorWoods.name', 'professionals'), count: t('products.categories.exteriorWoods.count', 'professionals'), icon: "🏢" },
+                { name: t('products.categories.commercialCoatings.name', 'professionals'), count: t('products.categories.commercialCoatings.count', 'professionals'), icon: "🏭" },
+                { name: t('products.categories.specialtyFinishes.name', 'professionals'), count: t('products.categories.specialtyFinishes.count', 'professionals'), icon: "✨" },
               ].map((category, index) => (
                 <Card key={index} className="text-center cursor-pointer hover:shadow-lg transition-shadow">
                   <CardContent className="p-6">
@@ -332,133 +314,38 @@ export default function ProfessionalsPage() {
             </div>
           </TabsContent>
 
-          {/* Training Tab */}
-          <TabsContent value="training" className="space-y-8">
-            <div className="text-center">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Professional Training</h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Enhance your skills and grow your business with our comprehensive training programs
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {trainingPrograms.map((program, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <div className="flex items-center justify-between mb-2">
-                      <Badge variant={program.format === "Online" ? "default" : "secondary"}>{program.format}</Badge>
-                      <Badge variant="outline">{program.level}</Badge>
-                    </div>
-                    <CardTitle className="text-lg">{program.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <p className="text-gray-600">{program.description}</p>
-
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
-                        <Clock className="w-4 h-4" />
-                        {program.duration}
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
-                        <DollarSign className="w-4 h-4" />
-                        {program.price}
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="font-semibold mb-2">Topics Covered:</h4>
-                      <ul className="text-sm text-gray-600 space-y-1">
-                        {program.topics.map((topic, topicIndex) => (
-                          <li key={topicIndex} className="flex items-center gap-2">
-                            <CheckCircle className="w-3 h-3 text-green-500" />
-                            {topic}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <Button className="w-full">Enroll Now</Button>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            {/* Certification Program */}
-            <Card className="bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200">
-              <CardContent className="p-8">
-                <div className="grid lg:grid-cols-2 gap-8 items-center">
-                  <div>
-                    <div className="flex items-center gap-2 mb-4">
-                      <Award className="w-8 h-8 text-blue-600" />
-                      <h3 className="text-2xl font-bold text-gray-900">Certification Program</h3>
-                    </div>
-                    <p className="text-gray-700 mb-6">
-                      Become a Benjamin Moore Certified Professional and showcase your expertise to clients. Our
-                      comprehensive certification program covers color theory, product knowledge, and application
-                      techniques.
-                    </p>
-                    <div className="space-y-2 mb-6">
-                      <div className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-green-500" />
-                        <span className="text-sm">Industry-recognized certification</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-green-500" />
-                        <span className="text-sm">Marketing materials and badge</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-green-500" />
-                        <span className="text-sm">Continuing education credits</span>
-                      </div>
-                    </div>
-                    <Button size="lg">Learn More</Button>
-                  </div>
-                  <div>
-                    <Image
-                      src="/placeholder.svg?height=300&width=400"
-                      alt="Certification program"
-                      width={400}
-                      height={300}
-                      className="rounded-lg shadow-lg"
-                    />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
           {/* Tools Tab */}
           <TabsContent value="tools" className="space-y-8">
             <div className="text-center">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Professional Tools</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('tools.title', 'professionals')}</h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Access powerful tools and resources to streamline your projects and grow your business
+                {t('tools.description', 'professionals')}
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
                 {
-                  title: "Paint Calculator",
-                  description: "Calculate exact paint quantities for any project",
+                  title: t('tools.calculator.title', 'professionals'),
+                  description: t('tools.calculator.description', 'professionals'),
                   icon: Calculator,
                   link: "/tools/calculator",
                 },
                 {
-                  title: "Color Visualizer",
-                  description: "Show clients how colors will look in their space",
+                  title: t('tools.colorVisualizer.title', 'professionals'),
+                  description: t('tools.colorVisualizer.description', 'professionals'),
                   icon: Palette,
                   link: "/tools/visualizer",
                 },
                 {
-                  title: "Project Estimator",
-                  description: "Generate professional estimates and proposals",
+                  title: t('tools.projectEstimator.title', 'professionals'),
+                  description: t('tools.projectEstimator.description', 'professionals'),
                   icon: TrendingUp,
                   link: "/tools/estimator",
                 },
                 {
-                  title: "Technical Data Sheets",
-                  description: "Access detailed product specifications",
+                  title: t('tools.technicalDataSheets.title', 'professionals'),
+                  description: t('tools.technicalDataSheets.description', 'professionals'),
                   icon: Download,
                   link: "/tools/datasheets",
                 },
@@ -469,7 +356,7 @@ export default function ProfessionalsPage() {
                     <h3 className="font-semibold text-lg mb-2">{tool.title}</h3>
                     <p className="text-gray-600 text-sm mb-4">{tool.description}</p>
                     <Button size="sm" variant="outline" asChild>
-                      <Link href={tool.link}>Access Tool</Link>
+                      <Link href={tool.link}>{t('tools.accessTool', 'professionals')}</Link>
                     </Button>
                   </CardContent>
                 </Card>
@@ -481,36 +368,35 @@ export default function ProfessionalsPage() {
               <CardContent className="p-8">
                 <div className="grid lg:grid-cols-2 gap-8 items-center">
                   <div>
-                    <h3 className="text-2xl font-bold mb-4">Benjamin Moore Pro App</h3>
+                    <h3 className="text-2xl font-bold mb-4">{t('tools.mobileApp.title', 'professionals')}</h3>
                     <p className="text-gray-300 mb-6">
-                      Take your business mobile with our professional app. Access color tools, calculators, product
-                      information, and more right from your phone or tablet.
+                      {t('tools.mobileApp.description', 'professionals')}
                     </p>
                     <div className="space-y-2 mb-6">
                       <div className="flex items-center gap-2">
                         <CheckCircle className="w-4 h-4 text-green-400" />
-                        <span className="text-sm">Color matching and visualization</span>
+                        <span className="text-sm">{t('tools.mobileApp.features.colorMatching', 'professionals')}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <CheckCircle className="w-4 h-4 text-green-400" />
-                        <span className="text-sm">Project management tools</span>
+                        <span className="text-sm">{t('tools.mobileApp.features.projectManagement', 'professionals')}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <CheckCircle className="w-4 h-4 text-green-400" />
-                        <span className="text-sm">Offline access to key features</span>
+                        <span className="text-sm">{t('tools.mobileApp.features.offlineAccess', 'professionals')}</span>
                       </div>
                     </div>
                     <div className="flex gap-4">
-                      <Button className="bg-white text-gray-900 hover:bg-gray-100">Download iOS</Button>
-                      <Button variant="outline" className="border-white text-white hover:bg-white hover:text-gray-900">
-                        Download Android
+                      <Button className="bg-white text-gray-900 hover:bg-gray-100">{t('tools.downloadIOS', 'professionals')}</Button>
+                      <Button className="border-white text-white hover:bg-white hover:text-gray-900">
+                        {t('tools.downloadAndroid', 'professionals')}
                       </Button>
                     </div>
                   </div>
                   <div>
                     <Image
                       src="/placeholder.svg?height=400&width=300"
-                      alt="Mobile app screenshot"
+                      alt={t('tools.mobileAppAlt', 'professionals')}
                       width={300}
                       height={400}
                       className="mx-auto"
@@ -534,7 +420,7 @@ export default function ProfessionalsPage() {
               {/* Application Form */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Trade Program Application</CardTitle>
+                  <CardTitle>{t('form.applicationTitle', 'professionals')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleSubmit} className="space-y-4">
@@ -592,56 +478,56 @@ export default function ProfessionalsPage() {
                     </div>
 
                     <div>
-                      <Label htmlFor="businessType">Business Type</Label>
+                      <Label htmlFor="businessType">{t('form.businessType', 'professionals')}</Label>
                       <Select
                         value={formData.businessType}
                         onValueChange={(value) => handleInputChange("businessType", value)}
                       >
                         <SelectTrigger>
-                          <SelectValue placeholder="Select business type" />
+                          <SelectValue placeholder={t('form.selectBusinessType', 'professionals')} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="painter">Professional Painter</SelectItem>
-                          <SelectItem value="contractor">General Contractor</SelectItem>
-                          <SelectItem value="designer">Interior Designer</SelectItem>
-                          <SelectItem value="architect">Architect</SelectItem>
-                          <SelectItem value="retailer">Paint Retailer</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
+                          <SelectItem value="wooder">{t('form.businessTypes.wooder', 'professionals')}</SelectItem>
+                          <SelectItem value="contractor">{t('form.businessTypes.contractor', 'professionals')}</SelectItem>
+                          <SelectItem value="designer">{t('form.businessTypes.designer', 'professionals')}</SelectItem>
+                          <SelectItem value="architect">{t('form.businessTypes.architect', 'professionals')}</SelectItem>
+                          <SelectItem value="retailer">{t('form.businessTypes.retailer', 'professionals')}</SelectItem>
+                          <SelectItem value="other">{t('form.businessTypes.other', 'professionals')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
 
                     <div>
-                      <Label htmlFor="experience">Years of Experience</Label>
+                      <Label htmlFor="experience">{t('form.experience', 'professionals')}</Label>
                       <Select
                         value={formData.experience}
                         onValueChange={(value) => handleInputChange("experience", value)}
                       >
                         <SelectTrigger>
-                          <SelectValue placeholder="Select experience level" />
+                          <SelectValue placeholder={t('form.selectExperience', 'professionals')} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="1-2">1-2 years</SelectItem>
-                          <SelectItem value="3-5">3-5 years</SelectItem>
-                          <SelectItem value="6-10">6-10 years</SelectItem>
-                          <SelectItem value="10+">10+ years</SelectItem>
+                          <SelectItem value="1-2">{t('form.experienceOptions.1-2', 'professionals')}</SelectItem>
+                          <SelectItem value="3-5">{t('form.experienceOptions.3-5', 'professionals')}</SelectItem>
+                          <SelectItem value="6-10">{t('form.experienceOptions.6-10', 'professionals')}</SelectItem>
+                          <SelectItem value="10+">{t('form.experienceOptions.10+', 'professionals')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
 
                     <div>
-                      <Label htmlFor="message">Additional Information</Label>
+                      <Label htmlFor="message">{t('form.message', 'professionals')}</Label>
                       <Textarea
                         id="message"
                         value={formData.message}
                         onChange={(e) => handleInputChange("message", e.target.value)}
-                        placeholder="Tell us about your business and painting needs..."
+                        placeholder={t('form.messagePlaceholder', 'professionals')}
                         rows={4}
                       />
                     </div>
 
                     <Button type="submit" className="w-full" size="lg">
-                      Submit Application
+                      {t('form.submit', 'professionals')}
                     </Button>
                   </form>
                 </CardContent>
@@ -651,29 +537,29 @@ export default function ProfessionalsPage() {
               <div className="space-y-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Need Help?</CardTitle>
+                    <CardTitle>{t('contact.needHelp', 'professionals')}</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="flex items-center gap-3">
                       <Phone className="w-5 h-5 text-blue-600" />
                       <div>
-                        <p className="font-semibold">Professional Support</p>
-                        <p className="text-gray-600">1-800-BENJAMIN</p>
+                        <p className="font-semibold">{t('contact.professionalSupport', 'professionals')}</p>
+                        <p className="text-gray-600">1-800-SilkLux</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
                       <Mail className="w-5 h-5 text-blue-600" />
                       <div>
-                        <p className="font-semibold">Email Support</p>
-                        <p className="text-gray-600">professionals@benjaminmoore.com</p>
+                        <p className="font-semibold">{t('contact.emailSupport', 'professionals')}</p>
+                        <p className="text-gray-600">professionals@silkLux.com</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
                       <MapPin className="w-5 h-5 text-blue-600" />
                       <div>
-                        <p className="font-semibold">Find a Representative</p>
+                        <p className="font-semibold">{t('contact.findRepresentative', 'professionals')}</p>
                         <Button variant="link" className="p-0 h-auto text-blue-600">
-                          Locate your local rep
+                          {t('contact.locateRep', 'professionals')}
                         </Button>
                       </div>
                     </div>
@@ -682,25 +568,25 @@ export default function ProfessionalsPage() {
 
                 <Card>
                   <CardHeader>
-                    <CardTitle>Program Requirements</CardTitle>
+                    <CardTitle>{t('requirements.title', 'professionals')}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-2 text-sm text-gray-600">
                       <li className="flex items-center gap-2">
                         <CheckCircle className="w-4 h-4 text-green-500" />
-                        Valid business license
+                        {t('requirements.businessLicense', 'professionals')}
                       </li>
                       <li className="flex items-center gap-2">
                         <CheckCircle className="w-4 h-4 text-green-500" />
-                        Professional painting experience
+                        {t('requirements.professionalExperience', 'professionals')}
                       </li>
                       <li className="flex items-center gap-2">
                         <CheckCircle className="w-4 h-4 text-green-500" />
-                        Minimum annual volume requirements
+                        {t('requirements.minimumVolume', 'professionals')}
                       </li>
                       <li className="flex items-center gap-2">
                         <CheckCircle className="w-4 h-4 text-green-500" />
-                        Commitment to quality standards
+                        {t('requirements.qualityStandards', 'professionals')}
                       </li>
                     </ul>
                   </CardContent>

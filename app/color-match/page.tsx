@@ -101,7 +101,7 @@ export default function ColorMatchPage() {
                             onChange={handleImageUpload}
                           />
                         </div>
-                        <p className="text-sm text-gray-600">Upload a photo to find matching paint colors</p>
+                        <p className="text-sm text-gray-600">Upload a photo to find matching wood colors</p>
                       </div>
                     )}
                   </div>

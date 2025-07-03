@@ -17,8 +17,8 @@ export function DemoComponents() {
 
   const sampleProduct = {
     id: 1,
-    name: "SilkLux Premium Interior Paint",
-    category: "Interior Paint",
+    name: "SilkLux Premium Interior wood",
+    category: "Interior wood",
     type: "Ultra Premium",
     price: 89.99,
     rating: 4.8,

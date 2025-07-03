@@ -1,12 +1,12 @@
 {
   "site": {
     "title": "SilkLux - Giải Pháp Ván Gỗ Cao Cấp & Màu Sắc Sang Trọng",
-    "description": "Khám phá ván gỗ cao cấp với lớp hoàn thiện mịn như lụa. Hơn 3,500 màu sắc tinh tế và sản phẩm chuyên nghiệp dành cho các nhà thiết kế và chủ nhà khó tính.",
-    "keywords": "ván gỗ cao cấp, màu ván gỗ premium, ván gỗ hoàn thiện lụa, thiết kế nội thất, SilkLux, tư vấn màu sắc, ván gỗ high-end"
+    "description": "Khám phá ván gỗ cao cấp với lớp hoàn thiện mịn như . Hơn 3,500 màu sắc tinh tế và sản phẩm chuyên nghiệp dành cho các nhà thiết kế và chủ nhà khó tính.",
+    "keywords": "ván gỗ cao cấp, màu ván gỗ premium, ván gỗ hoàn thiện , thiết kế nội thất, SilkLux, tư vấn màu sắc, ván gỗ high-end"
   },
   "navigation": {
     "home": "Trang Chủ",
-    "paintColors": "Màu Ván Gỗ",
+    "woodColors": "Màu Ván Gỗ",
     "products": "Sản Phẩm",
     "designIdeas": "Ý Tưởng",
     "forProfessionals": "Dành Cho Chuyên Gia",
@@ -14,8 +14,8 @@
     "colorMatching": "Phối Màu",
     "colorFamilies": "Họ Màu",
     "allProducts": "Tất Cả Sản Phẩm",
-    "interiorPaint": "Ván Gỗ Nội Thất",
-    "exteriorPaint": "Ván Gỗ Ngoại Thất",
+    "interiorwood": "Ván Gỗ Nội Thất",
+    "exteriorwood": "Ván Gỗ Ngoại Thất",
     "luxuryFinishes": "Hoàn Thiện Cao Cấp",
     "primers": "Lót Ván Gỗ",
     "specialtyProducts": "Sản Phẩm Đặc Biệt"
@@ -31,7 +31,7 @@
     "allProductsDesc": "Dải sản phẩm ván gỗ cao cấp đầy đủ"
   },
   "footer": {
-    "description": "Giải pháp ván gỗ cao cấp được chế tác với lớp hoàn thiện mịn như lụa. Nâng tầm không gian với chất lượng và sự tinh tế vô song.",
+    "description": "Giải pháp ván gỗ cao cấp được chế tác với lớp hoàn thiện mịn như . Nâng tầm không gian với chất lượng và sự tinh tế vô song.",
     "products": "Sản Phẩm",
     "colors": "Màu Sắc",
     "stayConnected": "Kết Nối",

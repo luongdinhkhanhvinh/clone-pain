@@ -12,26 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Heart, Search, Bookmark, Share2, TrendingUp } from "lucide-react"
 import { useLanguage } from "@/components/providers/language-provider"
 
-const roomCategories = [
-  "All Rooms",
-  "Living Room",
-  "Bedroom",
-  "Kitchen",
-  "Bathroom",
-  "Dining Room",
-  "Home Office",
-  "Exterior",
-]
-const styleCategories = [
-  "All Styles",
-  "Modern",
-  "Traditional",
-  "Farmhouse",
-  "Minimalist",
-  "Bohemian",
-  "Industrial",
-  "Coastal",
-]
+// These will be replaced with translated versions in the component
 
 const trendingColors = [
   { name: "Aegean Teal", code: "2136-40", hex: "#4A90A4", trend: "Ocean Inspired" },
@@ -109,53 +90,41 @@ const colorSchemes = [
   },
 ]
 
-const expertTips = [
-  {
-    title: "The 60-30-10 Rule",
-    description: "Use 60% dominant color, 30% secondary color, and 10% accent color for balanced rooms.",
-    image: "/placeholder.svg?height=200&width=300",
-  },
-  {
-    title: "Test Colors in Different Light",
-    description: "Paint large swatches and observe them throughout the day in various lighting conditions.",
-    image: "/placeholder.svg?height=200&width=300",
-  },
-  {
-    title: "Consider Room Function",
-    description: "Choose energizing colors for workspaces and calming tones for bedrooms.",
-    image: "/placeholder.svg?height=200&width=300",
-  },
-]
+// Expert tips will be generated dynamically with translations
 
-export default function PaintIdeasPage() {
+export default function woodIdeasPage() {
   const { t } = useLanguage()
-  const [selectedRoom, setSelectedRoom] = useState("All Rooms")
-  const [selectedStyle, setSelectedStyle] = useState("All Styles")
+  const [selectedRoom, setSelectedRoom] = useState(t('rooms.allRooms', 'wood-ideas'))
+  const [selectedStyle, setSelectedStyle] = useState(t('styles.allStyles', 'wood-ideas'))
   const [searchTerm, setSearchTerm] = useState("")
   const [favorites, setFavorites] = useState<number[]>([])
   const [saved, setSaved] = useState<number[]>([])
 
   const roomCategories = [
-    t('rooms.livingRoom', 'paint-ideas'),
-    t('rooms.bedroom', 'paint-ideas'),
-    t('rooms.kitchen', 'paint-ideas'),
-    t('rooms.bathroom', 'paint-ideas'),
-    t('rooms.diningRoom', 'paint-ideas'),
-    t('rooms.homeOffice', 'paint-ideas'),
-    t('rooms.exterior', 'paint-ideas')
+    t('rooms.allRooms', 'wood-ideas'),
+    t('rooms.livingRoom', 'wood-ideas'),
+    t('rooms.bedroom', 'wood-ideas'),
+    t('rooms.kitchen', 'wood-ideas'),
+    t('rooms.bathroom', 'wood-ideas'),
+    t('rooms.diningRoom', 'wood-ideas'),
+    t('rooms.homeOffice', 'wood-ideas'),
+    t('rooms.exterior', 'wood-ideas')
   ]
 
   const styleCategories = [
-    t('styles.modern', 'paint-ideas'),
-    t('styles.traditional', 'paint-ideas'),
-    t('styles.farmhouse', 'paint-ideas'),
-    t('styles.minimalist', 'paint-ideas'),
-    t('styles.bohemian', 'paint-ideas')
+    t('styles.allStyles', 'wood-ideas'),
+    t('styles.modern', 'wood-ideas'),
+    t('styles.traditional', 'wood-ideas'),
+    t('styles.farmhouse', 'wood-ideas'),
+    t('styles.minimalist', 'wood-ideas'),
+    t('styles.bohemian', 'wood-ideas'),
+    t('styles.industrial', 'wood-ideas'),
+    t('styles.coastal', 'wood-ideas')
   ]
 
   const filteredSchemes = colorSchemes.filter((scheme) => {
-    const matchesRoom = selectedRoom === "All Rooms" || scheme.room === selectedRoom
-    const matchesStyle = selectedStyle === "All Styles" || scheme.style === selectedStyle
+    const matchesRoom = selectedRoom === t('rooms.allRooms', 'wood-ideas') || scheme.room === selectedRoom
+    const matchesStyle = selectedStyle === t('styles.allStyles', 'wood-ideas') || scheme.style === selectedStyle
     const matchesSearch =
       scheme.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       scheme.description.toLowerCase().includes(searchTerm.toLowerCase())
@@ -170,23 +139,41 @@ export default function PaintIdeasPage() {
     setSaved((prev) => (prev.includes(id) ? prev.filter((save) => save !== id) : [...prev, id]))
   }
 
+  const expertTips = [
+    {
+      title: t('tips.quickTips.rule60-30-10.title', 'wood-ideas'),
+      description: t('tips.quickTips.rule60-30-10.description', 'wood-ideas'),
+      image: "/placeholder.svg?height=200&width=300",
+    },
+    {
+      title: t('tips.quickTips.testColors.title', 'wood-ideas'),
+      description: t('tips.quickTips.testColors.description', 'wood-ideas'),
+      image: "/placeholder.svg?height=200&width=300",
+    },
+    {
+      title: t('tips.quickTips.considerFunction.title', 'wood-ideas'),
+      description: t('tips.quickTips.considerFunction.description', 'wood-ideas'),
+      image: "/placeholder.svg?height=200&width=300",
+    },
+  ]
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('title', 'paint-ideas')}</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('title', 'wood-ideas')}</h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            {t('description', 'paint-ideas')}
+            {t('description', 'wood-ideas')}
           </p>
         </div>
 
         <Tabs defaultValue="inspiration" className="w-full">
           <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="inspiration">Room Inspiration</TabsTrigger>
-            <TabsTrigger value="trending">Trending Colors</TabsTrigger>
-            <TabsTrigger value="schemes">Color Schemes</TabsTrigger>
-            <TabsTrigger value="tips">Expert Tips</TabsTrigger>
+            <TabsTrigger value="inspiration">{t('tabs.inspiration', 'wood-ideas')}</TabsTrigger>
+            <TabsTrigger value="trending">{t('tabs.trending', 'wood-ideas')}</TabsTrigger>
+            <TabsTrigger value="schemes">{t('tabs.schemes', 'wood-ideas')}</TabsTrigger>
+            <TabsTrigger value="tips">{t('tabs.tips', 'wood-ideas')}</TabsTrigger>
           </TabsList>
 
           {/* Room Inspiration Tab */}
@@ -196,7 +183,7 @@ export default function PaintIdeasPage() {
               <div className="relative flex-1 max-w-md">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                 <Input
-                  placeholder="Search ideas..."
+                  placeholder={t('filters.searchPlaceholder', 'wood-ideas')}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-10"
@@ -205,7 +192,7 @@ export default function PaintIdeasPage() {
 
               <Select value={selectedRoom} onValueChange={setSelectedRoom}>
                 <SelectTrigger className="w-48">
-                  <SelectValue placeholder="Room Type" />
+                  <SelectValue placeholder={t('filters.roomType', 'wood-ideas')} />
                 </SelectTrigger>
                 <SelectContent>
                   {roomCategories.map((room) => (
@@ -218,7 +205,7 @@ export default function PaintIdeasPage() {
 
               <Select value={selectedStyle} onValueChange={setSelectedStyle}>
                 <SelectTrigger className="w-48">
-                  <SelectValue placeholder="Style" />
+                  <SelectValue placeholder={t('filters.style', 'wood-ideas')} />
                 </SelectTrigger>
                 <SelectContent>
                   {styleCategories.map((style) => (
@@ -232,7 +219,7 @@ export default function PaintIdeasPage() {
 
             {/* Results Count */}
             <div className="text-sm text-gray-600">
-              Showing {filteredSchemes.length} inspiration{filteredSchemes.length !== 1 ? "s" : ""}
+              {t('filters.showing', 'wood-ideas')} {filteredSchemes.length} {filteredSchemes.length !== 1 ? t('filters.inspirations', 'wood-ideas') : t('filters.inspiration', 'wood-ideas')}
             </div>
 
             {/* Inspiration Grid */}
@@ -299,7 +286,7 @@ export default function PaintIdeasPage() {
                           </span>
                         </div>
                         <Button asChild size="sm">
-                          <Link href={`/colors?inspiration=${scheme.id}`}>Get Colors</Link>
+                          <Link href={`/colors?inspiration=${scheme.id}`}>{t('actions.getColors', 'wood-ideas')}</Link>
                         </Button>
                       </div>
                     </div>
@@ -312,8 +299,8 @@ export default function PaintIdeasPage() {
           {/* Trending Colors Tab */}
           <TabsContent value="trending" className="space-y-8">
             <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">2024 Color Trends</h2>
-              <p className="text-gray-600">Discover the colors shaping interior design this year</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">{t('trending.title', 'wood-ideas')}</h2>
+              <p className="text-gray-600">{t('trending.description', 'wood-ideas')}</p>
             </div>
 
             {/* Featured Trending Color */}
@@ -335,13 +322,13 @@ export default function PaintIdeasPage() {
                       </div>
                     </div>
                     <Button asChild>
-                      <Link href="/colors?featured=aegean-teal">Explore This Color</Link>
+                      <Link href="/colors?featured=aegean-teal">{t('trending.exploreColor', 'wood-ideas')}</Link>
                     </Button>
                   </div>
                   <div className="relative">
                     <Image
                       src="/placeholder.svg?height=400&width=500"
-                      alt="Room painted in Aegean Teal"
+                      alt="Room wooded in Aegean Teal"
                       width={500}
                       height={400}
                       className="rounded-lg shadow-lg"
@@ -364,7 +351,7 @@ export default function PaintIdeasPage() {
                     <h3 className="font-semibold text-lg mb-1">{color.name}</h3>
                     <p className="text-gray-600 text-sm mb-4">{color.code}</p>
                     <Button size="sm" variant="outline" className="w-full">
-                      View Details
+                      {t('trending.viewDetails', 'wood-ideas')}
                     </Button>
                   </CardContent>
                 </Card>
@@ -412,8 +399,8 @@ export default function PaintIdeasPage() {
           {/* Color Schemes Tab */}
           <TabsContent value="schemes" className="space-y-8">
             <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Curated Color Schemes</h2>
-              <p className="text-gray-600">Professional color combinations for every style</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">{t('schemes.title', 'wood-ideas')}</h2>
+              <p className="text-gray-600">{t('schemes.description', 'wood-ideas')}</p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -459,7 +446,7 @@ export default function PaintIdeasPage() {
                     <h3 className="font-semibold text-lg mb-2">{scheme.name}</h3>
                     <p className="text-gray-600 text-sm mb-4">{scheme.description}</p>
                     <Button size="sm" variant="outline" className="w-full">
-                      Use This Scheme
+                      {t('schemes.useScheme', 'wood-ideas')}
                     </Button>
                   </CardContent>
                 </Card>
@@ -470,8 +457,8 @@ export default function PaintIdeasPage() {
           {/* Expert Tips Tab */}
           <TabsContent value="tips" className="space-y-8">
             <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Expert Painting Tips</h2>
-              <p className="text-gray-600">Professional advice for perfect results</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">{t('tips.title', 'wood-ideas')}</h2>
+              <p className="text-gray-600">{t('tips.description', 'wood-ideas')}</p>
             </div>
 
             {/* Featured Tips */}
@@ -499,24 +486,20 @@ export default function PaintIdeasPage() {
             <div className="space-y-8">
               {[
                 {
-                  title: "Choosing the Right Finish",
-                  content:
-                    "Flat finishes hide imperfections but are harder to clean. Satin and eggshell are great for most rooms. Semi-gloss works well in kitchens and bathrooms.",
+                  title: t('tips.detailedTips.choosingFinish.title', 'wood-ideas'),
+                  content: t('tips.detailedTips.choosingFinish.content', 'wood-ideas'),
                 },
                 {
-                  title: "Primer is Essential",
-                  content:
-                    "Always use primer when changing colors dramatically, painting over dark colors, or painting new drywall. It ensures better coverage and color accuracy.",
+                  title: t('tips.detailedTips.primerEssential.title', 'wood-ideas'),
+                  content: t('tips.detailedTips.primerEssential.content', 'wood-ideas'),
                 },
                 {
-                  title: "Quality Tools Matter",
-                  content:
-                    "Invest in high-quality brushes and rollers. They hold more paint, provide smoother application, and leave fewer marks.",
+                  title: t('tips.detailedTips.qualityTools.title', 'wood-ideas'),
+                  content: t('tips.detailedTips.qualityTools.content', 'wood-ideas'),
                 },
                 {
-                  title: "Plan Your Color Flow",
-                  content:
-                    "Consider how colors flow from room to room. Use a consistent color palette throughout your home for cohesive design.",
+                  title: t('tips.detailedTips.planColorFlow.title', 'wood-ideas'),
+                  content: t('tips.detailedTips.planColorFlow.content', 'wood-ideas'),
                 },
               ].map((tip, index) => (
                 <Card key={index}>

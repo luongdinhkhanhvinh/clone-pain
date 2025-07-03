@@ -45,7 +45,10 @@
     "viewDetails": "View Details",
     "compareProducts": "Compare Products",
     "sqft": "sq ft",
-    "gallon": "gallon"
+    "gallon": "gallon",
+    "availableIn": "Available in",
+    "baseColor": "Base Color",
+    "availableColors": "Available Colors"
   },
   "cart": {
     "addToCart": "Add to Cart",

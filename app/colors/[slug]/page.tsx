@@ -133,7 +133,7 @@ export default function ColorDetailPage() {
             className="flex items-center gap-2"
           >
             <ArrowLeft className="w-4 h-4" />
-            Quay lại
+            {t('buttons.backToColors', 'colors')}
           </Button>
           
           <div className="flex items-center gap-2">
@@ -144,15 +144,15 @@ export default function ColorDetailPage() {
               className={isFavorited ? "text-red-500" : ""}
             >
               <Heart className={`w-4 h-4 mr-2 ${isFavorited ? "fill-current" : ""}`} />
-              {isFavorited ? "Đã yêu thích" : "Yêu thích"}
+              {isFavorited ? t('buttons.favorited', 'colors') : t('buttons.favorite', 'colors')}
             </Button>
             <Button variant="outline" size="sm">
               <Share2 className="w-4 h-4 mr-2" />
-              Chia sẻ
+              {t('buttons.share', 'colors')}
             </Button>
             <Button variant="outline" size="sm">
               <Download className="w-4 h-4 mr-2" />
-              Tải về
+              {t('buttons.download', 'colors')}
             </Button>
           </div>
         </div>
@@ -232,7 +232,7 @@ export default function ColorDetailPage() {
                 <Badge variant="outline">{color.category}</Badge>
                 {color.orderPercentage && (
                   <Badge className="bg-blue-100 text-blue-800">
-                    {color.orderPercentage} đặt hàng
+                    {color.orderPercentage}
                   </Badge>
                 )}
               </div>
@@ -241,15 +241,15 @@ export default function ColorDetailPage() {
 
             <Tabs defaultValue="details" className="w-full">
               <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="details">Chi tiết</TabsTrigger>
-                <TabsTrigger value="applications">Ứng dụng</TabsTrigger>
-                <TabsTrigger value="combinations">Phối màu</TabsTrigger>
+                <TabsTrigger value="details">{t('colorDetail.tabs.details', 'colors')}</TabsTrigger>
+                <TabsTrigger value="applications">{t('colorDetail.tabs.applications', 'colors')}</TabsTrigger>
+                <TabsTrigger value="combinations">{t('colorDetail.tabs.combinations', 'colors')}</TabsTrigger>
               </TabsList>
               
               <TabsContent value="details" className="space-y-4">
                 <Card>
                   <CardHeader>
-                    <CardTitle className="text-lg">Thông tin kỹ thuật</CardTitle>
+                    <CardTitle className="text-lg">{t('colorDetail.technicalInfo', 'colors')}</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className="flex justify-between">
@@ -275,7 +275,7 @@ export default function ColorDetailPage() {
               <TabsContent value="applications" className="space-y-4">
                 <Card>
                   <CardHeader>
-                    <CardTitle className="text-lg">Ứng dụng phù hợp</CardTitle>
+                    <CardTitle className="text-lg">{t('colorDetail.suitableApplications', 'colors')}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">
@@ -303,7 +303,7 @@ export default function ColorDetailPage() {
               <TabsContent value="combinations" className="space-y-4">
                 <Card>
                   <CardHeader>
-                    <CardTitle className="text-lg">Gợi ý phối màu</CardTitle>
+                    <CardTitle className="text-lg">{t('colorDetail.colorCombinations', 'colors')}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     {relatedColors.length > 0 ? (
@@ -341,15 +341,15 @@ export default function ColorDetailPage() {
               <CardContent className="p-6">
                 <div className="text-center">
                   <MessageCircle className="w-12 h-12 text-green-600 mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold mb-2">Liên hệ tư vấn</h3>
+                  <h3 className="text-lg font-semibold mb-2">{t('colorDetail.contactForAdvice', 'colors')}</h3>
                   <p className="text-gray-600 mb-4">
-                    Cần tư vấn về màu sắc và ứng dụng cho dự án của bạn?
+                    {t('colorDetail.consultationText', 'colors')}
                   </p>
                   <Sheet open={isContactOpen} onOpenChange={setIsContactOpen}>
                     <SheetTrigger asChild>
                       <Button size="lg" className="w-full" variant="outline">
                         <MessageCircle className="w-4 h-4 mr-2" />
-                        Liên hệ ngay
+                        {t('colorDetail.contactNow', 'colors')}
                       </Button>
                     </SheetTrigger>
                     <SheetContent className="w-full sm:max-w-lg bg-white flex flex-col">
@@ -373,7 +373,7 @@ export default function ColorDetailPage() {
                                 {/* Personal Information */}
                                 <div className="grid grid-cols-2 gap-4">
                                   <div>
-                                    <Label htmlFor="firstName">Họ</Label>
+                                    <Label htmlFor="firstName">{t('colorDetail.form.firstName', 'colors')}</Label>
                                     <Input
                                       id="firstName"
                                       value={contactFormData.firstName}
@@ -382,7 +382,7 @@ export default function ColorDetailPage() {
                                     />
                                   </div>
                                   <div>
-                                    <Label htmlFor="lastName">Tên</Label>
+                                    <Label htmlFor="lastName">{t('colorDetail.form.lastName', 'colors')}</Label>
                                     <Input
                                       id="lastName"
                                       value={contactFormData.lastName}
@@ -394,7 +394,7 @@ export default function ColorDetailPage() {
 
                                 <div className="grid grid-cols-2 gap-4">
                                   <div>
-                                    <Label htmlFor="email">Email</Label>
+                                    <Label htmlFor="email">{t('colorDetail.form.email', 'colors')}</Label>
                                     <Input
                                       id="email"
                                       type="email"
@@ -404,7 +404,7 @@ export default function ColorDetailPage() {
                                     />
                                   </div>
                                   <div>
-                                    <Label htmlFor="phone">Số điện thoại</Label>
+                                    <Label htmlFor="phone">{t('colorDetail.form.phone', 'colors')}</Label>
                                     <Input
                                       id="phone"
                                       value={contactFormData.phone}
@@ -416,7 +416,7 @@ export default function ColorDetailPage() {
 
                                 {/* Address Information */}
                                 <div>
-                                  <Label htmlFor="address">Địa chỉ</Label>
+                                  <Label htmlFor="address">{t('colorDetail.form.address', 'colors')}</Label>
                                   <Input
                                     id="address"
                                     value={contactFormData.address}
@@ -427,7 +427,7 @@ export default function ColorDetailPage() {
 
                                 <div className="grid grid-cols-3 gap-4">
                                   <div>
-                                    <Label htmlFor="city">Thành phố</Label>
+                                    <Label htmlFor="city">{t('colorDetail.form.city', 'colors')}</Label>
                                     <Input
                                       id="city"
                                       value={contactFormData.city}
@@ -436,10 +436,10 @@ export default function ColorDetailPage() {
                                     />
                                   </div>
                                   <div>
-                                    <Label htmlFor="state">Tỉnh/Thành</Label>
+                                    <Label htmlFor="state">{t('colorDetail.form.state', 'colors')}</Label>
                                     <Select value={contactFormData.state} onValueChange={(value) => handleContactInputChange("state", value)}>
                                       <SelectTrigger>
-                                        <SelectValue placeholder="Chọn tỉnh/thành" />
+                                        <SelectValue placeholder={t('colorDetail.form.selectState', 'colors')} />
                                       </SelectTrigger>
                                       <SelectContent>
                                         <SelectItem value="hanoi">Hà Nội</SelectItem>
@@ -452,7 +452,7 @@ export default function ColorDetailPage() {
                                     </Select>
                                   </div>
                                   <div>
-                                    <Label htmlFor="zipCode">Mã bưu điện</Label>
+                                    <Label htmlFor="zipCode">{t('colorDetail.form.zipCode', 'colors')}</Label>
                                     <Input
                                       id="zipCode"
                                       value={contactFormData.zipCode}
@@ -463,10 +463,10 @@ export default function ColorDetailPage() {
 
                                 {/* Project Information */}
                                 <div>
-                                  <Label htmlFor="projectType">Loại dự án</Label>
+                                  <Label htmlFor="projectType">{t('colorDetail.form.projectType', 'colors')}</Label>
                                   <Select value={contactFormData.projectType} onValueChange={(value) => handleContactInputChange("projectType", value)}>
                                     <SelectTrigger>
-                                      <SelectValue placeholder="Chọn loại dự án" />
+                                      <SelectValue placeholder={t('colorDetail.form.selectProject', 'colors')} />
                                     </SelectTrigger>
                                     <SelectContent>
                                       <SelectItem value="residential">Nhà ở</SelectItem>
@@ -478,10 +478,10 @@ export default function ColorDetailPage() {
                                 </div>
 
                                 <div>
-                                  <Label htmlFor="message">Ghi chú</Label>
+                                  <Label htmlFor="message">{t('colorDetail.form.message', 'colors')}</Label>
                                   <Textarea
                                     id="message"
-                                    placeholder="Mô tả chi tiết về dự án và nhu cầu tư vấn của bạn..."
+                                    placeholder={t('colorDetail.form.messagePlaceholder', 'colors')}
                                     value={contactFormData.message}
                                     onChange={(e) => handleContactInputChange("message", e.target.value)}
                                     rows={3}
@@ -490,7 +490,7 @@ export default function ColorDetailPage() {
 
                                 <Button type="submit" className="w-full" size="lg">
                                   <Mail className="w-4 h-4 mr-2" />
-                                  Gửi yêu cầu tư vấn
+                                  {t('colorDetail.form.submitConsultation', 'colors')}
                                 </Button>
                               </form>
                             </CardContent>
@@ -509,7 +509,7 @@ export default function ColorDetailPage() {
         {relatedColors.length > 0 && (
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-6">
-              Màu cùng danh mục: {color.category}
+              {t('colorDetail.colorOfTheSame', 'colors')}: {color.category}
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {relatedColors.map((relatedColor) => (

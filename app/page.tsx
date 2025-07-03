@@ -7,10 +7,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Palette, Paintbrush, Users, Lightbulb, ArrowRight, CheckCircle } from "lucide-react"
 import { useLanguage } from "@/components/providers/language-provider"
+import { woodPanelColors } from "@/data/wood-panel-colors"
 
 
 export default function HomePage() {
   const { t } = useLanguage()
+
+  // Get featured colors from data
+  const warmGrey = woodPanelColors.find(color => color.name === "Warm Grey")
+  const featuredColors = woodPanelColors.filter(color => color.popular).slice(0, 6)
 
   return (
     <div className="min-h-screen bg-white">
@@ -81,7 +86,7 @@ export default function HomePage() {
             <div className="relative">
               <div className="relative rounded-sm overflow-hidden shadow-2xl">
                 <Image
-                  src="/placeholder.svg?height=700&width=600"
+                  src="/colors/WarmGrey.png?height=700&width=700"
                   alt={t('hero.imageAlt', 'home')}
                   width={600}
                   height={700}
@@ -90,12 +95,24 @@ export default function HomePage() {
                 />
                 <div className="absolute bottom-8 left-8 bg-white/95 backdrop-blur-sm p-6 rounded-sm shadow-lg border border-white/20">
                   <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 bg-stone-200 rounded-sm"></div>
+                    <div className="w-16 h-16 rounded-sm overflow-hidden relative">
+                      {warmGrey && (
+                        <Image
+                          src={warmGrey.image}
+                          alt={warmGrey.name}
+                          fill
+                          className="object-cover"
+                          sizes="64px"
+                        />
+                      )}
+                    </div>
                     <div>
-                      <h3 className="font-display text-lg font-medium text-slate-900">{t('hero.colorName', 'home')}</h3>
-                      <p className="text-stone-600">{t('hero.colorCode', 'home')}</p>
+                      <h3 className="font-display text-lg font-medium text-slate-900">
+                        {warmGrey?.name || t('hero.colorName', 'home')}
+                      </h3>
+                      <p className="text-stone-600">{warmGrey?.code || t('hero.colorCode', 'home')}</p>
                       <Badge variant="secondary" className="mt-2 text-xs">
-                        {t('hero.signatureColor', 'home')}
+                        {warmGrey?.description || t('hero.signatureColor', 'home')}
                       </Badge>
                     </div>
                   </div>
@@ -168,29 +185,40 @@ export default function HomePage() {
           </div>
 
           <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {[
-              { name: t('signatureCollection.colors.silkGray', 'home'), code: "SLX-23", color: "bg-gray-400", category: t('signatureCollection.categories.neutral', 'home') },
-              { name: t('signatureCollection.colors.pearlDove', 'home'), code: "SLX-17", color: "bg-gray-100", category: t('signatureCollection.categories.white', 'home') },
-              { name: t('signatureCollection.colors.midnightSilk', 'home'), code: "SLX-154", color: "bg-blue-900", category: t('signatureCollection.categories.blue', 'home') },
-              { name: t('signatureCollection.colors.silkPewter', 'home'), code: "SLX-172", color: "bg-gray-300", category: t('signatureCollection.categories.neutral', 'home') },
-              { name: t('signatureCollection.colors.onyxLuxury', 'home'), code: "SLX-10", color: "bg-gray-900", category: t('signatureCollection.categories.black', 'home') },
-              { name: t('signatureCollection.colors.silkFern', 'home'), code: "SLX-40", color: "bg-green-200", category: t('signatureCollection.categories.green', 'home') },
-            ].map((color, index) => (
-              <Card key={index} className="group cursor-pointer overflow-hidden">
-                <CardContent className="p-0">
-                  <div
-                    className={`w-full h-32 ${color.color} relative group-hover:scale-105 transition-transform duration-300`}
-                  >
-                    <Badge variant="secondary" className="absolute top-3 left-3 text-xs bg-white/90 backdrop-blur-sm">
-                      {color.category}
-                    </Badge>
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-display font-medium text-slate-900">{color.name}</h3>
-                    <p className="text-sm text-stone-600">{color.code}</p>
-                  </div>
-                </CardContent>
-              </Card>
+            {featuredColors.map((color) => (
+              <Link key={color.id} href={`/colors/${color.name.toLowerCase().replace(/\s+/g, "-")}`}>
+                <Card className="group cursor-pointer overflow-hidden hover:shadow-lg transition-all duration-300">
+                  <CardContent className="p-0">
+                    <div className="w-full h-32 relative group-hover:scale-105 transition-transform duration-300 overflow-hidden">
+                      <Image
+                        src={color.image}
+                        alt={color.name}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 16vw"
+                      />
+                      <Badge variant="secondary" className="absolute top-3 left-3 text-xs bg-white/90 backdrop-blur-sm">
+                        {color.category}
+                      </Badge>
+                      {color.popular && (
+                        <Badge className="absolute top-3 right-3 text-xs bg-blue-600 text-white">
+                          {t('colorCard.popular', 'components')}
+                        </Badge>
+                      )}
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-display font-medium text-slate-900">{color.name}</h3>
+                      <p className="text-sm text-stone-600">{color.code}</p>
+                      <p className="text-xs text-stone-500 mt-1">{color.description}</p>
+                      {color.orderPercentage && (
+                        <Badge variant="outline" className="mt-2 text-xs">
+                          {color.orderPercentage}
+                        </Badge>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
 

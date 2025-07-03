@@ -17,7 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/paint-colors`,
+      url: `${baseUrl}/wood-colors`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
@@ -29,7 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/paint-ideas`,
+      url: `${baseUrl}/wood-ideas`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,

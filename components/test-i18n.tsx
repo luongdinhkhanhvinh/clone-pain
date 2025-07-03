@@ -25,7 +25,7 @@ export function TestI18n() {
       </div>
       <div className="mt-2 text-xs">
         <p>Site: {t('site.title')}</p>
-        <p>Nav: {t('navigation.paintColors')}</p>
+        <p>Nav: {t('navigation.woodColors')}</p>
         <p>Component: {t('colorCard.popular', 'components')}</p>
         <p>Cart: {t('cart.addToCart', 'components')}</p>
       </div>

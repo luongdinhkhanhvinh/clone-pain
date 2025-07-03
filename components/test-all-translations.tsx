@@ -40,7 +40,7 @@ export function TestAllTranslations() {
     
     // Common translations
     { key: 'site.title', namespace: 'common', label: 'Site Title' },
-    { key: 'navigation.paintColors', namespace: 'common', label: 'Paint Colors' },
+    { key: 'navigation.woodColors', namespace: 'common', label: 'wood Colors' },
     { key: 'header.findStore', namespace: 'common', label: 'Find Store' },
     { key: 'footer.description', namespace: 'common', label: 'Footer Description' },
   ]

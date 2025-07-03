@@ -32,7 +32,7 @@ export const woodPanelProducts: WoodPanelProduct[] = [
     features: ["Chống ẩm", "Không VOC", "Dễ lau chùi", "Chống trầy xước"],
     colors: 15,
     coverage: "20 m²",
-    description: "Ván gỗ nội thất cao cấp với lớp hoàn thiện mịn như lụa, chống ẩm và bền màu theo thời gian.",
+    description: "Ván gỗ nội thất cao cấp với lớp hoàn thiện mịn như , chống ẩm và bền màu theo thời gian.",
     specifications: {
       thickness: "12mm",
       width: "200mm", 

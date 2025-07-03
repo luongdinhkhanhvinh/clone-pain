@@ -1,0 +1,163 @@
+{
+  "title": "Ý Tưởng Ván Gỗ & Cảm Hứng Thiết Kế",
+  "description": "Khám phá tổ hợp màu xu hướng, ý tưởng phòng và mẹo thiết kế chuyên nghiệp",
+  "tabs": {
+    "inspiration": "Cảm Hứng Phòng",
+    "trending": "Màu Xu Hướng",
+    "schemes": "Bảng Màu",
+    "tips": "Mẹo Chuyên Gia"
+  },
+  "rooms": {
+    "allRooms": "Tất Cả Phòng",
+    "livingRoom": "Phòng Khách",
+    "bedroom": "Phòng Ngủ",
+    "kitchen": "Nhà Bếp",
+    "bathroom": "Phòng Tắm",
+    "diningRoom": "Phòng Ăn",
+    "homeOffice": "Văn Phòng Tại Nhà",
+    "exterior": "Ngoại Thất"
+  },
+  "styles": {
+    "allStyles": "Tất Cả Phong Cách",
+    "modern": "Hiện Đại",
+    "traditional": "Truyền Thống",
+    "farmhouse": "Nông Trại",
+    "minimalist": "Tối Giản",
+    "bohemian": "Bohemian",
+    "industrial": "Công Nghiệp",
+    "coastal": "Ven Biển"
+  },
+  "filters": {
+    "searchPlaceholder": "Tìm kiếm cảm hứng...",
+    "roomType": "Loại Phòng",
+    "style": "Phong Cách",
+    "showing": "Hiển thị",
+    "inspiration": "cảm hứng",
+    "inspirations": "cảm hứng"
+  },
+  "colorSchemes": {
+    "sereneSanctuary": {
+      "name": "Thánh Địa Thanh Bình",
+      "description": "Màu xanh dương nhẹ nhàng và trắng mềm tạo nên không gian nghỉ ngơi yên bình"
+    },
+    "warmEarthTones": {
+      "name": "Tông Màu Đất Ấm",
+      "description": "Màu đất nung phong phú và be ấm áp cho bầu không khí ấm cúng"
+    },
+    "freshKitchenGreens": {
+      "name": "Xanh Bếp Tươi Mát",
+      "description": "Xanh sage và bạc hà với điểm nhấn trắng tinh khiết"
+    },
+    "boldStatementWall": {
+      "name": "Tường Tuyên Bố Táo Bạo",
+      "description": "Xanh navy đậm tạo sự kịch tính với điểm nhấn vàng"
+    },
+    "spaLikeBathroom": {
+      "name": "Phòng Tắm Như Spa",
+      "description": "Xám nhẹ và trắng cho cảm giác sạch sẽ, thư giãn"
+    },
+    "cozyHomeOffice": {
+      "name": "Văn Phòng Ấm Cúng",
+      "description": "Xám ấm với điểm nhấn cam tạo năng lượng"
+    }
+  },
+  "trending": {
+    "title": "Xu Hướng Màu 2024",
+    "description": "Khám phá những màu sắc định hình thiết kế nội thất năm nay",
+    "exploreColor": "Khám Phá Màu Này",
+    "viewDetails": "Xem Chi Tiết",
+    "trends": {
+      "oceanInspired": "Cảm Hứng Đại Dương",
+      "warmNeutrals": "Trung Tính Ấm",
+      "naturesPalette": "Bảng Màu Thiên Nhiên",
+      "softRomance": "Lãng Mạn Nhẹ Nhàng"
+    },
+    "categories": {
+      "warmNeutrals": {
+        "title": "Trung Tính Ấm",
+        "description": "Be ấm cúng và nâu nhẹ tạo không gian mời gọi"
+      },
+      "boldJewelTones": {
+        "title": "Tông Màu Ngọc Táo Bạo",
+        "description": "Ngọc lục bảo và sapphire phong phú tạo tuyên bố kịch tính"
+      },
+      "softPastels": {
+        "title": "Pastel Nhẹ Nhàng",
+        "description": "Sắc thái dịu dàng hoàn hảo để tạo môi trường bình yên, thư giãn"
+      }
+    }
+  },
+  "schemes": {
+    "title": "Bảng Màu Được Tuyển Chọn",
+    "description": "Tổ hợp màu chuyên nghiệp cho mọi phong cách",
+    "useScheme": "Sử Dụng Bảng Màu Này",
+    "types": {
+      "monochromaticBlues": {
+        "name": "Xanh Đơn Sắc",
+        "description": "Các sắc thái khác nhau của xanh tạo chiều sâu và tinh tế"
+      },
+      "complementaryContrast": {
+        "name": "Tương Phản Bổ Sung",
+        "description": "Cam và xanh đối lập tạo năng lượng sống động"
+      },
+      "analogousHarmony": {
+        "name": "Hòa Hợp Tương Tự",
+        "description": "Màu liền kề trên bánh xe để dòng chảy tự nhiên"
+      },
+      "triadicBalance": {
+        "name": "Cân Bằng Ba Màu",
+        "description": "Ba màu cách đều tạo cân bằng năng động"
+      },
+      "splitComplementary": {
+        "name": "Bổ Sung Tách Đôi",
+        "description": "Màu cơ sở với hai màu liền kề với màu bổ sung của nó"
+      },
+      "tetradicSquare": {
+        "name": "Hình Vuông Bốn Màu",
+        "description": "Bốn màu tạo thành hình vuông trên bánh xe màu"
+      }
+    }
+  },
+  "tips": {
+    "title": "Mẹo Ván Gỗ Chuyên Gia",
+    "description": "Lời khuyên chuyên nghiệp cho kết quả hoàn hảo",
+    "quickTips": {
+      "rule60-30-10": {
+        "title": "Quy Tắc 60-30-10",
+        "description": "Sử dụng 60% màu chủ đạo, 30% màu phụ và 10% màu nhấn để cân bằng phòng."
+      },
+      "testColors": {
+        "title": "Thử Màu Trong Ánh Sáng Khác Nhau",
+        "description": "Sơn mẫu lớn và quan sát chúng suốt cả ngày trong điều kiện ánh sáng khác nhau."
+      },
+      "considerFunction": {
+        "title": "Xem Xét Chức Năng Phòng",
+        "description": "Chọn màu tạo năng lượng cho không gian làm việc và tông màu nhẹ nhàng cho phòng ngủ."
+      }
+    },
+    "detailedTips": {
+      "choosingFinish": {
+        "title": "Chọn Lớp Hoàn Thiện Phù Hợp",
+        "content": "Lớp hoàn thiện mờ che khuyết điểm nhưng khó vệ sinh hơn. Satin và eggshell tuyệt vời cho hầu hết các phòng. Semi-gloss hoạt động tốt trong nhà bếp và phòng tắm."
+      },
+      "primerEssential": {
+        "title": "Lót Là Thiết Yếu",
+        "content": "Luôn sử dụng lót khi thay đổi màu sắc đáng kể, sơn lên màu tối hoặc sơn tường thạch cao mới. Nó đảm bảo độ phủ tốt hơn và độ chính xác màu sắc."
+      },
+      "qualityTools": {
+        "title": "Dụng Cụ Chất Lượng Quan Trọng",
+        "content": "Đầu tư vào cọ và con lăn chất lượng cao. Chúng giữ nhiều sơn hơn, ứng dụng mượt mà hơn và để lại ít vết hơn."
+      },
+      "planColorFlow": {
+        "title": "Lập Kế Hoạch Dòng Chảy Màu Sắc",
+        "content": "Xem xét cách màu sắc chảy từ phòng này sang phòng khác. Sử dụng bảng màu nhất quán trong toàn bộ ngôi nhà để thiết kế gắn kết."
+      }
+    }
+  },
+  "actions": {
+    "getColors": "Lấy Màu",
+    "exploreThisColor": "Khám Phá Màu Này",
+    "viewDetails": "Xem Chi Tiết",
+    "useThisScheme": "Sử Dụng Bảng Màu Này"
+  }
+}

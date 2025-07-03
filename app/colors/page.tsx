@@ -1,17 +1,18 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Search } from "lucide-react"
+import { Search, Package } from "lucide-react"
 import { ColorCard } from "@/components/colors/color-card"
 import { useLanguage } from "@/components/providers/language-provider"
 import { woodPanelColors, colorCategories } from "@/data/wood-panel-colors"
 
 export default function ColorsPage() {
   const { t } = useLanguage()
-  const [selectedCategory, setSelectedCategory] = useState("All")
+  const [selectedCategory, setSelectedCategory] = useState(t('categories.allColors', 'colors'))
   const [searchTerm, setSearchTerm] = useState("")
   const [favorites, setFavorites] = useState<string[]>([])
 
@@ -34,7 +35,7 @@ export default function ColorsPage() {
   })
 
   const filteredColors = woodPanelColors.filter((color) => {
-    const matchesCategory = selectedCategory === "All" || color.category === selectedCategory
+    const matchesCategory = selectedCategory === t('categories.allColors', 'colors') || color.category === selectedCategory
     const matchesSearch =
       color.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       color.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -81,9 +82,9 @@ export default function ColorsPage() {
         </div>
 
         {/* Popular Colors Section */}
-        {selectedCategory === "All" && (
+        {selectedCategory === t('categories.allColors', 'colors') && (
           <div className="mb-12 pt-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Popular Colors</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('popularColors', 'colors')}</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {woodPanelColors
                 .filter((color) => color.popular)
@@ -110,11 +111,15 @@ export default function ColorsPage() {
           </div>
         </div>
 
-        {/* Load More */}
-        <div className="text-center">
-          <Button variant="outline" size="lg">
-            {t('buttons.loadMore')}
-          </Button>
+        {/* Action Buttons */}
+        <div className="text-center space-y-4">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button variant="outline" size="lg">
+              <Link href="/products">
+              {t('buttons.loadMore')}
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
     </div>

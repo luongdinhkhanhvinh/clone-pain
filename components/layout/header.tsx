@@ -59,7 +59,7 @@ export function Header() {
             <NavigationMenuList className="gap-2">
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="text-slate-700 hover:text-slate-900 font-medium">
-                  {t('navigation.paintColors')}
+                  {t('navigation.woodColors')}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="bg-white border-white">
                   <div className="grid gap-3 p-8 w-[500px]">
@@ -76,7 +76,7 @@ export function Header() {
                       </Link>
                     </NavigationMenuLink>
                     <NavigationMenuLink asChild>
-                      <Link href="/paint-colors" className="block p-4 hover:bg-slate-50 rounded-sm transition-colors">
+                      <Link href="/wood-colors" className="block p-4 hover:bg-slate-50 rounded-sm transition-colors">
                         <div className="font-display font-medium text-slate-900 mb-1">{t('navigation.colorFamilies')}</div>
                         <p className="text-sm text-slate-600">{t('header.colorFamiliesDesc')}</p>
                       </Link>
@@ -99,19 +99,19 @@ export function Header() {
                     </NavigationMenuLink>
                     <NavigationMenuLink asChild>
                       <Link
-                        href="/products?category=Interior+Paint"
+                        href="/products?category=Interior+wood"
                         className="block p-4 hover:bg-slate-50 rounded-sm transition-colors"
                       >
-                        <div className="font-display font-medium text-slate-900 mb-1">{t('navigation.interiorPaint')}</div>
-                        <p className="text-sm text-slate-600">Premium interior paint collections</p>
+                        <div className="font-display font-medium text-slate-900 mb-1">{t('navigation.interiorwood')}</div>
+                        <p className="text-sm text-slate-600">Premium interior wood collections</p>
                       </Link>
                     </NavigationMenuLink>
                     <NavigationMenuLink asChild>
                       <Link
-                        href="/products?category=Exterior+Paint"
+                        href="/products?category=Exterior+wood"
                         className="block p-4 hover:bg-slate-50 rounded-sm transition-colors"
                       >
-                        <div className="font-display font-medium text-slate-900 mb-1">{t('navigation.exteriorPaint')}</div>
+                        <div className="font-display font-medium text-slate-900 mb-1">{t('navigation.exteriorwood')}</div>
                         <p className="text-sm text-slate-600">Weather-resistant exterior solutions</p>
                       </Link>
                     </NavigationMenuLink>
@@ -120,7 +120,7 @@ export function Header() {
               </NavigationMenuItem> */}
 
               <NavigationMenuItem>
-                <Link href="/paint-ideas" legacyBehavior passHref>
+                <Link href="/wood-ideas" legacyBehavior passHref>
                   <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-sm bg-background px-4 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors focus:bg-accent focus:text-accent-foreground disabled:pointer-events-none disabled:opacity-50">
                     {t('navigation.designIdeas')}
                   </NavigationMenuLink>

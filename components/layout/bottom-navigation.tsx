@@ -21,7 +21,7 @@ export function BottomNavigation() {
     {
       href: "/colors",
       icon: Palette,
-      label: t('navigation.paintColors', 'common'),
+      label: t('navigation.woodColors', 'common'),
       isActive: pathname.startsWith("/colors")
     },
     // {
@@ -31,10 +31,10 @@ export function BottomNavigation() {
     //   isActive: pathname.startsWith("/products")
     // },
     {
-      href: "/paint-ideas",
+      href: "/wood-ideas",
       icon: Lightbulb,
       label: t('navigation.designIdeas', 'common'),
-      isActive: pathname.startsWith("/paint-ideas")
+      isActive: pathname.startsWith("/wood-ideas")
     },
     // {
     //   href: "/professionals",

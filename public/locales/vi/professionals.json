@@ -1,13 +1,14 @@
 {
   "title": "Dành Cho Chuyên Gia",
-  "description": "Hợp tác với Benjamin Moore để có sản phẩm cao cấp, hỗ trợ chuyên môn và lợi ích độc quyền được thiết kế cho các chuyên gia sơn.",
+  "description": "Hợp tác với Silklux để có sản phẩm cao cấp, hỗ trợ chuyên môn và lợi ích độc quyền được thiết kế cho các chuyên gia Ván gỗ.",
   "hero": {
     "title": "Dành Cho Chuyên Gia",
-    "description": "Hợp tác với Benjamin Moore để có sản phẩm cao cấp, hỗ trợ chuyên môn và lợi ích độc quyền được thiết kế cho các chuyên gia sơn."
+    "description": "Hợp tác với Silklux để có sản phẩm cao cấp, hỗ trợ chuyên môn và lợi ích độc quyền được thiết kế cho các chuyên gia Ván gỗ.",
+    "imageAlt": "Chuyên gia ván gỗ đang làm việc"
   },
   "benefits": {
     "title": "Lợi Ích Chuyên Nghiệp",
-    "description": "Ưu đãi độc quyền được thiết kế cho các chuyên gia sơn và nhà thầu",
+    "description": "Ưu đãi độc quyền được thiết kế cho các chuyên gia Ván gỗ và nhà thầu",
     "tradeDiscount": {
       "title": "Chương Trình Giảm Giá Thương Mại",
       "description": "Giá cả độc quyền và giảm giá theo khối lượng cho các chuyên gia đủ điều kiện"
@@ -45,25 +46,149 @@
     "experience": "Số Năm Kinh Nghiệm",
     "message": "Thông Tin Bổ Sung",
     "submit": "Gửi Đơn Đăng Ký",
+    "applicationTitle": "Đơn Đăng Ký Chương Trình Thương Mại",
+    "selectBusinessType": "Chọn loại hình kinh doanh",
+    "selectExperience": "Chọn mức độ kinh nghiệm",
+    "messagePlaceholder": "Hãy cho chúng tôi biết về doanh nghiệp và nhu cầu ván gỗ của bạn...",
     "businessTypes": {
-      "painter": "Nhà Thầu Sơn",
+      "wooder": "Nhà Thầu Ván gỗ",
+      "contractor": "Nhà thầu tổng",
       "designer": "Nhà Thiết Kế Nội Thất",
       "architect": "Kiến Trúc Sư",
-      "retailer": "Nhà Bán Lẻ Sơn",
+      "retailer": "Nhà Bán Lẻ Ván gỗ",
       "other": "Khác"
     },
     "experienceOptions": {
-      "1-3": "1-3 năm",
-      "4-10": "4-10 năm",
+      "1-2": "1-2 năm",
+      "3-5": "3-5 năm",
+      "6-10": "6-10 năm",
       "10+": "10+ năm"
     }
   },
+
+  "products": {
+    "title": "Sản Phẩm Chuyên Nghiệp",
+    "description": "Dòng ván gỗ cao cấp được thiết kế cho ứng dụng chuyên nghiệp và các dự án đòi hỏi khắt khe",
+    "coverage": "Độ phủ",
+    "getQuote": "Báo giá",
+    "contactForPricing": "Liên hệ để biết giá",
+    "advanceWaterborne": {
+      "name": "Advance Waterborne Interior Alkyd",
+      "category": "Nội thất cao cấp",
+      "description": "Ván gỗ tự san phẳng với độ bền của dầu trong công thức gốc nước",
+      "coverage": "350-400 m²",
+      "features": {
+        "selfLeveling": "Tự san phẳng",
+        "excellentFlow": "Độ chảy tuyệt vời",
+        "durableFinish": "Hoàn thiện bền",
+        "lowOdor": "Ít mùi"
+      }
+    },
+    "auraGrandEntrance": {
+      "name": "Aura Grand Entrance",
+      "category": "Ngoại thất cao cấp",
+      "description": "Ván gỗ ngoại thất siêu cao cấp với bảo hành trọn đời có giới hạn",
+      "coverage": "350-400 m²",
+      "features": {
+        "fadeResistant": "Chống phai màu",
+        "selfPriming": "Tự lót",
+        "mildewResistant": "Chống nấm mốc",
+        "easyCleanup": "Dễ vệ sinh"
+      }
+    },
+    "corotechV160": {
+      "name": "Corotech V160",
+      "category": "Thương mại",
+      "description": "Lớp phủ thương mại hiệu suất cao cho môi trường khắt khe",
+      "coverage": "400-450 m²",
+      "features": {
+        "highDurability": "Độ bền cao",
+        "chemicalResistant": "Chống hóa chất",
+        "easyMaintenance": "Bảo trì dễ dàng",
+        "vocCompliant": "Tuân thủ VOC"
+      }
+    },
+    "categories": {
+      "interiorWoods": {
+        "name": "Ván gỗ nội thất",
+        "count": "25+ Sản phẩm"
+      },
+      "exteriorWoods": {
+        "name": "Ván gỗ ngoại thất",
+        "count": "20+ Sản phẩm"
+      },
+      "commercialCoatings": {
+        "name": "Lớp phủ thương mại",
+        "count": "15+ Sản phẩm"
+      },
+      "specialtyFinishes": {
+        "name": "Hoàn thiện đặc biệt",
+        "count": "10+ Sản phẩm"
+      }
+    }
+  },
   "tools": {
-    "title": "Công Cụ & Tài Nguyên Chuyên Nghiệp",
-    "colorTools": "Công Cụ Màu Sắc",
-    "calculator": "Máy Tính Sơn",
-    "specifications": "Thông Số Sản Phẩm",
-    "samples": "Đặt Hàng Mẫu",
-    "support": "Hỗ Trợ Kỹ Thuật"
+    "title": "Công cụ chuyên nghiệp",
+    "description": "Truy cập các công cụ và tài nguyên mạnh mẽ để hợp lý hóa dự án và phát triển doanh nghiệp của bạn",
+    "accessTool": "Truy cập công cụ",
+    "downloadIOS": "Tải iOS",
+    "downloadAndroid": "Tải Android",
+    "mobileAppAlt": "Ảnh chụp màn hình ứng dụng di động",
+    "calculator": {
+      "title": "Máy tính ván gỗ",
+      "description": "Tính toán chính xác số lượng ván gỗ cho bất kỳ dự án nào"
+    },
+    "colorVisualizer": {
+      "title": "Trực quan hóa màu sắc",
+      "description": "Cho khách hàng thấy màu sắc sẽ trông như thế nào trong không gian của họ"
+    },
+    "projectEstimator": {
+      "title": "Ước tính dự án",
+      "description": "Tạo ước tính và đề xuất chuyên nghiệp"
+    },
+    "technicalDataSheets": {
+      "title": "Bảng dữ liệu kỹ thuật",
+      "description": "Truy cập thông số kỹ thuật chi tiết của sản phẩm"
+    },
+    "mobileApp": {
+      "title": "Ứng dụng Silklux Pro",
+      "description": "Đưa doanh nghiệp của bạn lên di động với ứng dụng chuyên nghiệp của chúng tôi. Truy cập công cụ màu sắc, máy tính, thông tin sản phẩm và nhiều hơn nữa ngay từ điện thoại hoặc máy tính bảng của bạn.",
+      "features": {
+        "colorMatching": "Ghép màu và trực quan hóa",
+        "projectManagement": "Công cụ quản lý dự án",
+        "offlineAccess": "Truy cập ngoại tuyến các tính năng chính"
+      }
+    }
+  },
+  "contact": {
+    "locateRep": "Tìm đại diện địa phương của bạn",
+    "professionalSupport": "Hỗ trợ chuyên nghiệp",
+    "findRepresentative": "Tìm đại diện",
+    "needHelp": "Cần hỗ trợ?",
+    "emailSupport": "Hỗ trợ qua Email"
+  },
+  "testimonials": {
+    "mikesWooding": {
+      "name": "Mike's Wooding Co.",
+      "location": "Denver, CO",
+      "testimonial": "Chương trình thương mại của Silklux đã giúp chúng tôi tăng lợi nhuận 25% trong khi vẫn cung cấp chất lượng vượt trội cho khách hàng."
+    },
+    "eliteContractors": {
+      "name": "Elite Contractors",
+      "location": "Austin, TX",
+      "testimonial": "Các chương trình đào tạo đã nâng cao kỹ năng của đội ngũ chúng tôi và giúp chúng tôi giành được nhiều dự án cao cấp hơn."
+    },
+    "precisionWooding": {
+      "name": "Precision Wooding",
+      "location": "Seattle, WA",
+      "testimonial": "Giao hàng tại công trường và hỗ trợ chuyên dụng đã hợp lý hóa đáng kể hoạt động của chúng tôi."
+    }
+  },
+  "requirements": {
+    "title": "Yêu Cầu Chương Trình",
+    "businessLicense": "Giấy phép kinh doanh hợp lệ",
+    "professionalExperience": "Kinh nghiệm ván gỗ chuyên nghiệp",
+    "minimumVolume": "Yêu cầu khối lượng tối thiểu hàng năm",
+    "qualityStandards": "Cam kết về tiêu chuẩn chất lượng"
   }
 }

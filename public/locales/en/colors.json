@@ -1,6 +1,6 @@
 {
-  "title": "Paint Colors",
-  "description": "Explore our complete collection of premium paint colors",
+  "title": "Wood Colors",
+  "description": "Explore our complete collection of premium wood colors",
   "categories": {
     "allColors": "All Colors",
     "neutrals": "Neutrals",
@@ -16,9 +16,18 @@
   },
   "popularColors": "Popular Colors",
   "colorsFound": "colors found",
+  "buttons": {
+    "loadMore": "Load More Colors",
+    "viewProducts": "View Products",
+    "backToColors": "Back to Colors",
+    "favorite": "Favorite",
+    "favorited": "Favorited",
+    "share": "Share",
+    "download": "Download"
+  },
   "breadcrumb": {
     "home": "Home",
-    "paintColors": "Paint Colors"
+    "woodColors": "Wood Colors"
   },
   "colorDetail": {
     "lrv": "LRV",
@@ -41,6 +50,34 @@
     "matte": "Matte",
     "roomVisualizer": "Room Visualizer",
     "coordinatingColors": "Coordinating Colors",
-    "similarColors": "Similar Colors"
+    "similarColors": "Similar Colors",
+    "tabs": {
+      "details": "Details",
+      "applications": "Applications",
+      "combinations": "Combinations"
+    },
+    "technicalInfo": "Technical Information",
+    "suitableApplications": "Suitable Applications",
+    "colorCombinations": "Color Combination Suggestions",
+    "consultationText": "Need consultation on colors and applications for your project?",
+    "contactForAdvice": "Contact for advice",
+    "contactNow": "Contact Now",
+    "colorOfTheSame": "Color of the same category",
+    "form": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phone": "Phone Number",
+      "address": "Address",
+      "city": "City",
+      "state": "State/Province",
+      "zipCode": "Zip Code",
+      "projectType": "Project Type",
+      "message": "Message",
+      "selectState": "Select state/province",
+      "selectProject": "Select project type",
+      "messagePlaceholder": "Describe your project details and consultation needs...",
+      "submitConsultation": "Submit Consultation Request"
+    }
   }
 }

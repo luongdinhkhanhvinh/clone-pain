@@ -12,14 +12,14 @@ import { generatedProducts, generatedProductCategories, generatedProductTypes } 
 
 export default function ProductsPage() {
   const { t } = useLanguage()
-  const [selectedCategory, setSelectedCategory] = useState("All Products")
-  const [selectedType, setSelectedType] = useState("All Types")
+  const [selectedCategory, setSelectedCategory] = useState(t('categories.allProducts', 'products'))
+  const [selectedType, setSelectedType] = useState(t('types.allTypes', 'products'))
   const [sortBy, setSortBy] = useState("featured")
   const [showFilters, setShowFilters] = useState(false)
 
   const filteredProducts = generatedProducts.filter((product) => {
-    const matchesCategory = selectedCategory === "All Products" || product.category === selectedCategory
-    const matchesType = selectedType === "All Types" || product.type === selectedType
+    const matchesCategory = selectedCategory === t('categories.allProducts', 'products') || product.category === selectedCategory
+    const matchesType = selectedType === t('types.allTypes', 'products') || product.type === selectedType
     return matchesCategory && matchesType
   })
 
@@ -39,8 +39,8 @@ export default function ProductsPage() {
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('title', 'products')}</h1>
-          <p className="text-lg text-gray-600">{t('description', 'products')}</p>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">{t('title', 'products')}</h2>
+          <p className="text-mg text-gray-600">{t('description', 'products')}</p>
         </div>
 
         {/* Filters and Sort */}
@@ -81,7 +81,7 @@ export default function ProductsPage() {
               <SelectTrigger className="w-48">
                 <SelectValue placeholder={t('filters.sortBy', 'products')} />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent defaultValue={"featured"}>
                 <SelectItem value="featured">{t('filters.featured', 'products')}</SelectItem>
                 <SelectItem value="name">{t('filters.name', 'products')}</SelectItem>
                 <SelectItem value="price-low">{t('filters.priceLow', 'products')}</SelectItem>
@@ -92,21 +92,45 @@ export default function ProductsPage() {
           </div>
 
           <div className="text-sm text-gray-600">
-            Showing {sortedProducts.length} of {generatedProducts.length} products
+            {t('filters.showing', 'products')} {sortedProducts.length} {t('filters.of', 'products')} {generatedProducts.length} {t('filters.products', 'products')}
           </div>
         </div>
 
-        {/* Products Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {sortedProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+        {/* Featured Products Section */}
+        {selectedCategory === t('categories.allProducts', 'products') && (
+          <div className="mb-12 pt-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('sections.featuredProducts', 'products')}</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {generatedProducts
+                .filter((product) => product.rating >= 4.7)
+                .slice(0, 4)
+                .map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+            </div>
+          </div>
+        )}
+
+        {/* All Products Grid */}
+        <div className="mb-8 pt-8">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-2xl font-bold text-gray-900">
+              {selectedCategory === t('categories.allProducts', 'products') ? t('sections.allProducts', 'products') : selectedCategory}
+            </h2>
+            <p className="text-gray-600">{sortedProducts.length} {t('filters.products', 'products')}</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {sortedProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
         </div>
 
         {/* Load More */}
-        <div className="text-center mt-12">
+        <div className="text-center">
           <Button variant="outline" size="lg">
-            Load More Products
+            {t('buttons.loadMore', 'products')}
           </Button>
         </div>
       </div>

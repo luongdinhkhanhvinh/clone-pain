@@ -50,12 +50,12 @@ export function Footer() {
             <ul className="space-y-2 text-gray-300">
               <li>
                 <Link href="/products" className="hover:text-white">
-                  {t('navigation.interiorPaint')}
+                  {t('navigation.interiorwood')}
                 </Link>
               </li>
               <li>
                 <Link href="/products" className="hover:text-white">
-                  {t('navigation.exteriorPaint')}
+                  {t('navigation.exteriorwood')}
                 </Link>
               </li>
               <li>
@@ -96,12 +96,12 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/paint-ideas" className="hover:text-white">
+                <Link href="/wood-ideas" className="hover:text-white">
                   {t('footer.colorTrends')}
                 </Link>
               </li>
               <li>
-                <Link href="/paint-ideas" className="hover:text-white">
+                <Link href="/wood-ideas" className="hover:text-white">
                   {t('navigation.designIdeas')}
                 </Link>
               </li>

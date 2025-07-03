@@ -16,9 +16,18 @@
   },
   "popularColors": "Màu Phổ Biến",
   "colorsFound": "màu được tìm thấy",
+  "buttons": {
+    "loadMore": "Xem Thêm Màu",
+    "viewProducts": "Xem Sản Phẩm",
+    "backToColors": "Quay lại",
+    "favorite": "Yêu thích",
+    "favorited": "Đã yêu thích",
+    "share": "Chia sẻ",
+    "download": "Tải về"
+  },
   "breadcrumb": {
     "home": "Trang Chủ",
-    "paintColors": "Ván gỗ"
+    "woodColors": "Ván gỗ"
   },
   "colorDetail": {
     "lrv": "Giá Trị Phản Xạ Ánh Sáng",
@@ -41,6 +50,34 @@
     "matte": "Mờ",
     "roomVisualizer": "Trực Quan Hóa Phòng",
     "coordinatingColors": "Màu Phối Hợp",
-    "similarColors": "Màu Tương Tự"
+    "similarColors": "Màu Tương Tự",
+    "tabs": {
+      "details": "Chi tiết",
+      "applications": "Ứng dụng",
+      "combinations": "Phối màu"
+    },
+    "technicalInfo": "Thông tin kỹ thuật",
+    "suitableApplications": "Ứng dụng phù hợp",
+    "colorCombinations": "Gợi ý phối màu",
+    "consultationText": "Cần tư vấn về màu sắc và ứng dụng cho dự án của bạn?",
+    "contactNow": "Liên hệ ngay",
+    "contactForAdvice": "Liên hệ tư vấn",
+    "colorOfTheSame": "Màu cùng danh mục",
+    "form": {
+      "firstName": "Họ",
+      "lastName": "Tên",
+      "email": "Email",
+      "phone": "Số điện thoại",
+      "address": "Địa chỉ",
+      "city": "Thành phố",
+      "state": "Tỉnh/Thành",
+      "zipCode": "Mã bưu điện",
+      "projectType": "Loại dự án",
+      "message": "Ghi chú",
+      "selectState": "Chọn tỉnh/thành",
+      "selectProject": "Chọn loại dự án",
+      "messagePlaceholder": "Mô tả chi tiết về dự án và nhu cầu tư vấn của bạn...",
+      "submitConsultation": "Gửi yêu cầu tư vấn"
+    }
   }
 }

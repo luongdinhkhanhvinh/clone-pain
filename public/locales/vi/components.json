@@ -45,7 +45,10 @@
     "viewDetails": "Xem Chi Tiết",
     "compareProducts": "So Sánh Sản Phẩm",
     "sqft": "m²",
-    "gallon": "gallon"
+    "gallon": "gallon",
+    "availableIn": "Có sẵn trong",
+    "baseColor": "Màu chính",
+    "availableColors": "Màu có sẵn"
   },
   "cart": {
     "addToCart": "Thêm Vào Giỏ",

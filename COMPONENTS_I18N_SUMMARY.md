@@ -82,7 +82,7 @@
 2. **Project Types**: Loại dự án phù hợp với thị trường Việt Nam
    - Nhà Ở, Thương Mại, Công Nghiệp, Cải Tạo, Xây Dựng Mới
 
-3. **Paint Finishes**: Dịch các loại hoàn thiện sơn
+3. **wood Finishes**: Dịch các loại hoàn thiện Ván gỗ
    - Flat → Mờ, Eggshell → Vỏ Trứng, Satin → Satin, etc.
 
 ### 🧪 Testing:
@@ -153,7 +153,7 @@ function MyComponent() {
 - 🌍 **2 ngôn ngữ** hoàn chỉnh (English + Vietnamese)
 - 🔧 **Form fields** đầy đủ với validation messages
 - 🏢 **Vietnamese locations** (Hà Nội, TP.HCM, Đà Nẵng, etc.)
-- 🎨 **Paint finishes** (Mờ, Vỏ Trứng, Satin, Bán Bóng, Bóng)
+- 🎨 **wood finishes** (Mờ, Vỏ Trứng, Satin, Bán Bóng, Bóng)
 - 🏗️ **Project types** phù hợp thị trường Việt Nam
 
 ### 🎉 Hoàn thành:

@@ -1,11 +1,11 @@
 {
-  "title": "Sản Phẩm Ván Gỗ & Chất Nhuộm",
-  "description": "Ván gỗ và chất nhuộm chất lượng cao cấp cho mọi dự án",
+  "title": "Sản Phẩm Ván Gỗ",
+  "description": "Ván gỗ chất lượng cao cấp cho mọi dự án",
   "categories": {
     "allProducts": "Tất Cả Sản Phẩm",
-    "interiorPaint": "Ván Gỗ Nội Thất",
-    "exteriorPaint": "Ván Gỗ Ngoại Thất",
-    "exteriorStain": "Chất Nhuộm Ngoại Thất",
+    "interiorwood": "Ván Gỗ Nội Thất",
+    "exteriorwood": "Ván Gỗ Ngoại Thất",
+    "exteriorStain": "Ngoại Thất",
     "primer": "Lót Ván Gỗ"
   },
   "types": {
@@ -25,7 +25,10 @@
     "rating": "Đánh Giá",
     "name": "Tên",
     "showFilters": "Hiện Bộ Lọc",
-    "hideFilters": "Ẩn Bộ Lọc"
+    "hideFilters": "Ẩn Bộ Lọc",
+    "showing": "Hiển thị",
+    "of": "trong tổng số",
+    "products": "sản phẩm"
   },
   "product": {
     "rating": "Đánh Giá",
@@ -53,5 +56,12 @@
     "easyCleanup": "Dễ dọn dẹp",
     "goodCoverage": "Độ phủ tốt",
     "mildewResistant": "Chống nấm mốc"
+  },
+  "sections": {
+    "featuredProducts": "Sản phẩm phổ biến",
+    "allProducts": "Tất cả sản phẩm"
+  },
+  "buttons": {
+    "loadMore": "Xem thêm sản phẩm"
   }
 }

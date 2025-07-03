@@ -1,10 +1,10 @@
 {
-  "title": "Paint & Stain Products",
-  "description": "Premium quality paints and stains for every project",
+  "title": "wood & Stain Products",
+  "description": "Premium quality woods and stains for every project",
   "categories": {
     "allProducts": "All Products",
-    "interiorPaint": "Interior Paint",
-    "exteriorPaint": "Exterior Paint", 
+    "interiorwood": "Interior wood",
+    "exteriorwood": "Exterior wood", 
     "exteriorStain": "Exterior Stain",
     "primer": "Primer"
   },
@@ -25,7 +25,10 @@
     "rating": "Rating",
     "name": "Name",
     "showFilters": "Show Filters",
-    "hideFilters": "Hide Filters"
+    "hideFilters": "Hide Filters",
+    "showing": "Showing",
+    "of": "of",
+    "products": "products"
   },
   "product": {
     "rating": "Rating",
@@ -53,5 +56,12 @@
     "easyCleanup": "Easy cleanup",
     "goodCoverage": "Good coverage",
     "mildewResistant": "Mildew resistant"
+  },
+  "sections": {
+    "featuredProducts": "Featured Products",
+    "allProducts": "All Products"
+  },
+  "buttons": {
+    "loadMore": "Load More Products"
   }
 }

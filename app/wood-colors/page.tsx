@@ -151,7 +151,7 @@ const colorFamilies = [
   },
 ]
 
-export default function PaintColorsPage() {
+export default function woodColorsPage() {
   const { t } = useLanguage()
   const [searchTerm, setSearchTerm] = useState("")
   const [expandedFamily, setExpandedFamily] = useState<string | null>(null)
@@ -192,9 +192,9 @@ export default function PaintColorsPage() {
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('title', 'paint-colors')}</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('title', 'wood-colors')}</h1>
           <p className="text-lg text-gray-600">
-            {t('description', 'paint-colors')}
+            {t('description', 'wood-colors')}
           </p>
         </div>
 
@@ -286,22 +286,22 @@ export default function PaintColorsPage() {
 
         {/* Featured Collections */}
         <div className="mt-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('featuredCollections.title', 'paint-colors')}</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('featuredCollections.title', 'wood-colors')}</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
-                name: t('featuredCollections.historical.name', 'paint-colors'),
-                description: t('featuredCollections.historical.description', 'paint-colors'),
+                name: t('featuredCollections.historical.name', 'wood-colors'),
+                description: t('featuredCollections.historical.description', 'wood-colors'),
                 colors: ["#D7CEC7", "#C9BEA0", "#A69B8C", "#8B9AAF", "#566573", "#1B2951"],
               },
               {
-                name: t('featuredCollections.trends2024.name', 'paint-colors'),
-                description: t('featuredCollections.trends2024.description', 'paint-colors'),
+                name: t('featuredCollections.trends2024.name', 'wood-colors'),
+                description: t('featuredCollections.trends2024.description', 'wood-colors'),
                 colors: ["#4A90A4", "#C5B8A5", "#D4A5A5", "#A3B18A", "#1B4F72", "#D4C5A0"],
               },
               {
-                name: t('featuredCollections.coastal.name', 'paint-colors'),
-                description: t('featuredCollections.coastal.description', 'paint-colors'),
+                name: t('featuredCollections.coastal.name', 'wood-colors'),
+                description: t('featuredCollections.coastal.description', 'wood-colors'),
                 colors: ["#AED6F1", "#F8F6F0", "#4A90A4", "#D7CEC7", "#2874A6", "#F7F4F2"],
               },
             ].map((collection, index) => (
@@ -320,7 +320,7 @@ export default function PaintColorsPage() {
                   <p className="text-sm text-gray-600 mb-4">{collection.description}</p>
                   <Button variant="outline" size="sm" asChild>
                     <Link href={`/colors?collection=${collection.name.toLowerCase().replace(/\s+/g, "-")}`}>
-                      {t('interface.exploreCollection', 'paint-colors')}
+                      {t('interface.exploreCollection', 'wood-colors')}
                     </Link>
                   </Button>
                 </CardContent>

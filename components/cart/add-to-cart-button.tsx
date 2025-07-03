@@ -99,54 +99,6 @@ export function AddToCartButton({ product, className }: AddToCartButtonProps) {
 
   return (
     <div className={`space-y-4 ${className}`}>
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <Label htmlFor="finish" className="text-sm font-medium text-slate-700">
-            {t('cart.finish', 'components')}
-          </Label>
-          <Select value={finish} onValueChange={setFinish}>
-            <SelectTrigger id="finish">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {finishes.map((f) => (
-                <SelectItem key={f} value={f}>
-                  {f}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div>
-          <Label htmlFor="size" className="text-sm font-medium text-slate-700">
-            {t('cart.size', 'components')}
-          </Label>
-          <Select value={size} onValueChange={setSize}>
-            <SelectTrigger id="size">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {sizes.map((s) => (
-                <SelectItem key={s.value} value={s.value}>
-                  <div className="flex justify-between items-center w-full">
-                    <span>{s.label}</span>
-                  </div>
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-      </div>
-
-      <div className="flex items-center justify-between p-4 bg-slate-50 rounded-sm">
-        <div>
-          <div className="font-display font-medium text-slate-900">
-            {selectedSize?.label} - {finish}
-          </div>
-          <div className="text-sm text-slate-600">{product.name}</div>
-        </div>
-      </div>
 
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild>

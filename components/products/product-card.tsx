@@ -84,7 +84,7 @@ export function ProductCard({ product }: ProductCardProps) {
               ))}
             </div>
             <span className="text-sm text-gray-600">
-              {product.rating} ({product.reviews} {t('productCard.reviews', 'components')})
+              {product.rating.toFixed(2)} ({product.reviews} {t('productCard.reviews', 'components')})
             </span>
           </div>
 
@@ -98,12 +98,12 @@ export function ProductCard({ product }: ProductCardProps) {
             </div>
             <div className="text-sm text-gray-600">
               <p>{t('productCard.coverage', 'components')}: {product.coverage}</p>
-              <p>Available in {product.colors} {t('productCard.colors', 'components')}</p>
+              <p>{t('productCard.availableIn', 'components')} {product.colors} {t('productCard.colors', 'components')}</p>
             </div>
 
             {/* Base Color Display */}
             <div className="space-y-2">
-              <div className="text-sm font-medium text-gray-700">Màu chính:</div>
+              <div className="text-sm font-medium text-gray-700">{t('productCard.baseColor', 'components')}:</div>
               <div className="flex items-center gap-2">
                 <div className="w-6 h-6 rounded border-2 border-gray-200 overflow-hidden relative">
                   <Image
@@ -123,7 +123,7 @@ export function ProductCard({ product }: ProductCardProps) {
             {/* Available Colors Preview */}
             {product.availableColors.length > 1 && (
               <div className="space-y-2">
-                <div className="text-sm font-medium text-gray-700">Màu có sẵn:</div>
+                <div className="text-sm font-medium text-gray-700">{t('productCard.availableColors', 'components')}:</div>
                 <div className="flex gap-1">
                   {product.availableColors.slice(0, 6).map((color) => (
                     <div
@@ -151,11 +151,6 @@ export function ProductCard({ product }: ProductCardProps) {
           </div>
 
           <div className="pt-4 border-t space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <span className="text-sm text-gray-600 ml-1">per {t('productCard.gallon', 'components')}</span>
-              </div>
-            </div>
             <AddToCartButton
               product={{
                 id: product.id.toString(),

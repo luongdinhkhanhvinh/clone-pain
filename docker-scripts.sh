@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Docker management scripts for Benjamin Moore Clone
+# Docker management scripts for Silklux Clone
 
 case "$1" in
   "build")

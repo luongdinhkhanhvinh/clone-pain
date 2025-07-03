@@ -20,19 +20,19 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: "SilkLux - Premium Luxury Paint & Color Solutions",
+    default: "SilkLux - Premium Luxury wood & Color Solutions",
     template: "%s | SilkLux",
   },
   description:
-    "Discover premium luxury paint with silk-like finishes. Over 3,500 sophisticated colors and professional-grade products for discerning designers and homeowners.",
+    "Discover premium luxury wood with silk-like finishes. Over 3,500 sophisticated colors and professional-grade products for discerning designers and homeowners.",
   keywords: [
-    "luxury paint",
-    "premium paint colors",
-    "silk finish paint",
+    "luxury wood",
+    "premium wood colors",
+    "silk finish wood",
     "interior design",
     "SilkLux",
     "color consultation",
-    "high-end paint",
+    "high-end wood",
   ],
   authors: [{ name: "SilkLux" }],
   creator: "SilkLux",
@@ -51,21 +51,21 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://silklux.com",
     siteName: "SilkLux",
-    title: "SilkLux - Premium Luxury Paint & Color Solutions",
-    description: "Discover premium luxury paint with silk-like finishes and sophisticated color palettes.",
+    title: "SilkLux - Premium Luxury wood & Color Solutions",
+    description: "Discover premium luxury wood with silk-like finishes and sophisticated color palettes.",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "SilkLux Premium Paint Colors",
+        alt: "SilkLux Premium wood Colors",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "SilkLux - Premium Luxury Paint & Color Solutions",
-    description: "Discover premium luxury paint with silk-like finishes and sophisticated color palettes.",
+    title: "SilkLux - Premium Luxury wood & Color Solutions",
+    description: "Discover premium luxury wood with silk-like finishes and sophisticated color palettes.",
     images: ["/og-image.jpg"],
   },
   robots: {
