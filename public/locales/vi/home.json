@@ -1,0 +1,74 @@
+{
+  "banner": {
+    "exclusiveOffer": "Ưu Đãi Độc Quyền:",
+    "discount": "Giảm 20% cho SilkLux® Hoàn Thiện Cao Cấp & Mẫu Sơn",
+    "shopCollection": "Mua Sắm Bộ Sưu Tập",
+    "viewTerms": "Xem Điều Khoản"
+  },
+  "hero": {
+    "badge": "Giải Pháp Sơn Cao Cấp",
+    "title": "Sang Trọng Như Lụa.",
+    "subtitle": "Thanh Lịch Vô Song.",
+    "description": "Trải nghiệm bộ sưu tập độc quyền với hơn 3,500 màu sắc tinh tế và lớp hoàn thiện mịn như lụa, được chế tác dành cho các nhà thiết kế và chủ nhà cao cấp khó tính nhất.",
+    "exploreLuxury": "Khám Phá Bộ Sưu Tập Cao Cấp",
+    "browseColors": "Duyệt Màu Sắc",
+    "luxuryColors": "Màu Sắc Cao Cấp",
+    "silkFinishes": "Hoàn Thiện Lụa",
+    "premium": "Cao Cấp",
+    "colorName": "Lá Dương Xỉ Lụa",
+    "colorCode": "SLX-2144",
+    "signatureColor": "Màu Đặc Trưng",
+    "imageAlt": "Nội thất tinh tế với lớp hoàn thiện sơn cao cấp SilkLux"
+  },
+  "features": {
+    "title": "Điểm Khác Biệt SilkLux",
+    "description": "Khám phá điều gì làm nên sự khác biệt của các giải pháp sơn cao cấp trong chất lượng, đổi mới và sự thanh lịch tinh tế.",
+    "curatedPalette": {
+      "title": "Bảng Màu Cao Cấp Được Tuyển Chọn",
+      "description": "Màu sắc được chế tác tinh xảo với lớp hoàn thiện mịn như lụa, được phát triển bởi đội ngũ chuyên gia thiết kế cao cấp."
+    },
+    "silkFormulation": {
+      "title": "Công Thức Mịn Như Lụa",
+      "description": "Công nghệ sơn tiên tiến mang lại kết cấu mịn như lụa đặc biệt, độ phủ và chất lượng hoàn thiện sang trọng."
+    },
+    "designExpertise": {
+      "title": "Chuyên Môn Thiết Kế Cao Cấp",
+      "description": "Hỗ trợ tận tâm từ các chuyên gia tư vấn thiết kế cao cấp và chuyên gia kỹ thuật cho mọi dự án."
+    },
+    "innovation": {
+      "title": "Xuất Sắc Trong Đổi Mới",
+      "description": "Tiên phong trong hoàn thiện cao cấp và công nghệ màu sắc tiên tiến cho không gian tinh tế."
+    }
+  },
+  "signatureCollection": {
+    "title": "Bộ Sưu Tập Đặc Trưng Cao Cấp",
+    "description": "Khám phá những màu sắc được khao khát nhất, mỗi màu được lựa chọn cẩn thận vì sự thanh lịch vượt thời gian và lớp hoàn thiện mịn như lụa.",
+    "colors": {
+      "silkGray": "Xám Lụa",
+      "pearlDove": "Chim Bồ Câu Ngọc Trai",
+      "midnightSilk": "Lụa Nửa Đêm",
+      "silkPewter": "Thiếc Lụa",
+      "onyxLuxury": "Mã Não Cao Cấp",
+      "silkFern": "Lá Dương Xỉ Lụa"
+    },
+    "categories": {
+      "neutral": "Trung Tính",
+      "white": "Trắng",
+      "blue": "Xanh Dương",
+      "black": "Đen",
+      "green": "Xanh Lá"
+    }
+  },
+  "professionalServices": {
+    "badge": "Dịch Vụ Thiết Kế Cao Cấp",
+    "title": "Nâng Tầm Tầm Nhìn Với Chuyên Môn Cao Cấp",
+    "description": "Hợp tác với các chuyên gia thiết kế cao cấp và chuyên gia màu sắc để hiện thực hóa những dự án tinh tế nhất với sự thanh lịch và chính xác vô song.",
+    "services": [
+      "Tư vấn màu sắc cao cấp cá nhân hóa",
+      "Phối màu hoàn thiện lụa chuyên nghiệp",
+      "Hỗ trợ đặc tả dự án cao cấp",
+      "Hướng dẫn ứng dụng kỹ thuật"
+    ],
+    "imageAlt": "Tư vấn màu sắc cao cấp với chuyên gia SilkLux"
+  }
+}

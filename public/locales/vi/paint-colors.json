@@ -1,0 +1,59 @@
+{
+  "title": "Ván gỗ Theo Họ",
+  "description": "Khám phá bộ sưu tập đầy đủ được tổ chức theo họ màu",
+  "colorFamilies": {
+    "red": {
+      "name": "Đỏ",
+      "description": "Màu đỏ táo bạo, năng động từ hồng nhạt đến đỏ burgundy đậm"
+    },
+    "orange": {
+      "name": "Cam",
+      "description": "Màu cam ấm áp, rực rỡ từ đào nhạt đến cam tangerine táo bạo"
+    },
+    "yellow": {
+      "name": "Vàng",
+      "description": "Màu vàng vui tươi từ kem nhạt đến vàng gold rực rỡ"
+    },
+    "green": {
+      "name": "Xanh Lá",
+      "description": "Màu xanh lá tươi mát từ xanh sage đến xanh rừng, mang thiên nhiên vào trong nhà"
+    },
+    "blue": {
+      "name": "Xanh Dương",
+      "description": "Màu xanh dương êm dịu từ xanh trời nhạt đến xanh navy đậm"
+    },
+    "purple": {
+      "name": "Tím",
+      "description": "Màu tím phong phú từ lavender đến tím plum đậm"
+    },
+    "neutral": {
+      "name": "Trung Tính",
+      "description": "Màu trung tính linh hoạt từ beige ấm đến xám lạnh"
+    },
+    "white": {
+      "name": "Trắng",
+      "description": "Màu trắng tinh khiết từ trắng sáng rõ nét đến trắng ấm nhẹ nhàng"
+    }
+  },
+  "featuredCollections": {
+    "title": "Bộ Sưu Tập Màu Nổi Bật",
+    "historical": {
+      "name": "Bộ Sưu Tập Lịch Sử",
+      "description": "Màu sắc vượt thời gian lấy cảm hứng từ các địa danh lịch sử của Mỹ"
+    },
+    "trends2024": {
+      "name": "Xu Hướng Màu 2024",
+      "description": "Bảng màu truyền cảm hứng và hợp xu hướng nhất năm nay"
+    },
+    "coastal": {
+      "name": "Bộ Sưu Tập Ven Biển",
+      "description": "Màu xanh dương thanh bình và màu trung tính nhẹ nhàng lấy cảm hứng từ bờ biển"
+    }
+  },
+  "interface": {
+    "viewAllColors": "Xem Tất Cả Màu",
+    "exploreCollection": "Khám Phá Bộ Sưu Tập",
+    "colorCount": "màu trong họ này",
+    "popularInFamily": "Phổ biến trong họ này"
+  }
+}

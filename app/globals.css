@@ -2,6 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Mobile-first responsive design */
+@layer base {
+  /* Ensure mobile viewport is properly handled */
+  html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+
+  /* Smooth scrolling for mobile */
+  html, body {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Prevent horizontal scroll on mobile */
+  body {
+    overflow-x: hidden;
+  }
+}
+
+/* Mobile bottom navigation styles */
+@layer components {
+  .bottom-nav-item {
+    @apply flex flex-col items-center justify-center space-y-1 text-xs transition-colors;
+  }
+
+  .bottom-nav-item.active {
+    @apply text-blue-600 bg-blue-50;
+  }
+
+  .bottom-nav-item:not(.active) {
+    @apply text-gray-600 hover:text-gray-900;
+  }
+}
+
 :root {
   --font-inter: "Inter", sans-serif;
   --font-playfair: "Playfair Display", serif;

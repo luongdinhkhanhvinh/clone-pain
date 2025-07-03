@@ -1,0 +1,59 @@
+{
+  "title": "Paint Colors by Family",
+  "description": "Explore our complete collection organized by color families",
+  "colorFamilies": {
+    "red": {
+      "name": "Red",
+      "description": "Bold, energetic reds from soft pink to deep burgundy"
+    },
+    "orange": {
+      "name": "Orange", 
+      "description": "Warm, vibrant oranges from soft peach to bold tangerine"
+    },
+    "yellow": {
+      "name": "Yellow",
+      "description": "Cheerful yellows from pale cream to sunny gold"
+    },
+    "green": {
+      "name": "Green",
+      "description": "Fresh greens from sage to forest, bringing nature indoors"
+    },
+    "blue": {
+      "name": "Blue",
+      "description": "Calming blues from soft sky to deep navy"
+    },
+    "purple": {
+      "name": "Purple",
+      "description": "Rich purples from lavender to deep plum"
+    },
+    "neutral": {
+      "name": "Neutral",
+      "description": "Versatile neutrals from warm beige to cool gray"
+    },
+    "white": {
+      "name": "White",
+      "description": "Pure whites from crisp bright to soft warm"
+    }
+  },
+  "featuredCollections": {
+    "title": "Featured Color Collections",
+    "historical": {
+      "name": "Historical Collection",
+      "description": "Timeless colors inspired by America's historic landmarks"
+    },
+    "trends2024": {
+      "name": "Color Trends 2024",
+      "description": "This year's most inspiring and on-trend color palette"
+    },
+    "coastal": {
+      "name": "Coastal Collection", 
+      "description": "Serene blues and soft neutrals inspired by the seaside"
+    }
+  },
+  "interface": {
+    "viewAllColors": "View All Colors",
+    "exploreCollection": "Explore Collection",
+    "colorCount": "colors in this family",
+    "popularInFamily": "Popular in this family"
+  }
+}

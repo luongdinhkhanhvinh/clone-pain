@@ -1,0 +1,87 @@
+{
+  "colorCard": {
+    "orderSample": "Đặt Mẫu Ván Gỗ",
+    "samplePrice": "Mẫu 2oz",
+    "orderSuccess": "Đơn hàng mẫu ván gỗ đã được gửi thành công! Chúng tôi sẽ liên hệ với bạn sớm.",
+    "popular": "Phổ Biến",
+    "form": {
+      "firstName": "Họ",
+      "lastName": "Tên",
+      "email": "Email",
+      "phone": "Số Điện Thoại",
+      "address": "Địa Chỉ",
+      "city": "Thành Phố",
+      "state": "Tỉnh/Thành",
+      "zipCode": "Mã Bưu Điện",
+      "projectType": "Loại Dự Án",
+      "message": "Ghi Chú",
+      "selectState": "Chọn tỉnh/thành",
+      "selectProject": "Chọn loại dự án",
+      "projectDescription": "Mô tả chi tiết về dự án của bạn...",
+      "submitOrder": "Đặt Mẫu Màu",
+      "states": {
+        "hanoi": "Hà Nội",
+        "hcm": "TP. Hồ Chí Minh",
+        "danang": "Đà Nẵng",
+        "haiphong": "Hải Phòng",
+        "cantho": "Cần Thơ"
+      },
+      "projectTypes": {
+        "residential": "Nhà Ở",
+        "commercial": "Thương Mại",
+        "industrial": "Công Nghiệp",
+        "renovation": "Cải Tạo",
+        "newConstruction": "Xây Dựng Mới"
+      }
+    }
+  },
+  "productCard": {
+    "rating": "Đánh Giá",
+    "reviews": "đánh giá",
+    "features": "Tính Năng",
+    "colors": "màu",
+    "coverage": "Độ Phủ",
+    "addToCart": "Thêm Vào Giỏ",
+    "viewDetails": "Xem Chi Tiết",
+    "compareProducts": "So Sánh Sản Phẩm",
+    "sqft": "m²",
+    "gallon": "gallon"
+  },
+  "cart": {
+    "addToCart": "Thêm Vào Giỏ",
+    "quantity": "Số Lượng",
+    "total": "Tổng Cộng",
+    "checkout": "Thanh Toán",
+    "continueShopping": "Tiếp Tục Mua Sắm",
+    "cartEmpty": "Giỏ hàng của bạn đang trống",
+    "itemAdded": "Đã thêm sản phẩm vào giỏ",
+    "customerInfo": "Đăng Nhập",
+    "orderSummary": "Tóm Tắt Đơn Hàng",
+    "placeOrder": "Đặt Hàng",
+    "orderNow": "Đặt Hàng Ngay",
+    "orderInfo": "Thông Tin Đặt Hàng",
+    "orderFor": "Đặt hàng",
+    "submitOrder": "Gửi Đơn Hàng",
+    "orderSuccess": "Đăng nhập thành công!",
+    "finish": "Hoàn Thiện",
+    "size": "Kích Thước",
+    "customerFormTitle": "Đăng Nhập",
+    "customerFormDescription": "Vui lòng nhập thông tin đăng nhập",
+    "submitInfo": "Đăng Nhập",
+    "username": "Tên Đăng Nhập",
+    "password": "Mật Khẩu",
+    "finishes": {
+      "flat": "Mờ",
+      "eggshell": "Vỏ Trứng",
+      "satin": "Satin",
+      "semiGloss": "Bán Bóng",
+      "gloss": "Bóng"
+    },
+    "sizes": {
+      "sample": "Mẫu (2 oz)",
+      "quart": "Quart",
+      "gallon": "1 Gallon",
+      "fiveGallon": "5 Gallon"
+    }
+  }
+}

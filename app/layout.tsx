@@ -1,9 +1,9 @@
-import type React from "react"
+import { LanguageProvider } from "@/components/providers/language-provider"
+import { MobileLayout } from "@/components/layout/mobile-layout"
 import type { Metadata } from "next"
 import { Inter, Playfair_Display } from "next/font/google"
+import type React from "react"
 import "./globals.css"
-import { Header } from "@/components/layout/header"
-import { Footer } from "@/components/layout/footer"
 
 
 const inter = Inter({
@@ -98,9 +98,11 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body className={`${inter.className} antialiased`}>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <LanguageProvider>
+          <MobileLayout>
+            {children}
+          </MobileLayout>
+        </LanguageProvider>
       </body>
     </html>
   )

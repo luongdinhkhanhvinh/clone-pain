@@ -92,3 +92,12 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+.bg-popover {
+  background-color: white;
+}
+
+.outline-none {
+  background-color: white !important;
+}

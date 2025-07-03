@@ -1,0 +1,43 @@
+{
+  "title": "Phối Màu & Phối Hợp",
+  "description": "Tìm màu phối hoàn hảo hoặc khám phá màu bổ sung cho dự án của bạn",
+  "tabs": {
+    "match": "Phối Màu",
+    "coordinate": "Phối Hợp Màu Sắc",
+    "inspiration": "Cảm Hứng Màu Sắc"
+  },
+  "upload": {
+    "title": "Tải Lên Hình Ảnh hoặc Chọn Màu",
+    "dragDrop": "Kéo và thả hình ảnh vào đây, hoặc nhấp để chọn",
+    "takePhoto": "Chụp Ảnh",
+    "selectColor": "Chọn Màu",
+    "colorPicker": "Bộ Chọn Màu",
+    "hexCode": "Mã Hex",
+    "uploadedAlt": "Đã tải lên"
+  },
+  "results": {
+    "title": "Gợi Ý Phối Màu",
+    "match": "Phù Hợp",
+    "complementary": "Màu Bổ Sung",
+    "viewColor": "Xem Màu",
+    "addToFavorites": "Thêm Vào Yêu Thích"
+  },
+  "coordination": {
+    "title": "Công Cụ Phối Hợp Màu Sắc",
+    "description": "Tạo bảng màu đẹp với các công cụ phối hợp chuyên nghiệp",
+    "monochromatic": "Đơn Sắc",
+    "analogous": "Tương Tự",
+    "complementary": "Bổ Sung",
+    "triadic": "Ba Màu",
+    "tetradic": "Bốn Màu",
+    "generateScheme": "Tạo Bảng Màu"
+  },
+  "inspiration": {
+    "title": "Thư Viện Cảm Hứng Màu Sắc",
+    "description": "Khám phá tổ hợp màu xu hướng và cảm hứng thiết kế",
+    "trending": "Đang Thịnh Hành",
+    "seasonal": "Màu Theo Mùa",
+    "roomType": "Theo Loại Phòng",
+    "style": "Theo Phong Cách"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "title": "Ý Tưởng Sơn & Cảm Hứng Thiết Kế",
+  "description": "Khám phá tổ hợp màu xu hướng, ý tưởng phòng và mẹo thiết kế chuyên nghiệp",
+  "categories": {
+    "trending": "Ý Tưởng Thịnh Hành",
+    "byRoom": "Ý Tưởng Theo Phòng",
+    "byStyle": "Ý Tưởng Theo Phong Cách",
+    "seasonal": "Cảm Hứng Theo Mùa",
+    "colorCombos": "Tổ Hợp Màu Sắc"
+  },
+  "rooms": {
+    "livingRoom": "Phòng Khách",
+    "bedroom": "Phòng Ngủ",
+    "kitchen": "Nhà Bếp",
+    "bathroom": "Phòng Tắm",
+    "diningRoom": "Phòng Ăn",
+    "homeOffice": "Văn Phòng Tại Nhà",
+    "kidsRoom": "Phòng Trẻ Em",
+    "exterior": "Ngoại Thất"
+  },
+  "styles": {
+    "modern": "Hiện Đại",
+    "traditional": "Truyền Thống",
+    "farmhouse": "Nông Trại",
+    "coastal": "Ven Biển",
+    "industrial": "Công Nghiệp",
+    "bohemian": "Bohemian",
+    "minimalist": "Tối Giản",
+    "eclectic": "Chiết Trung"
+  },
+  "interface": {
+    "viewIdea": "Xem Ý Tưởng",
+    "saveIdea": "Lưu Ý Tưởng",
+    "shareIdea": "Chia Sẻ Ý Tưởng",
+    "getColors": "Lấy Những Màu Này",
+    "similarIdeas": "Ý Tưởng Tương Tự",
+    "moreFromStyle": "Thêm Từ Phong Cách Này",
+    "featured": "Nổi Bật",
+    "newest": "Mới Nhất",
+    "popular": "Phổ Biến Nhất"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "title": "Sản Phẩm Ván Gỗ & Chất Nhuộm",
+  "description": "Ván gỗ và chất nhuộm chất lượng cao cấp cho mọi dự án",
+  "categories": {
+    "allProducts": "Tất Cả Sản Phẩm",
+    "interiorPaint": "Ván Gỗ Nội Thất",
+    "exteriorPaint": "Ván Gỗ Ngoại Thất",
+    "exteriorStain": "Chất Nhuộm Ngoại Thất",
+    "primer": "Lót Ván Gỗ"
+  },
+  "types": {
+    "allTypes": "Tất Cả Loại",
+    "ultraPremium": "Siêu Cao Cấp",
+    "premium": "Cao Cấp",
+    "standard": "Tiêu Chuẩn"
+  },
+  "filters": {
+    "category": "Danh Mục",
+    "type": "Loại",
+    "priceRange": "Khoảng Giá",
+    "sortBy": "Sắp Xếp Theo",
+    "featured": "Nổi Bật",
+    "priceLow": "Giá: Thấp đến Cao",
+    "priceHigh": "Giá: Cao đến Thấp",
+    "rating": "Đánh Giá",
+    "name": "Tên",
+    "showFilters": "Hiện Bộ Lọc",
+    "hideFilters": "Ẩn Bộ Lọc"
+  },
+  "product": {
+    "rating": "Đánh Giá",
+    "reviews": "đánh giá",
+    "features": "Tính Năng",
+    "colors": "màu",
+    "coverage": "Độ Phủ",
+    "addToCart": "Thêm Vào Giỏ",
+    "viewDetails": "Xem Chi Tiết",
+    "compareProducts": "So Sánh Sản Phẩm"
+  },
+  "productFeatures": {
+    "fadeResistant": "Chống phai màu",
+    "selfPriming": "Tự lót",
+    "lifetimeWarranty": "Bảo hành trọn đời",
+    "multiSurface": "Đa bề mặt",
+    "stainBlocking": "Chống vết bẩn",
+    "fastDrying": "Khô nhanh",
+    "zeroVOC": "Không VOC",
+    "washable": "Có thể rửa được",
+    "colorLockTechnology": "Công Nghệ Khóa Màu",
+    "selfLeveling": "Tự san phẳng",
+    "durableFinish": "Hoàn thiện bền",
+    "lowVOC": "VOC thấp",
+    "easyCleanup": "Dễ dọn dẹp",
+    "goodCoverage": "Độ phủ tốt",
+    "mildewResistant": "Chống nấm mốc"
+  }
+}

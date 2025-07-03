@@ -1,0 +1,46 @@
+{
+  "title": "Ván gỗ",
+  "description": "Khám phá bộ sưu tập đầy đủ các Ván gỗ cao cấp",
+  "categories": {
+    "allColors": "Tất Cả Màu",
+    "neutrals": "Màu Trung Tính",
+    "browns": "Màu Nâu",
+    "greens": "Màu Xanh Lá",
+    "grays": "Màu Xám",
+    "beiges": "Màu Be",
+    "purples": "Màu Tím",
+    "blues": "Màu Xanh Dương",
+    "yellows": "Màu Vàng",
+    "pinks": "Màu Hồng",
+    "specials": "Màu Đặc Biệt"
+  },
+  "popularColors": "Màu Phổ Biến",
+  "colorsFound": "màu được tìm thấy",
+  "breadcrumb": {
+    "home": "Trang Chủ",
+    "paintColors": "Ván gỗ"
+  },
+  "colorDetail": {
+    "lrv": "Giá Trị Phản Xạ Ánh Sáng",
+    "family": "Họ Màu",
+    "undertones": "Sắc Thái",
+    "description": "Mô Tả",
+    "colorStory": "Câu Chuyện Màu Sắc",
+    "popularity": "Độ Phổ Biến",
+    "veryPopular": "Rất Phổ Biến",
+    "tags": "Thẻ",
+    "availableProducts": "Sản Phẩm Có Sẵn",
+    "features": "Tính Năng",
+    "coverage": "Độ Phủ",
+    "rating": "Đánh Giá",
+    "finishes": "Hoàn Thiện",
+    "eggshell": "Vỏ Trứng",
+    "satin": "Satin",
+    "semiGloss": "Bán Bóng",
+    "gloss": "Bóng",
+    "matte": "Mờ",
+    "roomVisualizer": "Trực Quan Hóa Phòng",
+    "coordinatingColors": "Màu Phối Hợp",
+    "similarColors": "Màu Tương Tự"
+  }
+}

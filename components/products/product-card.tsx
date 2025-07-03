@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { AddToCartButton } from "@/components/cart/add-to-cart-button"
 import { Star, Heart } from "lucide-react"
 import { useState } from "react"
+import { useLanguage } from "@/components/providers/language-provider"
 
 interface ProductCardProps {
   product: {
@@ -14,17 +15,34 @@ interface ProductCardProps {
     name: string
     category: string
     type: string
-    price: number
     rating: number
     reviews: number
     image: string
     features: string[]
     colors: number
     coverage: string
+    description: string
+    baseColor: {
+      id: number
+      code: string
+      name: string
+      description: string
+      hex: string
+      image: string
+      orderPercentage: string
+    }
+    availableColors: Array<{
+      id: number
+      code: string
+      name: string
+      hex: string
+      image: string
+    }>
   }
 }
 
 export function ProductCard({ product }: ProductCardProps) {
+  const { t } = useLanguage()
   const [isFavorited, setIsFavorited] = useState(false)
 
   return (
@@ -66,7 +84,7 @@ export function ProductCard({ product }: ProductCardProps) {
               ))}
             </div>
             <span className="text-sm text-gray-600">
-              {product.rating} ({product.reviews} reviews)
+              {product.rating} ({product.reviews} {t('productCard.reviews', 'components')})
             </span>
           </div>
 
@@ -79,16 +97,63 @@ export function ProductCard({ product }: ProductCardProps) {
               ))}
             </div>
             <div className="text-sm text-gray-600">
-              <p>Coverage: {product.coverage}</p>
-              <p>Available in {product.colors} colors</p>
+              <p>{t('productCard.coverage', 'components')}: {product.coverage}</p>
+              <p>Available in {product.colors} {t('productCard.colors', 'components')}</p>
             </div>
+
+            {/* Base Color Display */}
+            <div className="space-y-2">
+              <div className="text-sm font-medium text-gray-700">Màu chính:</div>
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded border-2 border-gray-200 overflow-hidden relative">
+                  <Image
+                    src={product.baseColor.image}
+                    alt={product.baseColor.name}
+                    fill
+                    className="object-cover"
+                    sizes="24px"
+                  />
+                </div>
+                <span className="text-sm text-gray-600">
+                  {product.baseColor.name} ({product.baseColor.orderPercentage})
+                </span>
+              </div>
+            </div>
+
+            {/* Available Colors Preview */}
+            {product.availableColors.length > 1 && (
+              <div className="space-y-2">
+                <div className="text-sm font-medium text-gray-700">Màu có sẵn:</div>
+                <div className="flex gap-1">
+                  {product.availableColors.slice(0, 6).map((color) => (
+                    <div
+                      key={color.id}
+                      className="w-4 h-4 rounded border border-gray-200 overflow-hidden relative"
+                      title={color.name}
+                    >
+                      <Image
+                        src={color.image}
+                        alt={color.name}
+                        fill
+                        className="object-cover"
+                        sizes="16px"
+                      />
+                    </div>
+                  ))}
+                  {product.availableColors.length > 6 && (
+                    <div className="text-xs text-gray-500 ml-1">
+                      +{product.availableColors.length - 6}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="pt-4 border-t space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <span className="text-2xl font-bold text-gray-900">${product.price}</span>
-                <span className="text-sm text-gray-600 ml-1">per gallon</span>
+                <span className="text-sm text-gray-600 ml-1">per {t('productCard.gallon', 'components')}</span>
               </div>
             </div>
             <AddToCartButton
@@ -96,7 +161,6 @@ export function ProductCard({ product }: ProductCardProps) {
                 id: product.id.toString(),
                 name: product.name,
                 code: `PROD-${product.id}`,
-                price: product.price,
                 image: product.image,
                 category: product.category,
               }}

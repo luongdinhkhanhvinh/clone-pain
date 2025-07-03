@@ -1,0 +1,74 @@
+{
+  "banner": {
+    "exclusiveOffer": "Exclusive Offer:",
+    "discount": "20% off SilkLux® Luxury Finishes & Samples",
+    "shopCollection": "Shop Collection",
+    "viewTerms": "View Terms"
+  },
+  "hero": {
+    "badge": "Luxury Paint Solutions",
+    "title": "Silk-Like Luxury.",
+    "subtitle": "Unmatched Elegance.",
+    "description": "Experience our exclusive collection of over 3,500 sophisticated colors with silk-like finishes, crafted for the most discerning designers and luxury homeowners.",
+    "exploreLuxury": "Explore Luxury Collection",
+    "browseColors": "Browse Colors",
+    "luxuryColors": "Luxury Colors",
+    "silkFinishes": "Silk Finishes",
+    "premium": "Premium",
+    "colorName": "Silk Fern",
+    "colorCode": "SLX-2144",
+    "signatureColor": "Signature Color",
+    "imageAlt": "Sophisticated interior with SilkLux premium paint finish"
+  },
+  "features": {
+    "title": "The SilkLux Difference",
+    "description": "Discover what sets our luxury paint solutions apart in quality, innovation, and sophisticated elegance.",
+    "curatedPalette": {
+      "title": "Curated Luxury Palette",
+      "description": "Expertly crafted colors with silk-like finishes, developed by our team of luxury design specialists."
+    },
+    "silkFormulation": {
+      "title": "Silk-Like Formulation",
+      "description": "Advanced paint technology delivering exceptional silk-like texture, coverage, and luxurious finish quality."
+    },
+    "designExpertise": {
+      "title": "Luxury Design Expertise", 
+      "description": "Dedicated support from luxury design consultants and technical specialists for every project."
+    },
+    "innovation": {
+      "title": "Innovation Excellence",
+      "description": "Pioneering luxury finishes and cutting-edge color technology for sophisticated spaces."
+    }
+  },
+  "signatureCollection": {
+    "title": "Signature Luxury Collection",
+    "description": "Explore our most coveted colors, each carefully selected for their timeless elegance and silk-like finish.",
+    "colors": {
+      "silkGray": "Silk Gray",
+      "pearlDove": "Pearl Dove", 
+      "midnightSilk": "Midnight Silk",
+      "silkPewter": "Silk Pewter",
+      "onyxLuxury": "Onyx Luxury",
+      "silkFern": "Silk Fern"
+    },
+    "categories": {
+      "neutral": "Neutral",
+      "white": "White",
+      "blue": "Blue", 
+      "black": "Black",
+      "green": "Green"
+    }
+  },
+  "professionalServices": {
+    "badge": "Luxury Design Services",
+    "title": "Elevate Your Vision with Luxury Expertise",
+    "description": "Partner with our luxury design specialists and color experts to bring your most sophisticated projects to life with unparalleled elegance and precision.",
+    "services": [
+      "Personalized luxury color consultation",
+      "Professional silk finish matching", 
+      "Luxury project specification support",
+      "Technical application guidance"
+    ],
+    "imageAlt": "Luxury color consultation with SilkLux expert"
+  }
+}

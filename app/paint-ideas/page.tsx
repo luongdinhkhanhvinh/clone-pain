@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Heart, Search, Bookmark, Share2, TrendingUp } from "lucide-react"
+import { useLanguage } from "@/components/providers/language-provider"
 
 const roomCategories = [
   "All Rooms",
@@ -127,11 +128,30 @@ const expertTips = [
 ]
 
 export default function PaintIdeasPage() {
+  const { t } = useLanguage()
   const [selectedRoom, setSelectedRoom] = useState("All Rooms")
   const [selectedStyle, setSelectedStyle] = useState("All Styles")
   const [searchTerm, setSearchTerm] = useState("")
   const [favorites, setFavorites] = useState<number[]>([])
   const [saved, setSaved] = useState<number[]>([])
+
+  const roomCategories = [
+    t('rooms.livingRoom', 'paint-ideas'),
+    t('rooms.bedroom', 'paint-ideas'),
+    t('rooms.kitchen', 'paint-ideas'),
+    t('rooms.bathroom', 'paint-ideas'),
+    t('rooms.diningRoom', 'paint-ideas'),
+    t('rooms.homeOffice', 'paint-ideas'),
+    t('rooms.exterior', 'paint-ideas')
+  ]
+
+  const styleCategories = [
+    t('styles.modern', 'paint-ideas'),
+    t('styles.traditional', 'paint-ideas'),
+    t('styles.farmhouse', 'paint-ideas'),
+    t('styles.minimalist', 'paint-ideas'),
+    t('styles.bohemian', 'paint-ideas')
+  ]
 
   const filteredSchemes = colorSchemes.filter((scheme) => {
     const matchesRoom = selectedRoom === "All Rooms" || scheme.room === selectedRoom
@@ -155,9 +175,9 @@ export default function PaintIdeasPage() {
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Paint Ideas & Inspiration</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('title', 'paint-ideas')}</h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Discover beautiful color combinations and get inspired for your next painting project
+            {t('description', 'paint-ideas')}
           </p>
         </div>
 

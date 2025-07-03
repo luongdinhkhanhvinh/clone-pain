@@ -4,16 +4,17 @@ import type React from "react"
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { ScrollArea } from "@/components/ui/scroll-area"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Heart, User, Mail } from "lucide-react"
+import { useLanguage } from "@/components/providers/language-provider"
 
 interface CustomerFormData {
   firstName: string
@@ -31,17 +32,23 @@ interface CustomerFormData {
 
 interface ColorCardProps {
   color: {
-    name: string
+    id: number
     code: string
+    name: string
+    description: string
     hex: string
+    image: string
+    orderPercentage: string
+    introduction: string
     category: string
-    popular?: boolean
+    popular: boolean
   }
   size?: "small" | "large"
   showCategory?: boolean
 }
 
 export function ColorCard({ color, size = "small", showCategory = false }: ColorCardProps) {
+  const { t } = useLanguage()
   const [isFavorited, setIsFavorited] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [formData, setFormData] = useState<CustomerFormData>({
@@ -74,7 +81,7 @@ export function ColorCard({ color, size = "small", showCategory = false }: Color
       },
     })
     // Handle form submission logic here
-    alert("Đơn hàng mẫu màu đã được gửi thành công! Chúng tôi sẽ liên hệ với bạn sớm.")
+    alert(t('colorCard.orderSuccess', 'components'))
     setIsOpen(false)
     // Reset form
     setFormData({
@@ -104,7 +111,14 @@ export function ColorCard({ color, size = "small", showCategory = false }: Color
     <Card className="group cursor-pointer hover:shadow-lg transition-all overflow-hidden">
       <CardContent className="p-0">
         <Link href={`/colors/${color.name.toLowerCase().replace(/\s+/g, "-")}`}>
-          <div className={`w-full ${cardHeight} relative`} style={{ backgroundColor: color.hex }}>
+          <div className={`w-full ${cardHeight} relative overflow-hidden`}>
+            <Image
+              src={color.image}
+              alt={color.name}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
             <div className="absolute top-2 right-2 flex gap-1">
               <Button
                 size="sm"
@@ -128,23 +142,28 @@ export function ColorCard({ color, size = "small", showCategory = false }: Color
                     <User className="w-3 h-3" />
                   </Button>
                 </SheetTrigger>
-                <SheetContent className="w-full sm:max-w-lg">
-                  <SheetHeader>
-                    <SheetTitle className="font-display text-xl">Đặt mẫu màu</SheetTitle>
+                <SheetContent className="w-full sm:max-w-lg flex flex-col">
+                  <SheetHeader className="flex-shrink-0">
+                    <SheetTitle className="font-display text-xl">{t('colorCard.orderSample', 'components')}</SheetTitle>
                   </SheetHeader>
 
-                  <ScrollArea className="flex-1 -mx-6 px-6">
+                  <div className="flex-1 overflow-y-auto py-4">
                     <div className="py-4">
                       <div className="mb-4 p-4 bg-slate-50 rounded-lg">
                         <div className="flex items-center gap-3">
-                          <div
-                            className="w-12 h-12 rounded-lg border-2 border-white shadow-sm"
-                            style={{ backgroundColor: color.hex }}
-                          />
+                          <div className="w-12 h-12 rounded-lg border-2 border-white shadow-sm overflow-hidden relative">
+                            <Image
+                              src={color.image}
+                              alt={color.name}
+                              fill
+                              className="object-cover"
+                              sizes="48px"
+                            />
+                          </div>
                           <div>
                             <h3 className="font-medium">{color.name}</h3>
                             <p className="text-sm text-slate-600">{color.code}</p>
-                            <p className="text-sm font-medium">$5.99 - Mẫu 2oz</p>
+                            <p className="text-sm font-medium">{t('colorCard.samplePrice', 'components')}</p>
                           </div>
                         </div>
                       </div>
@@ -153,7 +172,7 @@ export function ColorCard({ color, size = "small", showCategory = false }: Color
                         {/* Personal Information */}
                         <div className="grid grid-cols-2 gap-4">
                           <div>
-                            <Label htmlFor="firstName">Họ</Label>
+                            <Label htmlFor="firstName">{t('colorCard.form.firstName', 'components')}</Label>
                             <Input
                               id="firstName"
                               value={formData.firstName}
@@ -162,7 +181,7 @@ export function ColorCard({ color, size = "small", showCategory = false }: Color
                             />
                           </div>
                           <div>
-                            <Label htmlFor="lastName">Tên</Label>
+                            <Label htmlFor="lastName">{t('colorCard.form.lastName', 'components')}</Label>
                             <Input
                               id="lastName"
                               value={formData.lastName}
@@ -173,7 +192,7 @@ export function ColorCard({ color, size = "small", showCategory = false }: Color
                         </div>
 
                         <div>
-                          <Label htmlFor="email">Email</Label>
+                          <Label htmlFor="email">{t('colorCard.form.email', 'components')}</Label>
                           <Input
                             id="email"
                             type="email"
@@ -184,7 +203,7 @@ export function ColorCard({ color, size = "small", showCategory = false }: Color
                         </div>
 
                         <div>
-                          <Label htmlFor="phone">Số điện thoại</Label>
+                          <Label htmlFor="phone">{t('colorCard.form.phone', 'components')}</Label>
                           <Input
                             id="phone"
                             type="tel"
@@ -196,7 +215,7 @@ export function ColorCard({ color, size = "small", showCategory = false }: Color
 
                         {/* Address Information */}
                         <div>
-                          <Label htmlFor="address">Địa chỉ</Label>
+                          <Label htmlFor="address">{t('colorCard.form.address', 'components')}</Label>
                           <Input
                             id="address"
                             value={formData.address}
@@ -207,7 +226,7 @@ export function ColorCard({ color, size = "small", showCategory = false }: Color
 
                         <div className="grid grid-cols-2 gap-4">
                           <div>
-                            <Label htmlFor="city">Thành phố</Label>
+                            <Label htmlFor="city">{t('colorCard.form.city', 'components')}</Label>
                             <Input
                               id="city"
                               value={formData.city}
@@ -216,24 +235,24 @@ export function ColorCard({ color, size = "small", showCategory = false }: Color
                             />
                           </div>
                           <div>
-                            <Label htmlFor="state">Tỉnh/Thành</Label>
+                            <Label htmlFor="state">{t('colorCard.form.state', 'components')}</Label>
                             <Select value={formData.state} onValueChange={(value) => handleInputChange("state", value)}>
                               <SelectTrigger>
-                                <SelectValue placeholder="Chọn tỉnh/thành" />
+                                <SelectValue placeholder={t('colorCard.form.selectState', 'components')} />
                               </SelectTrigger>
                               <SelectContent>
-                                <SelectItem value="hanoi">Hà Nội</SelectItem>
-                                <SelectItem value="hcm">TP. Hồ Chí Minh</SelectItem>
-                                <SelectItem value="danang">Đà Nẵng</SelectItem>
-                                <SelectItem value="haiphong">Hải Phòng</SelectItem>
-                                <SelectItem value="cantho">Cần Thơ</SelectItem>
+                                <SelectItem value="hanoi">{t('colorCard.form.states.hanoi', 'components')}</SelectItem>
+                                <SelectItem value="hcm">{t('colorCard.form.states.hcm', 'components')}</SelectItem>
+                                <SelectItem value="danang">{t('colorCard.form.states.danang', 'components')}</SelectItem>
+                                <SelectItem value="haiphong">{t('colorCard.form.states.haiphong', 'components')}</SelectItem>
+                                <SelectItem value="cantho">{t('colorCard.form.states.cantho', 'components')}</SelectItem>
                               </SelectContent>
                             </Select>
                           </div>
                         </div>
 
                         <div>
-                          <Label htmlFor="zipCode">Mã bưu điện</Label>
+                          <Label htmlFor="zipCode">{t('colorCard.form.zipCode', 'components')}</Label>
                           <Input
                             id="zipCode"
                             value={formData.zipCode}
@@ -243,26 +262,26 @@ export function ColorCard({ color, size = "small", showCategory = false }: Color
 
                         {/* Project Information */}
                         <div>
-                          <Label htmlFor="projectType">Loại dự án</Label>
+                          <Label htmlFor="projectType">{t('colorCard.form.projectType', 'components')}</Label>
                           <Select value={formData.projectType} onValueChange={(value) => handleInputChange("projectType", value)}>
                             <SelectTrigger>
-                              <SelectValue placeholder="Chọn loại dự án" />
+                              <SelectValue placeholder={t('colorCard.form.selectProject', 'components')} />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="residential">Nhà ở</SelectItem>
-                              <SelectItem value="commercial">Thương mại</SelectItem>
-                              <SelectItem value="industrial">Công nghiệp</SelectItem>
-                              <SelectItem value="renovation">Cải tạo</SelectItem>
-                              <SelectItem value="new-construction">Xây dựng mới</SelectItem>
+                              <SelectItem value="residential">{t('colorCard.form.projectTypes.residential', 'components')}</SelectItem>
+                              <SelectItem value="commercial">{t('colorCard.form.projectTypes.commercial', 'components')}</SelectItem>
+                              <SelectItem value="industrial">{t('colorCard.form.projectTypes.industrial', 'components')}</SelectItem>
+                              <SelectItem value="renovation">{t('colorCard.form.projectTypes.renovation', 'components')}</SelectItem>
+                              <SelectItem value="new-construction">{t('colorCard.form.projectTypes.newConstruction', 'components')}</SelectItem>
                             </SelectContent>
                           </Select>
                         </div>
 
                         <div>
-                          <Label htmlFor="message">Ghi chú</Label>
+                          <Label htmlFor="message">{t('colorCard.form.message', 'components')}</Label>
                           <Textarea
                             id="message"
-                            placeholder="Mô tả chi tiết về dự án của bạn..."
+                            placeholder={t('colorCard.form.projectDescription', 'components')}
                             value={formData.message}
                             onChange={(e) => handleInputChange("message", e.target.value)}
                             rows={3}
@@ -271,17 +290,17 @@ export function ColorCard({ color, size = "small", showCategory = false }: Color
 
                         <Button type="submit" className="w-full" size="lg">
                           <Mail className="w-4 h-4 mr-2" />
-                          Đặt mẫu màu
+                          {t('colorCard.form.submitOrder', 'components')}
                         </Button>
                       </form>
                     </div>
-                  </ScrollArea>
+                  </div>
                 </SheetContent>
               </Sheet>
             </div>
 
             {color.popular && (
-              <Badge className="absolute bottom-2 left-2 bg-white text-gray-900 text-xs">Popular</Badge>
+              <Badge className="absolute bottom-2 left-2 bg-white text-gray-900 text-xs">{t('colorCard.popular', 'components')}</Badge>
             )}
 
             {showCategory && (
@@ -293,6 +312,14 @@ export function ColorCard({ color, size = "small", showCategory = false }: Color
           <div className="p-3">
             <h3 className="font-semibold text-sm">{color.name}</h3>
             <p className="text-xs text-gray-600">{color.code}</p>
+            <p className="text-xs text-gray-500 mt-1">{color.description}</p>
+            {color.orderPercentage && (
+              <div className="flex items-center justify-between mt-2">
+                <span className="text-xs text-blue-600 font-medium">
+                  {color.orderPercentage} đặt hàng
+                </span>
+              </div>
+            )}
           </div>
         </Link>
       </CardContent>

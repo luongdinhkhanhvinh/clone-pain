@@ -1,0 +1,69 @@
+{
+  "title": "Dành Cho Chuyên Gia",
+  "description": "Hợp tác với Benjamin Moore để có sản phẩm cao cấp, hỗ trợ chuyên môn và lợi ích độc quyền được thiết kế cho các chuyên gia sơn.",
+  "hero": {
+    "title": "Dành Cho Chuyên Gia",
+    "description": "Hợp tác với Benjamin Moore để có sản phẩm cao cấp, hỗ trợ chuyên môn và lợi ích độc quyền được thiết kế cho các chuyên gia sơn."
+  },
+  "benefits": {
+    "title": "Lợi Ích Chuyên Nghiệp",
+    "description": "Ưu đãi độc quyền được thiết kế cho các chuyên gia sơn và nhà thầu",
+    "tradeDiscount": {
+      "title": "Chương Trình Giảm Giá Thương Mại",
+      "description": "Giá cả độc quyền và giảm giá theo khối lượng cho các chuyên gia đủ điều kiện"
+    },
+    "technicalSupport": {
+      "title": "Hỗ Trợ Kỹ Thuật",
+      "description": "Hướng dẫn chuyên môn về lựa chọn sản phẩm và kỹ thuật ứng dụng"
+    },
+    "trainingPrograms": {
+      "title": "Chương Trình Đào Tạo",
+      "description": "Cơ hội phát triển chuyên môn và chứng nhận"
+    },
+    "marketingSupport": {
+      "title": "Hỗ Trợ Marketing",
+      "description": "Cơ hội đồng marketing và tài liệu quảng cáo"
+    },
+    "fastDelivery": {
+      "title": "Giao Hàng Ưu Tiên",
+      "description": "Vận chuyển và giao hàng nhanh cho các dự án khẩn cấp"
+    },
+    "recognitionPrograms": {
+      "title": "Chương Trình Ghi Nhận",
+      "description": "Giải thưởng và ghi nhận cho công việc chuyên nghiệp xuất sắc"
+    }
+  },
+  "form": {
+    "title": "Tham Gia Mạng Lưới Chuyên Nghiệp",
+    "description": "Bắt đầu với các lợi ích chuyên nghiệp độc quyền",
+    "firstName": "Tên",
+    "lastName": "Họ",
+    "company": "Tên Công Ty",
+    "email": "Địa Chỉ Email",
+    "phone": "Số Điện Thoại",
+    "businessType": "Loại Hình Kinh Doanh",
+    "experience": "Số Năm Kinh Nghiệm",
+    "message": "Thông Tin Bổ Sung",
+    "submit": "Gửi Đơn Đăng Ký",
+    "businessTypes": {
+      "painter": "Nhà Thầu Sơn",
+      "designer": "Nhà Thiết Kế Nội Thất",
+      "architect": "Kiến Trúc Sư",
+      "retailer": "Nhà Bán Lẻ Sơn",
+      "other": "Khác"
+    },
+    "experienceOptions": {
+      "1-3": "1-3 năm",
+      "4-10": "4-10 năm",
+      "10+": "10+ năm"
+    }
+  },
+  "tools": {
+    "title": "Công Cụ & Tài Nguyên Chuyên Nghiệp",
+    "colorTools": "Công Cụ Màu Sắc",
+    "calculator": "Máy Tính Sơn",
+    "specifications": "Thông Số Sản Phẩm",
+    "samples": "Đặt Hàng Mẫu",
+    "support": "Hỗ Trợ Kỹ Thuật"
+  }
+}

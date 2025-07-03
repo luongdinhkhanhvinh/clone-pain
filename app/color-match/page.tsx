@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Upload, Camera } from "lucide-react"
+import { useLanguage } from "@/components/providers/language-provider"
 
 const suggestedColors = [
   { name: "White Dove", code: "OC-17", hex: "#F8F6F0", match: "95%" },
@@ -25,6 +26,7 @@ const complementaryColors = [
 ]
 
 export default function ColorMatchPage() {
+  const { t } = useLanguage()
   const [selectedColor, setSelectedColor] = useState("#F8F6F0")
   const [uploadedImage, setUploadedImage] = useState<string | null>(null)
 
@@ -44,17 +46,17 @@ export default function ColorMatchPage() {
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8 text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Color Matching & Coordination</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('title', 'color-match')}</h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Find the perfect color match or discover complementary colors for your project
+            {t('description', 'color-match')}
           </p>
         </div>
 
         <Tabs defaultValue="match" className="w-full">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="match">Color Match</TabsTrigger>
-            <TabsTrigger value="coordinate">Color Coordination</TabsTrigger>
-            <TabsTrigger value="inspiration">Color Inspiration</TabsTrigger>
+            <TabsTrigger value="match">{t('tabs.match', 'color-match')}</TabsTrigger>
+            <TabsTrigger value="coordinate">{t('tabs.coordinate', 'color-match')}</TabsTrigger>
+            <TabsTrigger value="inspiration">{t('tabs.inspiration', 'color-match')}</TabsTrigger>
           </TabsList>
 
           {/* Color Match Tab */}
@@ -65,7 +67,7 @@ export default function ColorMatchPage() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Upload className="w-5 h-5" />
-                    Upload Image or Select Color
+                    {t('upload.title', 'color-match')}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
@@ -79,7 +81,7 @@ export default function ColorMatchPage() {
                           className="max-w-full h-48 object-cover mx-auto rounded-lg"
                         />
                         <Button variant="outline" onClick={() => setUploadedImage(null)}>
-                          Remove Image
+                          {t('buttons.removeImage')}
                         </Button>
                       </div>
                     ) : (

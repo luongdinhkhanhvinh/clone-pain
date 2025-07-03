@@ -8,8 +8,8 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { ScrollArea } from "@/components/ui/scroll-area"
 import { User, Mail } from "lucide-react"
+import { useLanguage } from "@/components/providers/language-provider"
 
 interface CustomerFormData {
   firstName: string
@@ -32,7 +32,6 @@ interface AddToCartButtonProps {
     id: string
     name: string
     code: string
-    price: number
     image: string
     category: string
     hex?: string
@@ -41,6 +40,7 @@ interface AddToCartButtonProps {
 }
 
 export function AddToCartButton({ product, className }: AddToCartButtonProps) {
+  const { t } = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
   const [finish, setFinish] = useState("Eggshell")
   const [size, setSize] = useState("1 Gallon")
@@ -62,14 +62,13 @@ export function AddToCartButton({ product, className }: AddToCartButtonProps) {
 
   const finishes = ["Flat", "Eggshell", "Satin", "Semi-Gloss", "Gloss"]
   const sizes = [
-    { label: "Sample (2 oz)", value: "Sample", price: 5.99 },
-    { label: "Quart", value: "Quart", price: product.price * 0.3 },
-    { label: "1 Gallon", value: "1 Gallon", price: product.price },
-    { label: "5 Gallon", value: "5 Gallon", price: product.price * 4.5 },
+    { label: "Sample (2 oz)", value: "Sample" },
+    { label: "Quart", value: "Quart"},
+    { label: "1 Gallon", value: "1 Gallon" },
+    { label: "5 Gallon", value: "5 Gallon" },
   ]
 
   const selectedSize = sizes.find((s) => s.value === size)
-  const finalPrice = selectedSize?.price || product.price
 
   const handleInputChange = (field: keyof CustomerFormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
@@ -77,19 +76,8 @@ export function AddToCartButton({ product, className }: AddToCartButtonProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Customer order submitted:", {
-      ...formData,
-      product: {
-        id: product.id,
-        name: product.name,
-        code: product.code,
-        price: finalPrice,
-        finish,
-        size,
-      },
-    })
     // Handle form submission logic here
-    alert("Đơn hàng đã được gửi thành công! Chúng tôi sẽ liên hệ với bạn sớm.")
+    alert(t('cart.orderSuccess', 'components'))
     setIsOpen(false)
     // Reset form
     setFormData({
@@ -114,7 +102,7 @@ export function AddToCartButton({ product, className }: AddToCartButtonProps) {
       <div className="grid grid-cols-2 gap-4">
         <div>
           <Label htmlFor="finish" className="text-sm font-medium text-slate-700">
-            Finish
+            {t('cart.finish', 'components')}
           </Label>
           <Select value={finish} onValueChange={setFinish}>
             <SelectTrigger id="finish">
@@ -132,7 +120,7 @@ export function AddToCartButton({ product, className }: AddToCartButtonProps) {
 
         <div>
           <Label htmlFor="size" className="text-sm font-medium text-slate-700">
-            Size
+            {t('cart.size', 'components')}
           </Label>
           <Select value={size} onValueChange={setSize}>
             <SelectTrigger id="size">
@@ -143,7 +131,6 @@ export function AddToCartButton({ product, className }: AddToCartButtonProps) {
                 <SelectItem key={s.value} value={s.value}>
                   <div className="flex justify-between items-center w-full">
                     <span>{s.label}</span>
-                    <span className="ml-2 text-slate-600">${s.price.toFixed(2)}</span>
                   </div>
                 </SelectItem>
               ))}
@@ -159,32 +146,29 @@ export function AddToCartButton({ product, className }: AddToCartButtonProps) {
           </div>
           <div className="text-sm text-slate-600">{product.name}</div>
         </div>
-        <div className="text-right">
-          <div className="text-xl font-display font-medium text-slate-900">${finalPrice.toFixed(2)}</div>
-        </div>
       </div>
 
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild>
           <Button className="w-full" size="lg">
             <User className="w-4 h-4 mr-2" />
-            Đặt hàng ngay
+            {t('cart.orderNow', 'components')}
           </Button>
         </SheetTrigger>
-        <SheetContent className="w-full sm:max-w-lg bg-white">
-          <SheetHeader>
-            <SheetTitle className="font-display text-xl">Thông tin đặt hàng</SheetTitle>
+        <SheetContent className="w-full sm:max-w-lg bg-white flex flex-col">
+          <SheetHeader className="flex-shrink-0">
+            <SheetTitle className="font-display text-xl">{t('cart.orderInfo', 'components')}</SheetTitle>
           </SheetHeader>
 
-          <ScrollArea className="flex-1 -mx-6 px-6 bg-white">
+          <div className="flex-1 overflow-y-auto py-4 bg-white">
             <div className="py-4">
               <Card>
                 <CardHeader>
                   <CardTitle className="text-lg">
-                    Đặt hàng: {product.name}
+                    {t('cart.orderFor', 'components')}: {product.name}
                   </CardTitle>
                   <p className="text-sm text-slate-600">
-                    {finish} - {size} - ${finalPrice.toFixed(2)}
+                    {finish} - {size}
                   </p>
                 </CardHeader>
                 <CardContent>
@@ -192,7 +176,7 @@ export function AddToCartButton({ product, className }: AddToCartButtonProps) {
                     {/* Personal Information */}
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="firstName">Họ</Label>
+                        <Label htmlFor="firstName">{t('colorCard.form.firstName', 'components')}</Label>
                         <Input
                           id="firstName"
                           value={formData.firstName}
@@ -201,7 +185,7 @@ export function AddToCartButton({ product, className }: AddToCartButtonProps) {
                         />
                       </div>
                       <div>
-                        <Label htmlFor="lastName">Tên</Label>
+                        <Label htmlFor="lastName">{t('colorCard.form.lastName', 'components')}</Label>
                         <Input
                           id="lastName"
                           value={formData.lastName}
@@ -212,7 +196,7 @@ export function AddToCartButton({ product, className }: AddToCartButtonProps) {
                     </div>
 
                     <div>
-                      <Label htmlFor="email">Email</Label>
+                      <Label htmlFor="email">{t('colorCard.form.email', 'components')}</Label>
                       <Input
                         id="email"
                         type="email"
@@ -223,7 +207,7 @@ export function AddToCartButton({ product, className }: AddToCartButtonProps) {
                     </div>
 
                     <div>
-                      <Label htmlFor="phone">Số điện thoại</Label>
+                      <Label htmlFor="phone">{t('colorCard.form.phone', 'components')}</Label>
                       <Input
                         id="phone"
                         type="tel"
@@ -235,7 +219,7 @@ export function AddToCartButton({ product, className }: AddToCartButtonProps) {
 
                     {/* Address Information */}
                     <div>
-                      <Label htmlFor="address">Địa chỉ</Label>
+                      <Label htmlFor="address">{t('colorCard.form.address', 'components')}</Label>
                       <Input
                         id="address"
                         value={formData.address}
@@ -246,7 +230,7 @@ export function AddToCartButton({ product, className }: AddToCartButtonProps) {
 
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="city">Thành phố</Label>
+                        <Label htmlFor="city">{t('colorCard.form.city', 'components')}</Label>
                         <Input
                           id="city"
                           value={formData.city}
@@ -255,24 +239,24 @@ export function AddToCartButton({ product, className }: AddToCartButtonProps) {
                         />
                       </div>
                       <div>
-                        <Label htmlFor="state">Tỉnh/Thành</Label>
+                        <Label htmlFor="state">{t('colorCard.form.state', 'components')}</Label>
                         <Select value={formData.state} onValueChange={(value) => handleInputChange("state", value)}>
                           <SelectTrigger>
-                            <SelectValue placeholder="Chọn tỉnh/thành" />
+                            <SelectValue placeholder={t('colorCard.form.selectState', 'components')} />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="hanoi">Hà Nội</SelectItem>
-                            <SelectItem value="hcm">TP. Hồ Chí Minh</SelectItem>
-                            <SelectItem value="danang">Đà Nẵng</SelectItem>
-                            <SelectItem value="haiphong">Hải Phòng</SelectItem>
-                            <SelectItem value="cantho">Cần Thơ</SelectItem>
+                            <SelectItem value="hanoi">{t('colorCard.form.states.hanoi', 'components')}</SelectItem>
+                            <SelectItem value="hcm">{t('colorCard.form.states.hcm', 'components')}</SelectItem>
+                            <SelectItem value="danang">{t('colorCard.form.states.danang', 'components')}</SelectItem>
+                            <SelectItem value="haiphong">{t('colorCard.form.states.haiphong', 'components')}</SelectItem>
+                            <SelectItem value="cantho">{t('colorCard.form.states.cantho', 'components')}</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
                     </div>
 
                     <div>
-                      <Label htmlFor="zipCode">Mã bưu điện</Label>
+                      <Label htmlFor="zipCode">{t('colorCard.form.zipCode', 'components')}</Label>
                       <Input
                         id="zipCode"
                         value={formData.zipCode}
@@ -282,26 +266,26 @@ export function AddToCartButton({ product, className }: AddToCartButtonProps) {
 
                     {/* Project Information */}
                     <div>
-                      <Label htmlFor="projectType">Loại dự án</Label>
+                      <Label htmlFor="projectType">{t('colorCard.form.projectType', 'components')}</Label>
                       <Select value={formData.projectType} onValueChange={(value) => handleInputChange("projectType", value)}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Chọn loại dự án" />
+                          <SelectValue placeholder={t('colorCard.form.selectProject', 'components')} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="residential">Nhà ở</SelectItem>
-                          <SelectItem value="commercial">Thương mại</SelectItem>
-                          <SelectItem value="industrial">Công nghiệp</SelectItem>
-                          <SelectItem value="renovation">Cải tạo</SelectItem>
-                          <SelectItem value="new-construction">Xây dựng mới</SelectItem>
+                          <SelectItem value="residential">{t('colorCard.form.projectTypes.residential', 'components')}</SelectItem>
+                          <SelectItem value="commercial">{t('colorCard.form.projectTypes.commercial', 'components')}</SelectItem>
+                          <SelectItem value="industrial">{t('colorCard.form.projectTypes.industrial', 'components')}</SelectItem>
+                          <SelectItem value="renovation">{t('colorCard.form.projectTypes.renovation', 'components')}</SelectItem>
+                          <SelectItem value="new-construction">{t('colorCard.form.projectTypes.newConstruction', 'components')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
 
                     <div>
-                      <Label htmlFor="message">Ghi chú</Label>
+                      <Label htmlFor="message">{t('colorCard.form.message', 'components')}</Label>
                       <Textarea
                         id="message"
-                        placeholder="Mô tả chi tiết về dự án của bạn..."
+                        placeholder={t('colorCard.form.projectDescription', 'components')}
                         value={formData.message}
                         onChange={(e) => handleInputChange("message", e.target.value)}
                         rows={3}
@@ -310,13 +294,13 @@ export function AddToCartButton({ product, className }: AddToCartButtonProps) {
 
                     <Button type="submit" className="w-full" size="lg">
                       <Mail className="w-4 h-4 mr-2" />
-                      Gửi đơn hàng
+                      {t('cart.submitOrder', 'components')}
                     </Button>
                   </form>
                 </CardContent>
               </Card>
             </div>
-          </ScrollArea>
+          </div>
         </SheetContent>
       </Sheet>
     </div>

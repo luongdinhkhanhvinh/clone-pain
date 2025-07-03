@@ -1,0 +1,42 @@
+{
+  "title": "Paint Ideas & Design Inspiration",
+  "description": "Discover trending color combinations, room ideas, and professional design tips",
+  "categories": {
+    "trending": "Trending Ideas",
+    "byRoom": "Ideas by Room",
+    "byStyle": "Ideas by Style",
+    "seasonal": "Seasonal Inspiration",
+    "colorCombos": "Color Combinations"
+  },
+  "rooms": {
+    "livingRoom": "Living Room",
+    "bedroom": "Bedroom", 
+    "kitchen": "Kitchen",
+    "bathroom": "Bathroom",
+    "diningRoom": "Dining Room",
+    "homeOffice": "Home Office",
+    "kidsRoom": "Kids Room",
+    "exterior": "Exterior"
+  },
+  "styles": {
+    "modern": "Modern",
+    "traditional": "Traditional",
+    "farmhouse": "Farmhouse",
+    "coastal": "Coastal",
+    "industrial": "Industrial",
+    "bohemian": "Bohemian",
+    "minimalist": "Minimalist",
+    "eclectic": "Eclectic"
+  },
+  "interface": {
+    "viewIdea": "View Idea",
+    "saveIdea": "Save Idea",
+    "shareIdea": "Share Idea",
+    "getColors": "Get These Colors",
+    "similarIdeas": "Similar Ideas",
+    "moreFromStyle": "More from this Style",
+    "featured": "Featured",
+    "newest": "Newest",
+    "popular": "Most Popular"
+  }
+}

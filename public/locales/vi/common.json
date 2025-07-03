@@ -1,0 +1,57 @@
+{
+  "site": {
+    "title": "SilkLux - Giải Pháp Ván Gỗ Cao Cấp & Màu Sắc Sang Trọng",
+    "description": "Khám phá ván gỗ cao cấp với lớp hoàn thiện mịn như lụa. Hơn 3,500 màu sắc tinh tế và sản phẩm chuyên nghiệp dành cho các nhà thiết kế và chủ nhà khó tính.",
+    "keywords": "ván gỗ cao cấp, màu ván gỗ premium, ván gỗ hoàn thiện lụa, thiết kế nội thất, SilkLux, tư vấn màu sắc, ván gỗ high-end"
+  },
+  "navigation": {
+    "home": "Trang Chủ",
+    "paintColors": "Màu Ván Gỗ",
+    "products": "Sản Phẩm",
+    "designIdeas": "Ý Tưởng",
+    "forProfessionals": "Dành Cho Chuyên Gia",
+    "exploreColors": "Khám Phá Màu Sắc",
+    "colorMatching": "Phối Màu",
+    "colorFamilies": "Họ Màu",
+    "allProducts": "Tất Cả Sản Phẩm",
+    "interiorPaint": "Ván Gỗ Nội Thất",
+    "exteriorPaint": "Ván Gỗ Ngoại Thất",
+    "luxuryFinishes": "Hoàn Thiện Cao Cấp",
+    "primers": "Lót Ván Gỗ",
+    "specialtyProducts": "Sản Phẩm Đặc Biệt"
+  },
+  "header": {
+    "language": "Tiếng Việt - Việt Nam",
+    "findStore": "Cửa Hàng Trưng Bày",
+    "searchPlaceholder": "Tìm kiếm màu sắc, sản phẩm...",
+    "shopOnline": "Hồ Sơ Năng Lực",
+    "exploreColorsDesc": "Duyệt bộ sưu tập đầy đủ các màu sắc cao cấp",
+    "colorMatchingDesc": "Phối màu và phối hợp màu sắc chuyên nghiệp",
+    "colorFamiliesDesc": "Được tổ chức theo danh mục và họ màu",
+    "allProductsDesc": "Dải sản phẩm ván gỗ cao cấp đầy đủ"
+  },
+  "footer": {
+    "description": "Giải pháp ván gỗ cao cấp được chế tác với lớp hoàn thiện mịn như lụa. Nâng tầm không gian với chất lượng và sự tinh tế vô song.",
+    "products": "Sản Phẩm",
+    "colors": "Màu Sắc",
+    "stayConnected": "Kết Nối",
+    "newsletterDesc": "Nhận xu hướng màu sắc mới nhất và đổi mới ván gỗ cao cấp.",
+    "emailPlaceholder": "Nhập email của bạn",
+    "subscribe": "Đăng Ký",
+    "copyright": "© 2024 SilkLux. Tất cả quyền được bảo lưu.",
+    "privacyPolicy": "Chính Sách Bảo Mật",
+    "termsOfUse": "Điều Khoản Sử Dụng",
+    "contactUs": "Liên Hệ",
+    "popularColors": "Màu Phổ Biến",
+    "colorTrends": "Xu Hướng Màu Sắc"
+  },
+  "buttons": {
+    "loadMore": "Tải Thêm Màu",
+    "viewComplete": "Xem Bộ Sưu Tập Đầy Đủ",
+    "scheduleConsultation": "Đặt Lịch Tư Vấn",
+    "joinTradeProgram": "Tham Gia Chương Trình Thương Mại",
+    "findRep": "Tìm Đại Diện",
+    "removeImage": "Xóa Hình Ảnh",
+    "close": "Đóng"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "site": {
+    "title": "SilkLux - Premium Luxury Paint & Color Solutions",
+    "description": "Discover premium luxury paint with silk-like finishes. Over 3,500 sophisticated colors and professional-grade products for discerning designers and homeowners.",
+    "keywords": "luxury paint, premium paint colors, silk finish paint, interior design, SilkLux, color consultation, high-end paint"
+  },
+  "navigation": {
+    "home": "Home",
+    "paintColors": "Paint Colors",
+    "products": "Products",
+    "designIdeas": "Design Ideas",
+    "forProfessionals": "For Professionals",
+    "exploreColors": "Explore Colors",
+    "colorMatching": "Color Matching",
+    "colorFamilies": "Color Families",
+    "allProducts": "All Products",
+    "interiorPaint": "Interior Paint",
+    "exteriorPaint": "Exterior Paint",
+    "luxuryFinishes": "Luxury Finishes",
+    "primers": "Primers",
+    "specialtyProducts": "Specialty Products"
+  },
+  "header": {
+    "language": "English - United States",
+    "findStore": "Showroom",
+    "searchPlaceholder": "Search colors, products...",
+    "shopOnline": "Company Profile",
+    "exploreColorsDesc": "Browse our complete collection of premium colors",
+    "colorMatchingDesc": "Professional color matching and coordination",
+    "colorFamiliesDesc": "Organized by color categories and families",
+    "allProductsDesc": "Complete range of premium paint products"
+  },
+  "footer": {
+    "description": "Premium luxury paint solutions crafted with silk-like finishes. Elevating spaces with unparalleled quality and sophistication.",
+    "products": "Products",
+    "colors": "Colors",
+    "stayConnected": "Stay Connected",
+    "newsletterDesc": "Get the latest color trends and luxury paint innovations.",
+    "emailPlaceholder": "Enter your email",
+    "subscribe": "Subscribe",
+    "copyright": "© 2024 SilkLux. All rights reserved.",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfUse": "Terms of Use",
+    "contactUs": "Contact Us",
+    "popularColors": "Popular Colors",
+    "colorTrends": "Color Trends"
+  },
+  "buttons": {
+    "loadMore": "Load More Colors",
+    "viewComplete": "View Complete Collection",
+    "scheduleConsultation": "Schedule Consultation",
+    "joinTradeProgram": "Join Trade Program",
+    "findRep": "Find a Rep",
+    "removeImage": "Remove Image",
+    "close": "Close"
+  }
+}

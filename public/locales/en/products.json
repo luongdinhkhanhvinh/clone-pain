@@ -1,0 +1,57 @@
+{
+  "title": "Paint & Stain Products",
+  "description": "Premium quality paints and stains for every project",
+  "categories": {
+    "allProducts": "All Products",
+    "interiorPaint": "Interior Paint",
+    "exteriorPaint": "Exterior Paint", 
+    "exteriorStain": "Exterior Stain",
+    "primer": "Primer"
+  },
+  "types": {
+    "allTypes": "All Types",
+    "ultraPremium": "Ultra Premium",
+    "premium": "Premium",
+    "standard": "Standard"
+  },
+  "filters": {
+    "category": "Category",
+    "type": "Type",
+    "priceRange": "Price Range",
+    "sortBy": "Sort By",
+    "featured": "Featured",
+    "priceLow": "Price: Low to High",
+    "priceHigh": "Price: High to Low",
+    "rating": "Rating",
+    "name": "Name",
+    "showFilters": "Show Filters",
+    "hideFilters": "Hide Filters"
+  },
+  "product": {
+    "rating": "Rating",
+    "reviews": "reviews",
+    "features": "Features",
+    "colors": "colors",
+    "coverage": "Coverage",
+    "addToCart": "Add to Cart",
+    "viewDetails": "View Details",
+    "compareProducts": "Compare Products"
+  },
+  "productFeatures": {
+    "fadeResistant": "Fade resistant",
+    "selfPriming": "Self-priming",
+    "lifetimeWarranty": "Lifetime warranty",
+    "multiSurface": "Multi-surface",
+    "stainBlocking": "Stain blocking",
+    "fastDrying": "Fast drying",
+    "zeroVOC": "Zero VOC",
+    "washable": "Washable",
+    "colorLockTechnology": "Color Lock Technology",
+    "selfLeveling": "Self-leveling",
+    "durableFinish": "Durable finish",
+    "lowVOC": "Low VOC",
+    "easyCleanup": "Easy cleanup",
+    "goodCoverage": "Good coverage",
+    "mildewResistant": "Mildew resistant"
+  }
+}

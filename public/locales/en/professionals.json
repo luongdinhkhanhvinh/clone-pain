@@ -1,0 +1,69 @@
+{
+  "title": "For Professionals",
+  "description": "Partner with Benjamin Moore for premium products, expert support, and exclusive benefits designed for painting professionals.",
+  "hero": {
+    "title": "For Professionals",
+    "description": "Partner with Benjamin Moore for premium products, expert support, and exclusive benefits designed for painting professionals."
+  },
+  "benefits": {
+    "title": "Professional Benefits",
+    "description": "Exclusive advantages designed for painting professionals and contractors",
+    "tradeDiscount": {
+      "title": "Trade Discount Program",
+      "description": "Exclusive pricing and volume discounts for qualified professionals"
+    },
+    "technicalSupport": {
+      "title": "Technical Support",
+      "description": "Expert guidance on product selection and application techniques"
+    },
+    "trainingPrograms": {
+      "title": "Training Programs",
+      "description": "Professional development and certification opportunities"
+    },
+    "marketingSupport": {
+      "title": "Marketing Support",
+      "description": "Co-marketing opportunities and promotional materials"
+    },
+    "fastDelivery": {
+      "title": "Priority Delivery",
+      "description": "Expedited shipping and delivery for urgent projects"
+    },
+    "recognitionPrograms": {
+      "title": "Recognition Programs",
+      "description": "Awards and recognition for outstanding professional work"
+    }
+  },
+  "form": {
+    "title": "Join Our Professional Network",
+    "description": "Get started with exclusive professional benefits",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "company": "Company Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "businessType": "Business Type",
+    "experience": "Years of Experience",
+    "message": "Additional Information",
+    "submit": "Submit Application",
+    "businessTypes": {
+      "painter": "Painting Contractor",
+      "designer": "Interior Designer",
+      "architect": "Architect",
+      "retailer": "Paint Retailer",
+      "other": "Other"
+    },
+    "experienceOptions": {
+      "1-3": "1-3 years",
+      "4-10": "4-10 years",
+      "10+": "10+ years"
+    }
+  },
+  "tools": {
+    "title": "Professional Tools & Resources",
+    "colorTools": "Color Tools",
+    "calculator": "Paint Calculator",
+    "specifications": "Product Specifications",
+    "samples": "Sample Ordering",
+    "support": "Technical Support"
+  }
+}

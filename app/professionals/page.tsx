@@ -30,6 +30,7 @@ import {
   DollarSign,
   Truck,
 } from "lucide-react"
+import { useLanguage } from "@/components/providers/language-provider"
 
 const professionalProducts = [
   {
@@ -91,40 +92,10 @@ const trainingPrograms = [
   },
 ]
 
-const benefits = [
-  {
-    icon: DollarSign,
-    title: "Trade Pricing",
-    description: "Exclusive discounts and volume pricing for qualified professionals",
-  },
-  {
-    icon: Truck,
-    title: "Job Site Delivery",
-    description: "Direct delivery to your project sites with flexible scheduling",
-  },
-  {
-    icon: Users,
-    title: "Dedicated Support",
-    description: "Access to professional sales representatives and technical experts",
-  },
-  {
-    icon: BookOpen,
-    title: "Training & Education",
-    description: "Comprehensive training programs and certification opportunities",
-  },
-  {
-    icon: Calculator,
-    title: "Project Tools",
-    description: "Professional calculators, estimating tools, and project management resources",
-  },
-  {
-    icon: Award,
-    title: "Recognition Programs",
-    description: "Awards and recognition for outstanding professional work",
-  },
-]
+
 
 export default function ProfessionalsPage() {
+  const { t } = useLanguage()
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -135,6 +106,39 @@ export default function ProfessionalsPage() {
     experience: "",
     message: "",
   })
+
+  const benefits = [
+    {
+      icon: DollarSign,
+      title: t('benefits.tradeDiscount.title', 'professionals'),
+      description: t('benefits.tradeDiscount.description', 'professionals'),
+    },
+    {
+      icon: Truck,
+      title: t('benefits.fastDelivery.title', 'professionals'),
+      description: t('benefits.fastDelivery.description', 'professionals'),
+    },
+    {
+      icon: Users,
+      title: t('benefits.technicalSupport.title', 'professionals'),
+      description: t('benefits.technicalSupport.description', 'professionals'),
+    },
+    {
+      icon: BookOpen,
+      title: t('benefits.trainingPrograms.title', 'professionals'),
+      description: t('benefits.trainingPrograms.description', 'professionals'),
+    },
+    {
+      icon: Calculator,
+      title: t('tools.title', 'professionals'),
+      description: t('benefits.marketingSupport.description', 'professionals'),
+    },
+    {
+      icon: Award,
+      title: t('benefits.recognitionPrograms.title', 'professionals'),
+      description: t('benefits.recognitionPrograms.description', 'professionals'),
+    },
+  ]
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
@@ -153,21 +157,19 @@ export default function ProfessionalsPage() {
         <div className="container mx-auto px-4 py-16">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h1 className="text-5xl font-bold mb-6">For Professionals</h1>
+              <h1 className="text-5xl font-bold mb-6">{t('hero.title', 'professionals')}</h1>
               <p className="text-xl mb-8 text-gray-300">
-                Partner with Benjamin Moore for premium products, expert support, and exclusive benefits designed for
-                painting professionals.
+                {t('hero.description', 'professionals')}
               </p>
               <div className="flex gap-4">
                 <Button size="lg" className="bg-white text-gray-900 hover:bg-gray-100">
-                  Join Trade Program
+                  {t('buttons.joinTradeProgram')}
                 </Button>
                 <Button
                   size="lg"
-                  variant="outline"
                   className="border-white text-white hover:bg-white hover:text-gray-900"
                 >
-                  Find a Rep
+                  {t('buttons.findRep')}
                 </Button>
               </div>
             </div>
@@ -187,19 +189,19 @@ export default function ProfessionalsPage() {
       <div className="container mx-auto px-4 py-12">
         <Tabs defaultValue="benefits" className="w-full">
           <TabsList className="grid w-full grid-cols-5">
-            <TabsTrigger value="benefits">Benefits</TabsTrigger>
-            <TabsTrigger value="products">Products</TabsTrigger>
-            <TabsTrigger value="training">Training</TabsTrigger>
-            <TabsTrigger value="tools">Tools</TabsTrigger>
-            <TabsTrigger value="join">Join Program</TabsTrigger>
+            <TabsTrigger value="benefits">{t('benefits.title', 'professionals')}</TabsTrigger>
+            <TabsTrigger value="products">{t('navigation.products')}</TabsTrigger>
+            <TabsTrigger value="training">{t('benefits.trainingPrograms.title', 'professionals')}</TabsTrigger>
+            <TabsTrigger value="tools">{t('tools.title', 'professionals')}</TabsTrigger>
+            <TabsTrigger value="join">{t('form.title', 'professionals')}</TabsTrigger>
           </TabsList>
 
           {/* Benefits Tab */}
           <TabsContent value="benefits" className="space-y-12">
             <div className="text-center">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Professional Benefits</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('benefits.title', 'professionals')}</h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Unlock exclusive advantages designed to help your business grow and succeed
+                {t('benefits.description', 'professionals')}
               </p>
             </div>
 
@@ -522,9 +524,9 @@ export default function ProfessionalsPage() {
           {/* Join Program Tab */}
           <TabsContent value="join" className="space-y-8">
             <div className="text-center">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Join Our Trade Program</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('form.title', 'professionals')}</h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Start enjoying exclusive benefits and support designed for painting professionals
+                {t('form.description', 'professionals')}
               </p>
             </div>
 
@@ -538,7 +540,7 @@ export default function ProfessionalsPage() {
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="firstName">First Name</Label>
+                        <Label htmlFor="firstName">{t('form.firstName', 'professionals')}</Label>
                         <Input
                           id="firstName"
                           value={formData.firstName}
@@ -547,7 +549,7 @@ export default function ProfessionalsPage() {
                         />
                       </div>
                       <div>
-                        <Label htmlFor="lastName">Last Name</Label>
+                        <Label htmlFor="lastName">{t('form.lastName', 'professionals')}</Label>
                         <Input
                           id="lastName"
                           value={formData.lastName}
@@ -558,7 +560,7 @@ export default function ProfessionalsPage() {
                     </div>
 
                     <div>
-                      <Label htmlFor="company">Company Name</Label>
+                      <Label htmlFor="company">{t('form.company', 'professionals')}</Label>
                       <Input
                         id="company"
                         value={formData.company}
@@ -569,7 +571,7 @@ export default function ProfessionalsPage() {
 
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="email">Email</Label>
+                        <Label htmlFor="email">{t('form.email', 'professionals')}</Label>
                         <Input
                           id="email"
                           type="email"
@@ -579,7 +581,7 @@ export default function ProfessionalsPage() {
                         />
                       </div>
                       <div>
-                        <Label htmlFor="phone">Phone</Label>
+                        <Label htmlFor="phone">{t('form.phone', 'professionals')}</Label>
                         <Input
                           id="phone"
                           value={formData.phone}

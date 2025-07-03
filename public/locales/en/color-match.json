@@ -1,0 +1,43 @@
+{
+  "title": "Color Matching & Coordination",
+  "description": "Find the perfect color match or discover complementary colors for your project",
+  "tabs": {
+    "match": "Color Match",
+    "coordinate": "Color Coordination", 
+    "inspiration": "Color Inspiration"
+  },
+  "upload": {
+    "title": "Upload Image or Select Color",
+    "dragDrop": "Drag and drop an image here, or click to select",
+    "takePhoto": "Take Photo",
+    "selectColor": "Select Color",
+    "colorPicker": "Color Picker",
+    "hexCode": "Hex Code",
+    "uploadedAlt": "Uploaded"
+  },
+  "results": {
+    "title": "Suggested Color Matches",
+    "match": "Match",
+    "complementary": "Complementary Colors",
+    "viewColor": "View Color",
+    "addToFavorites": "Add to Favorites"
+  },
+  "coordination": {
+    "title": "Color Coordination Tools",
+    "description": "Create beautiful color schemes with our professional coordination tools",
+    "monochromatic": "Monochromatic",
+    "analogous": "Analogous",
+    "complementary": "Complementary",
+    "triadic": "Triadic",
+    "tetradic": "Tetradic",
+    "generateScheme": "Generate Color Scheme"
+  },
+  "inspiration": {
+    "title": "Color Inspiration Gallery",
+    "description": "Discover trending color combinations and design inspiration",
+    "trending": "Trending Now",
+    "seasonal": "Seasonal Colors",
+    "roomType": "By Room Type",
+    "style": "By Style"
+  }
+}
