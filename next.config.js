@@ -3,6 +3,13 @@ const nextConfig = {
   // Enable standalone only in Docker environment
   ...(process.env.DOCKER_BUILD === 'true' && { output: 'standalone' }),
 
+  // Optimize for Docker builds
+  ...(process.env.DOCKER_BUILD === 'true' && {
+    experimental: {
+      optimizeCss: false, // Disable CSS optimization in Docker to avoid network issues
+    }
+  }),
+
   // Exclude server folder from Next.js compilation
   webpack: (config, { isServer }) => {
     if (!isServer) {
