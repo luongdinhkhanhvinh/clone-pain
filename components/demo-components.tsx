@@ -8,9 +8,14 @@ export function DemoComponents() {
   const { t, locale } = useLanguage()
 
   const sampleColor = {
+    id: 1,
     name: "Silk Fern",
     code: "SLX-2144",
+    description: "A beautiful green color",
     hex: "#9CAF88",
+    image: "",
+    orderPercentage: "5%",
+    introduction: "Perfect for nature-inspired designs",
     category: "Green",
     popular: true
   }
@@ -20,13 +25,31 @@ export function DemoComponents() {
     name: "SilkLux Premium Interior wood",
     category: "Interior wood",
     type: "Ultra Premium",
-    price: 89.99,
     rating: 4.8,
     reviews: 156,
     image: "/placeholder.svg",
     features: ["Self-priming", "Zero VOC", "Washable"],
     colors: 3500,
-    coverage: "400 sq ft"
+    coverage: "400 sq ft",
+    description: "Premium interior wood panel",
+    baseColor: {
+      id: 1,
+      code: "SLX-2144",
+      name: "Silk Fern",
+      description: "A beautiful green color",
+      hex: "#9CAF88",
+      image: "",
+      orderPercentage: "5%"
+    },
+    availableColors: [
+      {
+        id: 1,
+        code: "SLX-2144",
+        name: "Silk Fern",
+        hex: "#9CAF88",
+        image: ""
+      }
+    ]
   }
 
   return (

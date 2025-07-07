@@ -1,0 +1,45 @@
+{
+  "title": "Màu Ván Đầu Gỗ",
+  "subtitle": "Khám phá bộ sưu tập màu ván gỗ cao cấp",
+  "description": "Tìm hiểu về các màu ván gỗ chất lượng cao với độ bền vượt trội và vẻ đẹp tự nhiên.",
+  "categories": {
+    "all": "Tất cả",
+    "popular": "Phổ biến",
+    "new": "Mới",
+    "premium": "Cao cấp"
+  },
+  "filters": {
+    "category": "Danh mục",
+    "finish": "Hoàn thiện",
+    "application": "Ứng dụng",
+    "clear": "Xóa bộ lọc"
+  },
+  "colorCard": {
+    "viewDetails": "Xem chi tiết",
+    "orderSample": "Đặt mẫu",
+    "addToFavorites": "Thêm vào yêu thích",
+    "specifications": "Thông số kỹ thuật",
+    "applications": "Ứng dụng"
+  },
+  "colorDetails": {
+    "overview": "Tổng quan",
+    "specifications": "Thông số",
+    "applications": "Ứng dụng",
+    "relatedColors": "Màu liên quan",
+    "orderSample": "Đặt mẫu",
+    "contactUs": "Liên hệ",
+    "downloadSpec": "Tải thông số kỹ thuật"
+  },
+  "sampleOrder": {
+    "title": "Đặt mẫu màu",
+    "description": "Đặt mẫu để xem màu thực tế trước khi quyết định",
+    "form": {
+      "name": "Họ tên",
+      "email": "Email",
+      "phone": "Số điện thoại",
+      "address": "Địa chỉ",
+      "notes": "Ghi chú",
+      "submit": "Gửi yêu cầu"
+    }
+  }
+}

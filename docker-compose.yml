@@ -1,33 +1,111 @@
 version: '3.8'
 
 services:
-  benjamin-moore-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: benjamin-moore-clone
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: woodpanel-postgres
     restart: unless-stopped
-    ports:
-      - "3000:3000"
     environment:
-      - NODE_ENV=production
-      - PORT=3000
+      POSTGRES_DB: woodpanel_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+      PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
-      # Mount logs directory to persist PM2 logs
-      - ./logs:/app/logs
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
     networks:
-      - benjamin-moore-network
+      - woodpanel-network
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d woodpanel_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend API
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: woodpanel-backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres123@postgres:5432/woodpanel_db
+      JWT_SECRET: your-super-secret-jwt-key-change-this-in-production
+      PORT: 3001
+      NODE_ENV: production
+      FRONTEND_URL: http://frontend:3000
+      UPLOAD_DIR: /app/uploads
+      MAX_FILE_SIZE: 10485760
+    volumes:
+      - backend_uploads:/app/uploads
+    ports:
+      - "3001:3001"
+    networks:
+      - woodpanel-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3001/api/health || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 40s
 
-networks:
-  benjamin-moore-network:
-    driver: bridge
+  # Frontend Application
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: woodpanel-frontend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_API_URL: http://localhost:3001/api
+      NEXT_PUBLIC_APP_URL: http://localhost:3000
+    ports:
+      - "3000:3000"
+    networks:
+      - woodpanel-network
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # pgAdmin for database management (optional)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: woodpanel-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@woodpanel.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    networks:
+      - woodpanel-network
+    depends_on:
+      - postgres
+    profiles:
+      - tools
 
 volumes:
-  logs:
+  postgres_data:
     driver: local
+  backend_uploads:
+    driver: local
+  pgadmin_data:
+    driver: local
+
+networks:
+  woodpanel-network:
+    driver: bridge

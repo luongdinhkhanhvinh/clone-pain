@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database for Development
+  postgres-dev:
+    image: postgres:15-alpine
+    container_name: woodpanel-postgres-dev
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: woodpanel_dev
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+      - ./init-db:/docker-entrypoint-initdb.d
+    ports:
+      - "5433:5432"
+    networks:
+      - woodpanel-dev-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d woodpanel_dev"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis for caching (optional)
+  redis-dev:
+    image: redis:7-alpine
+    container_name: woodpanel-redis-dev
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - woodpanel-dev-network
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_dev_data:/data
+
+  # pgAdmin for database management
+  pgadmin-dev:
+    image: dpage/pgadmin4:latest
+    container_name: woodpanel-pgadmin-dev
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@woodpanel.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin_dev_data:/var/lib/pgadmin
+    ports:
+      - "5051:80"
+    networks:
+      - woodpanel-dev-network
+    depends_on:
+      - postgres-dev
+
+volumes:
+  postgres_dev_data:
+    driver: local
+  redis_dev_data:
+    driver: local
+  pgadmin_dev_data:
+    driver: local
+
+networks:
+  woodpanel-dev-network:
+    driver: bridge

@@ -1,5 +1,4 @@
-import { LanguageProvider } from "@/components/providers/language-provider"
-import { MobileLayout } from "@/components/layout/mobile-layout"
+import { ConditionalLayout } from "@/components/layout/conditional-layout"
 import type { Metadata } from "next"
 import { Inter, Playfair_Display } from "next/font/google"
 import type React from "react"
@@ -20,11 +19,11 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: "SilkLux - Premium Luxury wood & Color Solutions",
-    template: "%s | SilkLux",
+    default: "Wood Panel - Premium Wood Panel Solutions",
+    template: "%s | Wood Panel",
   },
   description:
-    "Discover premium luxury wood with silk-like finishes. Over 3,500 sophisticated colors and professional-grade products for discerning designers and homeowners.",
+    "Discover premium wood panels with natural finishes. High-quality wood panel colors and professional-grade products for discerning designers and homeowners.",
   keywords: [
     "luxury wood",
     "premium wood colors",
@@ -98,11 +97,9 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body className={`${inter.className} antialiased`}>
-        <LanguageProvider>
-          <MobileLayout>
-            {children}
-          </MobileLayout>
-        </LanguageProvider>
+        <ConditionalLayout>
+          {children}
+        </ConditionalLayout>
       </body>
     </html>
   )

@@ -1,0 +1,45 @@
+{
+  "title": "Wood Panel Colors",
+  "subtitle": "Explore our premium wood panel color collection",
+  "description": "Discover high-quality wood panel colors with superior durability and natural beauty.",
+  "categories": {
+    "all": "All",
+    "popular": "Popular",
+    "new": "New",
+    "premium": "Premium"
+  },
+  "filters": {
+    "category": "Category",
+    "finish": "Finish",
+    "application": "Application",
+    "clear": "Clear filters"
+  },
+  "colorCard": {
+    "viewDetails": "View Details",
+    "orderSample": "Order Sample",
+    "addToFavorites": "Add to Favorites",
+    "specifications": "Specifications",
+    "applications": "Applications"
+  },
+  "colorDetails": {
+    "overview": "Overview",
+    "specifications": "Specifications",
+    "applications": "Applications",
+    "relatedColors": "Related Colors",
+    "orderSample": "Order Sample",
+    "contactUs": "Contact Us",
+    "downloadSpec": "Download Specifications"
+  },
+  "sampleOrder": {
+    "title": "Order Color Sample",
+    "description": "Order a sample to see the actual color before making your decision",
+    "form": {
+      "name": "Full Name",
+      "email": "Email",
+      "phone": "Phone Number",
+      "address": "Address",
+      "notes": "Notes",
+      "submit": "Submit Request"
+    }
+  }
+}

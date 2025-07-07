@@ -12,8 +12,8 @@ export function MobileHeader() {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
-              src="logo.png"
-              alt="SilkLux Logo"
+              src="/logo.png"
+              alt="Wood Panel Logo"
               width={100}
               height={32}
               className="h-10 w-auto"

@@ -263,10 +263,16 @@ export default function woodColorsPage() {
                       <ColorCard
                         key={color.code}
                         color={{
+                          id: 0,
                           name: color.name,
                           code: color.code,
+                          description: '',
                           hex: color.hex,
+                          image: '',
+                          orderPercentage: '',
+                          introduction: '',
                           category: family.name,
+                          popular: false,
                         }}
                         size="small"
                       />

@@ -18,8 +18,8 @@ export function Footer() {
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <Image
-                src="logo.png"
-                alt="SilkLux Logo"
+                src="/logo.png"
+                alt="Wood Panel Logo"
                 width={120}
                 height={40}
                 className="h-14 w-auto brightness-0 invert"

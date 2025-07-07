@@ -45,8 +45,8 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
             <Image
-              src="logo.png"
-              alt="SilkLux Logo"
+              src="/logo.png"
+              alt="Wood Panel Logo"
               width={120}
               height={40}
               className="h-14 w-auto"
