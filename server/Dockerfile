@@ -1,8 +1,9 @@
 # Backend Dockerfile
 FROM node:18-alpine
 
-# Install curl for health checks
-RUN apk add --no-cache curl
+# Install curl for health checks and pnpm
+RUN apk add --no-cache curl \
+    && npm install -g pnpm
 
 # Set working directory
 WORKDIR /app
@@ -11,7 +12,7 @@ WORKDIR /app
 COPY package.json ./
 
 # Install dependencies
-RUN pnpm i
+RUN pnpm install
 
 # Copy source code
 COPY . .
