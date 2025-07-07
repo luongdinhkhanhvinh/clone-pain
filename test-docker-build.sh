@@ -1,13 +1,18 @@
 #!/bin/bash
 
-# Test Docker build with proper environment
-echo "Testing Docker build with DOCKER_BUILD=true..."
+# Test Docker build
+echo "Testing Docker build..."
 
 # Build the Docker image
 docker build \
-  --build-arg DOCKER_BUILD=true \
   --no-cache \
   -t wood-panel-frontend:test \
   .
 
-echo "Docker build completed!"
+if [ $? -eq 0 ]; then
+    echo "✅ Docker build completed successfully!"
+    echo "You can now run: docker run -p 3000:3000 wood-panel-frontend:test"
+else
+    echo "❌ Docker build failed!"
+    exit 1
+fi

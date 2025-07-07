@@ -19,17 +19,14 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 # Copy source code excluding server folder
 COPY package.json pnpm-lock.yaml* next.config.js tsconfig.json tailwind.config.ts postcss.config.mjs ./
-COPY next-i18next.config.js components.json ./
+COPY next-i18next.config.js components.json .nextignore ./
 COPY app ./app
 COPY components ./components
 COPY lib ./lib
 COPY data ./data
 COPY hooks ./hooks
-COPY i18n ./i18n
-COPY messages ./messages
 COPY styles ./styles
 COPY public ./public
-COPY .nextignore ./
 
 # Next.js collects completely anonymous telemetry data about general usage.
 ENV NEXT_TELEMETRY_DISABLED 1
