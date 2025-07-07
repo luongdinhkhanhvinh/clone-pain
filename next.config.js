@@ -1,6 +1,28 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // output: 'standalone', // Disabled for Windows build compatibility
+  // Enable standalone only in Docker environment
+  ...(process.env.DOCKER_BUILD === 'true' && { output: 'standalone' }),
+
+  // Exclude server folder from Next.js compilation
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+      }
+    }
+
+    // Exclude server directory
+    config.externals = config.externals || []
+    config.externals.push({
+      'drizzle-orm/postgres-js': 'commonjs drizzle-orm/postgres-js',
+      'postgres': 'commonjs postgres',
+    })
+
+    return config
+  },
   async rewrites() {
     return [
       {

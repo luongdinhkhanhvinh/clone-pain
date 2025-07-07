@@ -17,10 +17,17 @@ RUN pnpm install --frozen-lockfile
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-COPY . .
+# Copy source code excluding server folder
+COPY package.json pnpm-lock.yaml* next.config.js tsconfig.json tailwind.config.ts postcss.config.mjs ./
+COPY app ./app
+COPY components ./components
+COPY lib ./lib
+COPY public ./public
+COPY .nextignore ./
 
 # Next.js collects completely anonymous telemetry data about general usage.
 ENV NEXT_TELEMETRY_DISABLED 1
+ENV DOCKER_BUILD true
 
 RUN pnpm run build
 
@@ -44,8 +51,7 @@ COPY --from=builder /app/public ./public
 RUN mkdir .next
 RUN chown nextjs:nodejs .next
 
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
+# Copy built application
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
