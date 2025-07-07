@@ -8,10 +8,10 @@ RUN apk add --no-cache curl
 WORKDIR /app
 
 # Copy package files
-COPY package.json package-lock.json* ./
+COPY package.json ./
 
 # Install dependencies
-RUN npm ci
+RUN pnpm i
 
 # Copy source code
 COPY . .
