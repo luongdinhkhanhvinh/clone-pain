@@ -62,12 +62,12 @@ export default function SettingsPage() {
       setTimeout(() => {
         const mockSettings: Settings = {
           general: {
-            siteName: 'Wood Panel Pro',
+            siteName: 'Silklux Pro',
             siteNameVi: 'Ván Gỗ Chuyên Nghiệp',
-            siteDescription: 'Premium wood panel solutions for modern spaces',
+            siteDescription: 'Premium Silklux solutions for modern spaces',
             siteDescriptionVi: 'Giải pháp ván gỗ cao cấp cho không gian hiện đại',
-            contactEmail: 'contact@woodpanel.com',
-            supportPhone: '+84 901 234 567',
+            contactEmail: 'dd@diepduong.vn',
+            supportPhone: '+0433678888',
             address: '123 Wood Street, District 1, Ho Chi Minh City',
             addressVi: '123 Đường Gỗ, Quận 1, TP. Hồ Chí Minh',
           },
@@ -82,17 +82,17 @@ export default function SettingsPage() {
           email: {
             smtpHost: 'smtp.gmail.com',
             smtpPort: 587,
-            smtpUser: 'noreply@woodpanel.com',
+            smtpUser: 'noreply@silklux.com',
             smtpPassword: '••••••••',
-            fromEmail: 'noreply@woodpanel.com',
-            fromName: 'Wood Panel Pro',
+            fromEmail: 'noreply@silklux.com',
+            fromName: 'Silklux Pro',
           },
           seo: {
-            metaTitle: 'Wood Panel Pro - Premium Wood Panel Solutions',
+            metaTitle: 'Silklux Pro - Premium Silklux Solutions',
             metaTitleVi: 'Ván Gỗ Chuyên Nghiệp - Giải Pháp Ván Gỗ Cao Cấp',
-            metaDescription: 'Discover premium wood panels with natural finishes. High-quality wood panel colors and professional-grade products.',
+            metaDescription: 'Discover premium Silkluxs with natural finishes. High-quality Silklux colors and professional-grade products.',
             metaDescriptionVi: 'Khám phá ván gỗ cao cấp với hoàn thiện tự nhiên. Màu ván gỗ chất lượng cao và sản phẩm chuyên nghiệp.',
-            keywords: 'wood panels, interior design, home renovation, premium wood',
+            keywords: 'Silkluxs, interior design, home renovation, premium wood',
             keywordsVi: 'ván gỗ, thiết kế nội thất, cải tạo nhà, gỗ cao cấp',
           },
         }

@@ -15,7 +15,7 @@ Transformed the website to use **bottom tab navigation** on mobile/tablet while 
 #### **Bottom Navigation** (`components/layout/bottom-navigation.tsx`)
 - ✅ **Fixed bottom tabs** with 6 main sections:
   1. 🏠 **Home** (Trang Chủ)
-  2. 🎨 **Wood Panel Colors** (Màu Ván Gỗ)
+  2. 🎨 **Silklux Colors** (Màu Ván Gỗ)
   3. 📦 **Products** (Sản Phẩm)
   4. 💡 **Design Ideas** (Ý Tưởng Thiết Kế)
   5. 👥 **For Professionals** (Dành Cho Chuyên Gia)
@@ -118,7 +118,7 @@ Transformed the website to use **bottom tab navigation** on mobile/tablet while 
 
 ### 📱 **Mobile Navigation Flow:**
 ```
-Home → Wood Panel Colors → Products → Design Ideas → Professionals → Login
+Home → Silklux Colors → Products → Design Ideas → Professionals → Login
   ↓         ↓              ↓          ↓             ↓              ↓
 Trang Chủ → Màu Ván Gỗ → Sản Phẩm → Ý Tưởng → Chuyên Gia → Đăng Nhập
 ```

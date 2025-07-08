@@ -38,10 +38,10 @@ INSERT INTO categories (
   updated_at
 ) VALUES 
 (
-  'Premium Wood Panels',
+  'Premium Silkluxs',
   'Ván Gỗ Cao Cấp',
   'premium-wood-panels',
-  'High-quality premium wood panels',
+  'High-quality premium Silkluxs',
   'Ván gỗ cao cấp chất lượng cao',
   true,
   1,
@@ -49,10 +49,10 @@ INSERT INTO categories (
   NOW()
 ),
 (
-  'Standard Wood Panels',
+  'Standard Silkluxs',
   'Ván Gỗ Tiêu Chuẩn',
   'standard-wood-panels',
-  'Standard quality wood panels',
+  'Standard quality Silkluxs',
   'Ván gỗ chất lượng tiêu chuẩn',
   true,
   2,

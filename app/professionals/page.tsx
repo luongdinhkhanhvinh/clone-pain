@@ -160,7 +160,7 @@ export default function ProfessionalsPage() {
             </div>
             <div className="relative">
               <Image
-                src="/profess/chuyengia.jpg/?height=400&width=600"
+                src="/profess/chuyengia.jpg?height=400&width=600"
                 alt={t('hero.imageAlt', 'professionals')}
                 width={600}
                 height={400}

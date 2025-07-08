@@ -21,11 +21,11 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: "Wood Panel - Premium Wood Panel Solutions",
-    template: "%s | Wood Panel",
+    default: "Silklux - Premium Silklux Solutions",
+    template: "%s | Silklux",
   },
   description:
-    "Discover premium wood panels with natural finishes. High-quality wood panel colors and professional-grade products for discerning designers and homeowners.",
+    "Discover premium Silkluxs with natural finishes. High-quality Silklux colors and professional-grade products for discerning designers and homeowners.",
   keywords: [
     "luxury wood",
     "premium wood colors",

@@ -43,19 +43,19 @@
 //     console.log('📂 Seeding categories...');
 //     const categoryData = await db.insert(categories).values([
 //       {
-//         name: 'Premium Wood Panels',
+//         name: 'Premium Silkluxs',
 //         nameVi: 'Ván Gỗ Cao Cấp',
 //         slug: 'premium-wood-panels',
-//         description: 'High-quality premium wood panels for luxury applications',
+//         description: 'High-quality premium Silkluxs for luxury applications',
 //         descriptionVi: 'Ván gỗ cao cấp chất lượng cao cho các ứng dụng sang trọng',
 //         isActive: true,
 //         sortOrder: 1,
 //       },
 //       {
-//         name: 'Standard Wood Panels',
+//         name: 'Standard Silkluxs',
 //         nameVi: 'Ván Gỗ Tiêu Chuẩn',
 //         slug: 'standard-wood-panels',
-//         description: 'Reliable standard wood panels for everyday use',
+//         description: 'Reliable standard Silkluxs for everyday use',
 //         descriptionVi: 'Ván gỗ tiêu chuẩn đáng tin cậy cho sử dụng hàng ngày',
 //         isActive: true,
 //         sortOrder: 2,

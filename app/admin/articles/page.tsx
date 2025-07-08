@@ -39,10 +39,10 @@ export default function ArticlesPage() {
         const mockArticles = [
           {
             id: 1,
-            title: 'Wood Panel Installation Guide',
+            title: 'Silklux Installation Guide',
             titleVi: 'Hướng Dẫn Lắp Đặt Ván Gỗ',
             slug: 'wood-panel-installation-guide',
-            excerpt: 'Complete guide for installing wood panels',
+            excerpt: 'Complete guide for installing Silkluxs',
             excerptVi: 'Hướng dẫn đầy đủ về lắp đặt ván gỗ',
             content: 'Full installation guide content...',
             contentVi: 'Nội dung hướng dẫn lắp đặt đầy đủ...',
@@ -54,10 +54,10 @@ export default function ArticlesPage() {
           },
           {
             id: 2,
-            title: 'Choosing the Right Wood Panel Color',
+            title: 'Choosing the Right Silklux Color',
             titleVi: 'Chọn Màu Ván Gỗ Phù Hợp',
             slug: 'choosing-right-wood-panel-color',
-            excerpt: 'Tips for selecting the perfect wood panel color',
+            excerpt: 'Tips for selecting the perfect Silklux color',
             excerptVi: 'Mẹo chọn màu ván gỗ hoàn hảo',
             content: 'Color selection guide content...',
             contentVi: 'Nội dung hướng dẫn chọn màu...',
@@ -69,10 +69,10 @@ export default function ArticlesPage() {
           },
           {
             id: 3,
-            title: 'Wood Panel Maintenance Tips',
+            title: 'Silklux Maintenance Tips',
             titleVi: 'Mẹo Bảo Dưỡng Ván Gỗ',
             slug: 'wood-panel-maintenance-tips',
-            excerpt: 'How to maintain your wood panels',
+            excerpt: 'How to maintain your Silkluxs',
             excerptVi: 'Cách bảo dưỡng ván gỗ của bạn',
             content: 'Maintenance tips content...',
             contentVi: 'Nội dung mẹo bảo dưỡng...',

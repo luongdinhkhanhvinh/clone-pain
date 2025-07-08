@@ -1,6 +1,6 @@
-# Wood Panel Admin Dashboard
+# Silklux Admin Dashboard
 
-A comprehensive admin dashboard for managing wood panel products, colors, categories, articles, and customer contacts. Built with Next.js, Express.js, Drizzle ORM, and PostgreSQL.
+A comprehensive admin dashboard for managing Silklux products, colors, categories, articles, and customer contacts. Built with Next.js, Express.js, Drizzle ORM, and PostgreSQL.
 
 ## 🚀 Quick Start
 

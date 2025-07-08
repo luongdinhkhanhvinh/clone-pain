@@ -344,7 +344,7 @@ placeholder={t('colorDetail.form.messagePlaceholder', 'colors')}
 1. **Professional Presentation** - Industry-standard terminology in both languages
 2. **Lead Generation** - Fully translated contact forms increase conversion
 3. **User Engagement** - Native language increases user comfort and trust
-4. **Market Expansion** - Ready for Vietnamese wood panel market
+4. **Market Expansion** - Ready for Vietnamese Silklux market
 5. **Customer Support** - Comprehensive consultation request system
 
 ### 📱 **User Journey Enhancement:**
@@ -367,4 +367,4 @@ placeholder={t('colorDetail.form.messagePlaceholder', 'colors')}
 3. **Project Details** - Proper project type selections
 4. **Submission** - "Gửi yêu cầu tư vấn" / "Submit Consultation Request"
 
-The Colors pages are now fully internationalized with comprehensive Vietnamese and English support, ready for professional wood panel business operations! 🌍🎨✨
+The Colors pages are now fully internationalized with comprehensive Vietnamese and English support, ready for professional Silklux business operations! 🌍🎨✨

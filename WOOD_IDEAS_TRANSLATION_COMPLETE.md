@@ -308,7 +308,7 @@ const expertTips = [
 
 ### 🎯 **Business Benefits:**
 
-1. **Complete Localization** - Full Vietnamese support for wood panel industry
+1. **Complete Localization** - Full Vietnamese support for Silklux industry
 2. **Professional Presentation** - Industry-appropriate terminology
 3. **User Engagement** - Native language increases user comfort
 4. **Market Expansion** - Ready for Vietnamese market launch

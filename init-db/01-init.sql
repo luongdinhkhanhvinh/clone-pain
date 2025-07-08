@@ -1,4 +1,4 @@
--- Initialize Wood Panel Database
+-- Initialize Silklux Database
 -- This script runs when the PostgreSQL container starts for the first time
 
 -- Create database if not exists (already created by POSTGRES_DB env var)
@@ -17,10 +17,10 @@ SET timezone = 'UTC';
 -- Create indexes for better performance (will be created by Drizzle migrations)
 -- These are just examples, actual indexes will be created by the ORM
 
-COMMENT ON DATABASE woodpanel_db IS 'Wood Panel Admin Dashboard Database';
+COMMENT ON DATABASE woodpanel_db IS 'Silklux Admin Dashboard Database';
 
 -- Log initialization
 DO $$
 BEGIN
-    RAISE NOTICE 'Wood Panel Database initialized successfully';
+    RAISE NOTICE 'Silklux Database initialized successfully';
 END $$;

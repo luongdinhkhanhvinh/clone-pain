@@ -47,7 +47,7 @@ export const generateProductsFromColors = (): GeneratedProduct[] => {
   const productTemplates = [
     {
       nameTemplate: "SilkLux Premium {colorName} Collection",
-      category: "Interior Wood Panel",
+      category: "Interior Silklux",
       type: "Ultra Premium",
       features: ["Chống ẩm", "Không VOC", "Dễ lau chùi", "Chống trầy xước"],
       coverage: "20 m²",
@@ -62,7 +62,7 @@ export const generateProductsFromColors = (): GeneratedProduct[] => {
     },
     {
       nameTemplate: "SilkLux Exterior {colorName} Pro",
-      category: "Exterior Wood Panel",
+      category: "Exterior Silklux",
       type: "Weather Resistant",
       features: ["Chống thời tiết", "Chống UV", "Chống mối mọt", "Bảo hành 10 năm"],
       coverage: "18 m²",
@@ -77,7 +77,7 @@ export const generateProductsFromColors = (): GeneratedProduct[] => {
     },
     {
       nameTemplate: "SilkLux Luxury {colorName} Veneer",
-      category: "Luxury Wood Panel",
+      category: "Luxury Silklux",
       type: "Natural Veneer",
       features: ["Veneer tự nhiên", "Vân gỗ thật", "Hoàn thiện thủ công", "Limited Edition"],
       coverage: "15 m²",
@@ -146,7 +146,7 @@ export const generateProductsFromColors = (): GeneratedProduct[] => {
       const product: GeneratedProduct = {
         id: productId++,
         name: `SilkLux ${category} Collection`,
-        category: "Collection Wood Panel",
+        category: "Collection Silklux",
         type: "Multi-Color",
         rating: 4.6 + (Math.random() * 0.3),
         reviews: Math.floor(Math.random() * 150) + 30,

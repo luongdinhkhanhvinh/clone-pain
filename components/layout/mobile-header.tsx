@@ -13,7 +13,7 @@ export function MobileHeader() {
           <Link href="/" className="flex items-center">
             <Image
               src="/logo.png"
-              alt="Wood Panel Logo"
+              alt="Silklux Logo"
               width={100}
               height={32}
               className="h-10 w-auto"

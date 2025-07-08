@@ -1,7 +1,7 @@
 {
   "name": "woodpanel-admin-server",
   "version": "1.0.0",
-  "description": "Wood Panel Admin Dashboard Backend API",
+  "description": "Silklux Admin Dashboard Backend API",
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch index.ts",
@@ -48,6 +48,6 @@
     "dashboard",
     "api"
   ],
-  "author": "Wood Panel Admin",
+  "author": "Silklux Admin",
   "license": "MIT"
 }

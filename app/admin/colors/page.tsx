@@ -149,14 +149,14 @@ export default function ColorsPage() {
       const mockCategories = [
         {
           id: 1,
-          name: 'Premium Wood Panels',
+          name: 'Premium Silkluxs',
           nameVi: 'Ván Gỗ Cao Cấp',
           slug: 'premium-wood-panels',
           isActive: true,
         },
         {
           id: 2,
-          name: 'Standard Wood Panels',
+          name: 'Standard Silkluxs',
           nameVi: 'Ván Gỗ Tiêu Chuẩn',
           slug: 'standard-wood-panels',
           isActive: true,
@@ -361,7 +361,7 @@ export default function ColorsPage() {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Colors</h1>
-          <p className="text-gray-600 mt-2">Manage your wood panel color collection</p>
+          <p className="text-gray-600 mt-2">Manage your Silklux color collection</p>
         </div>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
@@ -378,7 +378,7 @@ export default function ColorsPage() {
               <DialogDescription>
                 {editingColor 
                   ? 'Update the color information below.'
-                  : 'Create a new color for your wood panel collection.'
+                  : 'Create a new color for your Silklux collection.'
                 }
               </DialogDescription>
             </DialogHeader>
@@ -609,7 +609,7 @@ export default function ColorsPage() {
         <CardHeader>
           <CardTitle>Colors ({pagination.total})</CardTitle>
           <CardDescription>
-            Manage your wood panel color collection
+            Manage your Silklux color collection
           </CardDescription>
         </CardHeader>
         <CardContent>

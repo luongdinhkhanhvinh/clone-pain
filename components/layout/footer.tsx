@@ -19,7 +19,7 @@ export function Footer() {
             <div className="flex items-center gap-2">
               <Image
                 src="/logo.png"
-                alt="Wood Panel Logo"
+                alt="Silklux Logo"
                 width={120}
                 height={40}
                 className="h-14 w-auto brightness-0 invert"

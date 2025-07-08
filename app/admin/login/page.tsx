@@ -61,7 +61,7 @@ export default function AdminLogin() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Wood Panel Admin</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Silklux Admin</h1>
           <p className="text-gray-600">Sign in to your admin account</p>
         </div>
 
@@ -156,7 +156,7 @@ export default function AdminLogin() {
         </Card>
 
         <div className="text-center text-sm text-gray-500">
-          <p>© 2024 Wood Panel Admin. All rights reserved.</p>
+          <p>© 2024 Silklux Admin. All rights reserved.</p>
         </div>
       </div>
     </div>

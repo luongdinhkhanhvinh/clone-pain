@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🚀 Setting up Wood Panel Admin Dashboard..."
+echo "🚀 Setting up Silklux Admin Dashboard..."
 
 # Check if Node.js is installed
 if ! command -v node &> /dev/null; then

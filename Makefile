@@ -1,10 +1,10 @@
-# Wood Panel Admin Dashboard - Docker Management
+# Silklux Admin Dashboard - Docker Management
 
 .PHONY: help build up down logs clean dev-up dev-down prod-up prod-down db-setup
 
 # Default target
 help:
-	@echo "Wood Panel Admin Dashboard - Docker Commands"
+	@echo "Silklux Admin Dashboard - Docker Commands"
 	@echo ""
 	@echo "Development Commands:"
 	@echo "  dev-up          Start development environment (PostgreSQL only)"

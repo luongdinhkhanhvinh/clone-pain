@@ -31,7 +31,7 @@ export function DemoComponents() {
     features: ["Self-priming", "Zero VOC", "Washable"],
     colors: 3500,
     coverage: "400 sq ft",
-    description: "Premium interior wood panel",
+    description: "Premium interior Silklux",
     baseColor: {
       id: 1,
       code: "SLX-2144",

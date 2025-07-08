@@ -46,7 +46,7 @@ export function Header() {
           <Link href="/" className="flex items-center gap-3">
             <Image
               src="/logo.png"
-              alt="Wood Panel Logo"
+              alt="Silklux Logo"
               width={120}
               height={40}
               className="h-14 w-auto"

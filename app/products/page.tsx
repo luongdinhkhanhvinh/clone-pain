@@ -8,7 +8,7 @@ import { ProductCard } from "@/components/products/product-card"
 import { useLanguage } from "@/components/providers/language-provider"
 import { generatedProducts, generatedProductCategories, generatedProductTypes } from "@/data/generated-products"
 
-// Using imported wood panel products data
+// Using imported Silklux products data
 
 export default function ProductsPage() {
   const { t } = useLanguage()

@@ -23,8 +23,8 @@ export interface WoodPanelProduct {
 export const woodPanelProducts: WoodPanelProduct[] = [
   {
     id: 1,
-    name: "SilkLux Premium Wood Panel Interior",
-    category: "Interior Wood Panel",
+    name: "SilkLux Premium Silklux Interior",
+    category: "Interior Silklux",
     type: "Ultra Premium",
     rating: 4.8,
     reviews: 156,
@@ -44,8 +44,8 @@ export const woodPanelProducts: WoodPanelProduct[] = [
   },
   {
     id: 2,
-    name: "SilkLux Exterior Wood Panel Pro",
-    category: "Exterior Wood Panel", 
+    name: "SilkLux Exterior Silklux Pro",
+    category: "Exterior Silklux", 
     type: "Weather Resistant",
     rating: 4.7,
     reviews: 89,
@@ -66,7 +66,7 @@ export const woodPanelProducts: WoodPanelProduct[] = [
   {
     id: 3,
     name: "SilkLux Luxury Veneer Collection",
-    category: "Luxury Wood Panel",
+    category: "Luxury Silklux",
     type: "Natural Veneer",
     rating: 4.9,
     reviews: 234,
@@ -86,8 +86,8 @@ export const woodPanelProducts: WoodPanelProduct[] = [
   },
   {
     id: 4,
-    name: "SilkLux Eco-Friendly Wood Panel",
-    category: "Eco Wood Panel",
+    name: "SilkLux Eco-Friendly Silklux",
+    category: "Eco Silklux",
     type: "Sustainable",
     rating: 4.6,
     reviews: 167,
@@ -107,8 +107,8 @@ export const woodPanelProducts: WoodPanelProduct[] = [
   },
   {
     id: 5,
-    name: "SilkLux Commercial Wood Panel System",
-    category: "Commercial Wood Panel",
+    name: "SilkLux Commercial Silklux System",
+    category: "Commercial Silklux",
     type: "Heavy Duty",
     rating: 4.8,
     reviews: 98,
@@ -128,8 +128,8 @@ export const woodPanelProducts: WoodPanelProduct[] = [
   },
   {
     id: 6,
-    name: "SilkLux Quick Install Wood Panel",
-    category: "DIY Wood Panel",
+    name: "SilkLux Quick Install Silklux",
+    category: "DIY Silklux",
     type: "Easy Install",
     rating: 4.5,
     reviews: 312,
@@ -151,12 +151,12 @@ export const woodPanelProducts: WoodPanelProduct[] = [
 
 export const productCategories = [
   "All Products",
-  "Interior Wood Panel", 
-  "Exterior Wood Panel",
-  "Luxury Wood Panel",
-  "Eco Wood Panel", 
-  "Commercial Wood Panel",
-  "DIY Wood Panel"
+  "Interior Silklux", 
+  "Exterior Silklux",
+  "Luxury Silklux",
+  "Eco Silklux", 
+  "Commercial Silklux",
+  "DIY Silklux"
 ]
 
 export const productTypes = [

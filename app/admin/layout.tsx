@@ -124,7 +124,7 @@ export default function AdminLayout({
       <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
         <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4 shadow-sm">
           <div className="flex h-16 shrink-0 items-center">
-            <h1 className="text-xl font-bold text-gray-900">Wood Panel Admin</h1>
+            <h1 className="text-xl font-bold text-gray-900">Silklux Admin</h1>
           </div>
           <nav className="flex flex-1 flex-col">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -171,7 +171,7 @@ export default function AdminLayout({
           </SheetTrigger>
           <SheetContent side="left" className="w-72">
             <div className="flex h-16 shrink-0 items-center">
-              <h1 className="text-xl font-bold text-gray-900">Wood Panel Admin</h1>
+              <h1 className="text-xl font-bold text-gray-900">Silklux Admin</h1>
             </div>
             <nav className="flex flex-1 flex-col mt-6">
               <ul role="list" className="space-y-1">
@@ -204,7 +204,7 @@ export default function AdminLayout({
           </SheetContent>
         </Sheet>
         <div className="flex-1 text-sm font-semibold leading-6 text-gray-900">
-          Wood Panel Admin
+          Silklux Admin
         </div>
       </div>
 

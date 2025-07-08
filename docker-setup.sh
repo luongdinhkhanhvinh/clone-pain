@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🐳 Wood Panel Admin Dashboard - Docker Setup"
+echo "🐳 Silklux Admin Dashboard - Docker Setup"
 echo "=============================================="
 
 # Check if Docker is installed
