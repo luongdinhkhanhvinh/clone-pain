@@ -120,108 +120,22 @@ export default function ContactsPage() {
 
   const fetchContacts = async () => {
     try {
-      // Mock data for demo purposes
-      setTimeout(() => {
-        const mockContacts = [
-          {
-            id: 1,
-            firstName: 'Nguyễn',
-            lastName: 'Văn A',
-            email: 'nguyenvana@email.com',
-            phone: '0901234567',
-            subject: 'Inquiry about Jet Black panels',
-            message: 'I would like to know more about the Jet Black Silkluxs for my living room project.',
-            status: 'new' as const,
-            source: 'contact_form' as const,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-          {
-            id: 2,
-            firstName: 'Trần',
-            lastName: 'Thị B',
-            email: 'tranthib@email.com',
-            phone: '0912345678',
-            subject: 'Sample request for Summer White',
-            message: 'Can I get a sample of the Summer White Silklux? I need to see the actual color.',
-            status: 'in_progress' as const,
-            source: 'sample_request' as const,
-            createdAt: new Date(Date.now() - 86400000).toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-          {
-            id: 3,
-            firstName: 'Lê',
-            lastName: 'Văn C',
-            email: 'levanc@email.com',
-            phone: '0923456789',
-            subject: 'Professional application',
-            message: 'I am an interior designer and would like to become a professional partner.',
-            status: 'resolved' as const,
-            source: 'professional_application' as const,
-            createdAt: new Date(Date.now() - 172800000).toISOString(),
-            updatedAt: new Date(Date.now() - 86400000).toISOString(),
-          },
-          {
-            id: 4,
-            firstName: 'Phạm',
-            lastName: 'Thị D',
-            email: 'phamthid@email.com',
-            subject: 'Color consultation',
-            message: 'I need help choosing the right color for my bedroom renovation.',
-            status: 'closed' as const,
-            source: 'color_inquiry' as const,
-            createdAt: new Date(Date.now() - 259200000).toISOString(),
-            updatedAt: new Date(Date.now() - 172800000).toISOString(),
-          },
-        ]
-
-        // Apply filters
-        let filteredData = mockContacts
-
-        if (searchTerm) {
-          filteredData = filteredData.filter(contact =>
-            contact.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            contact.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            contact.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            contact.subject.toLowerCase().includes(searchTerm.toLowerCase())
-          )
-        }
-
-        if (selectedStatus && selectedStatus !== 'all') {
-          filteredData = filteredData.filter(contact => contact.status === selectedStatus)
-        }
-
-        if (selectedSource && selectedSource !== 'all') {
-          filteredData = filteredData.filter(contact => contact.source === selectedSource)
-        }
-
-        setContacts(filteredData)
-        setPagination({
-          page: 1,
-          limit: 20,
-          total: filteredData.length,
-          totalPages: 1,
-          hasNext: false,
-          hasPrev: false,
-        })
-
-        // Mock status counts
-        setStatusCounts([
-          { status: 'new', count: 1 },
-          { status: 'in_progress', count: 1 },
-          { status: 'resolved', count: 1 },
-          { status: 'closed', count: 1 },
-        ])
-
-        setLoading(false)
-      }, 500)
+      setLoading(true);
+      const token = localStorage.getItem('admin_token');
+      const response = await fetch('/api/contacts', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) throw new Error('Failed to fetch contacts');
+      const { data } = await response.json();
+      setContacts(data);
+      setLoading(false);
     } catch (error) {
-      console.error('Error fetching contacts:', error)
-      setError('Network error')
-      setLoading(false)
+      console.error('Error fetching contacts:', error);
+      setLoading(false);
     }
-  }
+  };
 
   const handleViewContact = (contact: Contact) => {
     setSelectedContact(contact)
@@ -234,13 +148,11 @@ export default function ContactsPage() {
   }
 
   const handleUpdateContact = async () => {
-    if (!selectedContact) return
-
-    setUpdateLoading(true)
-    setError('')
-
+    if (!selectedContact) return;
+    setUpdateLoading(true);
+    setError('');
     try {
-      const token = localStorage.getItem('admin_token')
+      const token = localStorage.getItem('admin_token');
       const response = await fetch(`/api/contacts/${selectedContact.id}`, {
         method: 'PUT',
         headers: {
@@ -248,47 +160,44 @@ export default function ContactsPage() {
           'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify(updateData),
-      })
-
+      });
       if (response.ok) {
-        await fetchContacts()
-        setIsViewDialogOpen(false)
-        setSelectedContact(null)
+        await fetchContacts();
+        setIsViewDialogOpen(false);
+        setSelectedContact(null);
       } else {
-        const data = await response.json()
-        setError(data.error || 'Failed to update contact')
+        const data = await response.json();
+        setError(data.error || 'Failed to update contact');
       }
     } catch (error) {
-      console.error('Error updating contact:', error)
-      setError('Network error')
+      console.error('Error updating contact:', error);
+      setError('Network error');
     } finally {
-      setUpdateLoading(false)
+      setUpdateLoading(false);
     }
-  }
+  };
 
   const handleDeleteContact = async (contact: Contact) => {
     if (!confirm(`Are you sure you want to delete the contact from ${contact.firstName} ${contact.lastName}?`)) {
-      return
+      return;
     }
-
     try {
-      const token = localStorage.getItem('admin_token')
+      const token = localStorage.getItem('admin_token');
       const response = await fetch(`/api/contacts/${contact.id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` },
-      })
-
+      });
       if (response.ok) {
-        await fetchContacts()
+        await fetchContacts();
       } else {
-        const data = await response.json()
-        alert(data.error || 'Failed to delete contact')
+        const data = await response.json();
+        alert(data.error || 'Failed to delete contact');
       }
     } catch (error) {
-      console.error('Error deleting contact:', error)
-      alert('Network error')
+      console.error('Error deleting contact:', error);
+      alert('Network error');
     }
-  }
+  };
 
   const handlePageChange = (newPage: number) => {
     setPagination(prev => ({ ...prev, page: newPage }))

@@ -55,45 +55,28 @@ import {
 } from 'lucide-react'
 
 interface Color {
-  id: number
+  id: string
   name: string
-  nameVi: string
   code: string
-  hexColor: string
-  description?: string
-  descriptionVi?: string
-  marketingCopy?: string
-  marketingCopyVi?: string
+  hexCode: string
   imageUrl?: string
-  popularity: number
-  isActive: boolean
-  createdAt: string
-  category?: {
-    id: number
-    name: string
-    nameVi: string
-  }
+  description?: string
+  isPopular?: boolean
+  createdAt?: string
+  updatedAt?: string
 }
 
 interface Category {
-  id: number
+  id: string
   name: string
-  nameVi: string
 }
 
 interface ColorFormData {
   name: string
-  nameVi: string
   code: string
-  hexColor: string
-  categoryId: number | null
-  description: string
-  descriptionVi: string
-  marketingCopy: string
-  marketingCopyVi: string
+  hexCode: string
   imageUrl: string
-  popularity: number
-  isActive: boolean
+  description: string
 }
 
 interface Pagination {
@@ -123,17 +106,10 @@ export default function ColorsPage() {
   const [editingColor, setEditingColor] = useState<Color | null>(null)
   const [formData, setFormData] = useState<ColorFormData>({
     name: '',
-    nameVi: '',
     code: '',
-    hexColor: '#000000',
-    categoryId: null,
-    description: '',
-    descriptionVi: '',
-    marketingCopy: '',
-    marketingCopyVi: '',
+    hexCode: '#000000',
     imageUrl: '',
-    popularity: 0,
-    isActive: true,
+    description: '',
   })
   const [formLoading, setFormLoading] = useState(false)
   const [error, setError] = useState('')
@@ -145,96 +121,33 @@ export default function ColorsPage() {
 
   const fetchCategories = async () => {
     try {
-      // Mock categories data
-      const mockCategories = [
-        {
-          id: 1,
-          name: 'Premium Silkluxs',
-          nameVi: 'Ván Gỗ Cao Cấp',
-          slug: 'premium-wood-panels',
-          isActive: true,
-        },
-        {
-          id: 2,
-          name: 'Standard Silkluxs',
-          nameVi: 'Ván Gỗ Tiêu Chuẩn',
-          slug: 'standard-wood-panels',
-          isActive: true,
-        },
-      ]
-      setCategories(mockCategories)
+      const token = localStorage.getItem('admin_token')
+      const res = await fetch('/api/categories', {
+        headers: token ? { 'Authorization': `Bearer ${token}` } : {},
+      })
+      if (!res.ok) throw new Error('Failed to fetch categories')
+      const json = await res.json()
+      setCategories(json.data)
     } catch (error) {
-      console.error('Error fetching categories:', error)
+      setCategories([])
     }
   }
 
   const fetchColors = async () => {
     try {
-      // Mock data for demo purposes
-      setTimeout(() => {
-        const mockColors = [
-          {
-            id: 1,
-            name: 'Jet Black',
-            nameVi: 'Đen Tuyền',
-            code: 'JB-001',
-            hexColor: '#1a1a1a',
-            imageUrl: '/colors/JetBlack.png',
-            description: 'Deep, rich black with sophisticated elegance',
-            descriptionVi: 'Màu đen sâu, phong phú với vẻ thanh lịch tinh tế',
-            categoryId: 1,
-            popularity: 85,
-            isActive: true,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-          {
-            id: 2,
-            name: 'Summer White',
-            nameVi: 'Trắng Mùa Hè',
-            code: 'SW-002',
-            hexColor: '#f8f8f8',
-            imageUrl: '/colors/SummerWhite.png',
-            description: 'Clean, bright white perfect for modern spaces',
-            descriptionVi: 'Màu trắng sạch, sáng hoàn hảo cho không gian hiện đại',
-            categoryId: 1,
-            popularity: 90,
-            isActive: true,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-          {
-            id: 3,
-            name: 'Chocolate',
-            nameVi: 'Sô-cô-la',
-            code: 'CH-003',
-            hexColor: '#7b3f00',
-            imageUrl: '/colors/Chocolate.png',
-            description: 'Rich chocolate brown for warm, cozy environments',
-            descriptionVi: 'Màu nâu sô-cô-la đậm đà cho môi trường ấm áp, ấm cúng',
-            categoryId: 2,
-            popularity: 70,
-            isActive: true,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-        ]
-
-        setColors(mockColors)
-        setPagination({
-          page: 1,
-          limit: 20,
-          total: mockColors.length,
-          totalPages: 1,
-          hasNext: false,
-          hasPrev: false,
-        })
-        setLoading(false)
-      }, 500)
-    } catch (error) {
-      console.error('Error fetching colors:', error)
-      setError('Network error')
+      setLoading(true)
+      const token = localStorage.getItem('admin_token')
+      const res = await fetch('/api/colors', {
+        headers: token ? { 'Authorization': `Bearer ${token}` } : {},
+      })
+      if (!res.ok) throw new Error('Failed to fetch colors')
+      const json = await res.json()
+      setColors(json.data)
       setLoading(false)
+    } catch (error) {
+      setLoading(false)
+      setColors([])
+      setError('Network error')
     }
   }
 
@@ -245,17 +158,10 @@ export default function ColorsPage() {
   const resetForm = () => {
     setFormData({
       name: '',
-      nameVi: '',
       code: '',
-      hexColor: '#000000',
-      categoryId: null,
-      description: '',
-      descriptionVi: '',
-      marketingCopy: '',
-      marketingCopyVi: '',
+      hexCode: '#000000',
       imageUrl: '',
-      popularity: 0,
-      isActive: true,
+      description: '',
     })
     setEditingColor(null)
     setError('')
@@ -265,26 +171,21 @@ export default function ColorsPage() {
     e.preventDefault()
     setFormLoading(true)
     setError('')
-
     try {
       const token = localStorage.getItem('admin_token')
       const url = editingColor 
         ? `/api/colors/${editingColor.id}`
         : '/api/colors'
-      
       const method = editingColor ? 'PUT' : 'POST'
-
       const response = await fetch(url, {
         method,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
         },
         body: JSON.stringify(formData),
       })
-
       const data = await response.json()
-
       if (response.ok) {
         await fetchColors()
         setIsDialogOpen(false)
@@ -293,7 +194,6 @@ export default function ColorsPage() {
         setError(data.error || 'Failed to save color')
       }
     } catch (error) {
-      console.error('Error saving color:', error)
       setError('Network error')
     } finally {
       setFormLoading(false)
@@ -304,33 +204,23 @@ export default function ColorsPage() {
     setEditingColor(color)
     setFormData({
       name: color.name,
-      nameVi: color.nameVi,
       code: color.code,
-      hexColor: color.hexColor,
-      categoryId: color.category?.id || null,
-      description: color.description || '',
-      descriptionVi: color.descriptionVi || '',
-      marketingCopy: color.marketingCopy || '',
-      marketingCopyVi: color.marketingCopyVi || '',
+      hexCode: color.hexCode,
       imageUrl: color.imageUrl || '',
-      popularity: color.popularity,
-      isActive: color.isActive,
+      description: color.description || '',
     })
     setIsDialogOpen(true)
   }
 
   const handleDelete = async (color: Color) => {
-    if (!confirm(`Are you sure you want to delete "${color.name}"?`)) {
-      return
-    }
-
+    if (!confirm(`Are you sure you want to delete color "${color.name}"?`)) return
+    setFormLoading(true)
     try {
       const token = localStorage.getItem('admin_token')
       const response = await fetch(`/api/colors/${color.id}`, {
         method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${token}` },
+        headers: token ? { 'Authorization': `Bearer ${token}` } : {},
       })
-
       if (response.ok) {
         await fetchColors()
       } else {
@@ -338,8 +228,9 @@ export default function ColorsPage() {
         alert(data.error || 'Failed to delete color')
       }
     } catch (error) {
-      console.error('Error deleting color:', error)
       alert('Network error')
+    } finally {
+      setFormLoading(false)
     }
   }
 
@@ -406,8 +297,8 @@ export default function ColorsPage() {
                     <Label htmlFor="nameVi">Name (Vietnamese)</Label>
                     <Input
                       id="nameVi"
-                      value={formData.nameVi}
-                      onChange={(e) => handleInputChange('nameVi', e.target.value)}
+                      value={formData.name}
+                      onChange={(e) => handleInputChange('name', e.target.value)}
                       placeholder="Tên màu tiếng Việt"
                       required
                     />
@@ -431,114 +322,49 @@ export default function ColorsPage() {
                       <Input
                         id="hexColor"
                         type="color"
-                        value={formData.hexColor}
-                        onChange={(e) => handleInputChange('hexColor', e.target.value)}
+                        value={formData.hexCode}
+                        onChange={(e) => handleInputChange('hexCode', e.target.value)}
                         className="w-16 h-10 p-1"
                       />
                       <Input
-                        value={formData.hexColor}
-                        onChange={(e) => handleInputChange('hexColor', e.target.value)}
+                        value={formData.hexCode}
+                        onChange={(e) => handleInputChange('hexCode', e.target.value)}
                         placeholder="#000000"
                         className="flex-1"
                       />
                     </div>
                   </div>
                   <div>
-                    <Label htmlFor="popularity">Popularity</Label>
+                    <Label htmlFor="imageUrl">Image URL</Label>
                     <Input
-                      id="popularity"
-                      type="number"
-                      value={formData.popularity}
-                      onChange={(e) => handleInputChange('popularity', parseInt(e.target.value) || 0)}
-                      placeholder="0-100"
-                      min="0"
-                      max="100"
+                      id="imageUrl"
+                      value={formData.imageUrl}
+                      onChange={(e) => handleInputChange('imageUrl', e.target.value)}
+                      placeholder="https://example.com/color-image.jpg"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <Label htmlFor="categoryId">Category</Label>
-                  <Select
-                    value={formData.categoryId?.toString() || ''}
-                    onValueChange={(value) => handleInputChange('categoryId', value ? parseInt(value) : '')}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a category" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {categories.map((category) => (
-                        <SelectItem key={category.id} value={category.id.toString()}>
-                          {category.name} ({category.nameVi})
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <Label htmlFor="description">Description (English)</Label>
+                  <Textarea
+                    id="description"
+                    value={formData.description}
+                    onChange={(e) => handleInputChange('description', e.target.value)}
+                    placeholder="Color description in English"
+                    rows={3}
+                  />
                 </div>
 
                 <div>
-                  <Label htmlFor="imageUrl">Image URL</Label>
-                  <Input
-                    id="imageUrl"
-                    value={formData.imageUrl}
-                    onChange={(e) => handleInputChange('imageUrl', e.target.value)}
-                    placeholder="https://example.com/color-image.jpg"
+                  <Label htmlFor="descriptionVi">Description (Vietnamese)</Label>
+                  <Textarea
+                    id="descriptionVi"
+                    value={formData.description}
+                    onChange={(e) => handleInputChange('description', e.target.value)}
+                    placeholder="Mô tả màu tiếng Việt"
+                    rows={3}
                   />
-                </div>
-
-                <div className="grid grid-cols-1 gap-4">
-                  <div>
-                    <Label htmlFor="description">Description (English)</Label>
-                    <Textarea
-                      id="description"
-                      value={formData.description}
-                      onChange={(e) => handleInputChange('description', e.target.value)}
-                      placeholder="Color description in English"
-                      rows={3}
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="descriptionVi">Description (Vietnamese)</Label>
-                    <Textarea
-                      id="descriptionVi"
-                      value={formData.descriptionVi}
-                      onChange={(e) => handleInputChange('descriptionVi', e.target.value)}
-                      placeholder="Mô tả màu tiếng Việt"
-                      rows={3}
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 gap-4">
-                  <div>
-                    <Label htmlFor="marketingCopy">Marketing Copy (English)</Label>
-                    <Textarea
-                      id="marketingCopy"
-                      value={formData.marketingCopy}
-                      onChange={(e) => handleInputChange('marketingCopy', e.target.value)}
-                      placeholder="Marketing description in English"
-                      rows={3}
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="marketingCopyVi">Marketing Copy (Vietnamese)</Label>
-                    <Textarea
-                      id="marketingCopyVi"
-                      value={formData.marketingCopyVi}
-                      onChange={(e) => handleInputChange('marketingCopyVi', e.target.value)}
-                      placeholder="Mô tả marketing tiếng Việt"
-                      rows={3}
-                    />
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-2">
-                  <Switch
-                    id="isActive"
-                    checked={formData.isActive}
-                    onCheckedChange={(checked) => handleInputChange('isActive', checked)}
-                  />
-                  <Label htmlFor="isActive">Active</Label>
                 </div>
               </div>
               <DialogFooter>
@@ -591,7 +417,7 @@ export default function ColorsPage() {
               <SelectContent>
                 <SelectItem value="all">All categories</SelectItem>
                 {categories.map((category) => (
-                  <SelectItem key={category.id} value={category.id.toString()}>
+                  <SelectItem key={category.id} value={category.name}>
                     {category.name}
                   </SelectItem>
                 ))}
@@ -619,9 +445,9 @@ export default function ColorsPage() {
                 <TableHead>Color</TableHead>
                 <TableHead>Name</TableHead>
                 <TableHead>Code</TableHead>
-                <TableHead>Category</TableHead>
-                <TableHead>Popularity</TableHead>
-                <TableHead>Status</TableHead>
+                <TableHead>Description</TableHead>
+                <TableHead>Image</TableHead>
+                <TableHead>Created At</TableHead>
                 <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -632,17 +458,17 @@ export default function ColorsPage() {
                     <div className="flex items-center gap-3">
                       <div
                         className="w-8 h-8 rounded border border-gray-300"
-                        style={{ backgroundColor: color.hexColor }}
+                        style={{ backgroundColor: color.hexCode }}
                       />
                       <code className="text-xs bg-gray-100 px-2 py-1 rounded">
-                        {color.hexColor}
+                        {color.hexCode}
                       </code>
                     </div>
                   </TableCell>
                   <TableCell>
                     <div>
                       <div className="font-medium">{color.name}</div>
-                      <div className="text-sm text-gray-500">{color.nameVi}</div>
+                      <div className="text-sm text-gray-500">{color.name}</div>
                     </div>
                   </TableCell>
                   <TableCell>
@@ -651,30 +477,17 @@ export default function ColorsPage() {
                     </code>
                   </TableCell>
                   <TableCell>
-                    {color.category ? (
-                      <div>
-                        <div className="text-sm">{color.category.name}</div>
-                        <div className="text-xs text-gray-500">{color.category.nameVi}</div>
-                      </div>
+                    <div className="text-sm">{color.description}</div>
+                  </TableCell>
+                  <TableCell>
+                    {color.imageUrl ? (
+                      <img src={color.imageUrl} alt={color.name} className="w-10 h-10 object-cover rounded" />
                     ) : (
-                      <span className="text-gray-400">No category</span>
+                      <span className="text-gray-400">No image</span>
                     )}
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-2">
-                      <div className="w-16 bg-gray-200 rounded-full h-2">
-                        <div
-                          className="bg-blue-600 h-2 rounded-full"
-                          style={{ width: `${Math.min(color.popularity, 100)}%` }}
-                        />
-                      </div>
-                      <span className="text-sm">{color.popularity}%</span>
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <Badge variant={color.isActive ? 'default' : 'secondary'}>
-                      {color.isActive ? 'Active' : 'Inactive'}
-                    </Badge>
+                    <div className="text-sm text-gray-500">{new Date(color.createdAt || '').toLocaleDateString()}</div>
                   </TableCell>
                   <TableCell>
                     <DropdownMenu>

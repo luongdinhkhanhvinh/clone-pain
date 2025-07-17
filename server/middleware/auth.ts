@@ -1,65 +1,62 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import { db, adminUsers } from '../db';
+import { db } from '../db';
+import { users } from '../db/schema';
 import { eq } from 'drizzle-orm';
+import { ApiError } from './error';
 
-export interface AuthRequest extends Request {
-  user?: {
-    id: number;
-    username: string;
-    email: string;
-    role: string;
-  };
+interface JwtPayload {
+  id: string;
 }
 
-export const authenticateToken = async (req: AuthRequest, res: Response, next: NextFunction): Promise<void> => {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-
-  if (!token) {
-    res.status(401).json({ error: 'Access token required' });
-    return;
+// Extend Request type to include user
+declare global {
+  namespace Express {
+    interface Request {
+      user?: any;
+    }
   }
+}
 
+// Protect routes
+export const protect = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as any;
-    
-    // Verify user still exists and is active
-    const user = await db.select().from(adminUsers)
-      .where(eq(adminUsers.id, decoded.userId))
-      .limit(1);
+    let token;
 
-    if (!user.length || !user[0].isActive) {
-      res.status(401).json({ error: 'Invalid or expired token' });
-      return;
+    if (req.cookies.token) {
+      token = req.cookies.token;
     }
 
-    req.user = {
-      id: user[0].id,
-      username: user[0].username,
-      email: user[0].email,
-      role: user[0].role || 'admin',
-    };
+    if (!token) {
+      return next(new ApiError(401, 'Not authorized to access this route'));
+    }
 
+    // Verify token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
+
+    // Get user from token
+    const [user] = await db
+      .select()
+      .from(users)
+      .where(eq(users.id, decoded.id));
+
+    if (!user) {
+      return next(new ApiError(401, 'Not authorized to access this route'));
+    }
+
+    req.user = user;
     next();
   } catch (error) {
-    res.status(403).json({ error: 'Invalid token' });
-    return;
+    return next(new ApiError(401, 'Not authorized to access this route'));
   }
 };
 
-export const requireRole = (roles: string[]) => {
-  return (req: AuthRequest, res: Response, next: NextFunction): void => {
-    if (!req.user) {
-      res.status(401).json({ error: 'Authentication required' });
-      return;
+// Grant access to specific roles
+export const authorize = (...roles: string[]) => {
+  return (req: Request, res: Response, next: NextFunction) => {
+    if (!req.user || !roles.includes(req.user.role)) {
+      return next(new ApiError(403, 'Not authorized to access this route'));
     }
-
-    if (!roles.includes(req.user.role)) {
-      res.status(403).json({ error: 'Insufficient permissions' });
-      return;
-    }
-
     next();
   };
 };

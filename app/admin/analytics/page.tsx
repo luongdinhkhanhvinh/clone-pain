@@ -44,45 +44,20 @@ export default function AnalyticsPage() {
 
   const fetchAnalytics = async () => {
     try {
-      // Mock data for demo purposes
-      setTimeout(() => {
-        const mockAnalytics: AnalyticsData = {
-          overview: {
-            totalVisitors: 12547,
-            totalPageViews: 45632,
-            totalContacts: 234,
-            totalSamples: 156,
-            visitorGrowth: 15.3,
-            contactGrowth: 8.7,
-          },
-          popularColors: [
-            { id: 1, name: 'Jet Black', nameVi: 'Đen Tuyền', views: 2341, samples: 45 },
-            { id: 2, name: 'Summer White', nameVi: 'Trắng Mùa Hè', views: 2156, samples: 38 },
-            { id: 3, name: 'Chocolate', nameVi: 'Sô-cô-la', views: 1876, samples: 29 },
-            { id: 4, name: 'Jungle Green', nameVi: 'Xanh Rừng', views: 1654, samples: 22 },
-            { id: 5, name: 'Warm Grey', nameVi: 'Xám Ấm', views: 1432, samples: 18 },
-          ],
-          trafficSources: [
-            { source: 'Direct', visitors: 4521, percentage: 36.1 },
-            { source: 'Google Search', visitors: 3876, percentage: 30.9 },
-            { source: 'Social Media', visitors: 2341, percentage: 18.7 },
-            { source: 'Referrals', visitors: 1234, percentage: 9.8 },
-            { source: 'Email', visitors: 575, percentage: 4.6 },
-          ],
-          monthlyStats: [
-            { month: 'Jan', visitors: 8234, contacts: 45, samples: 28 },
-            { month: 'Feb', visitors: 9156, contacts: 52, samples: 31 },
-            { month: 'Mar', visitors: 10234, contacts: 48, samples: 29 },
-            { month: 'Apr', visitors: 11456, contacts: 61, samples: 35 },
-            { month: 'May', visitors: 12547, contacts: 67, samples: 42 },
-          ],
-        }
-        setAnalytics(mockAnalytics)
-        setLoading(false)
-      }, 500)
+      const response = await fetch('/api/analytics', {
+        credentials: 'include',
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to fetch analytics data');
+      }
+      
+      const { data } = await response.json();
+      setAnalytics(data);
+      setLoading(false);
     } catch (error) {
-      console.error('Error fetching analytics:', error)
-      setLoading(false)
+      console.error('Error fetching analytics:', error);
+      setLoading(false);
     }
   }
 

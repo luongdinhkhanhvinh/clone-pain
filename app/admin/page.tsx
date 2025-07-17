@@ -56,72 +56,70 @@ export default function AdminDashboard() {
 
   const fetchDashboardData = async () => {
     try {
-      // Use mock data for demo purposes
-      setTimeout(() => {
-        setStats({
-          categories: {
-            total: 8,
-            active: 6,
-          },
-          colors: {
-            total: 15,
-            active: 12,
-            popular: 8,
-          },
-          products: {
-            total: 45,
-            active: 42,
-            inStock: 38,
-          },
-          articles: {
-            total: 23,
-            published: 18,
-            draft: 5,
-          },
-          contacts: {
-            total: 127,
-            new: 12,
-            inProgress: 8,
-            resolved: 107,
-          },
-        })
-
-        // Mock recent contacts
-        setRecentContacts([
-          {
-            id: 1,
-            firstName: 'Nguyễn',
-            lastName: 'Văn A',
-            email: 'nguyenvana@email.com',
-            subject: 'Inquiry about Jet Black panels',
-            status: 'new',
-            source: 'contact_form',
-            createdAt: new Date().toISOString(),
-          },
-          {
-            id: 2,
-            firstName: 'Trần',
-            lastName: 'Thị B',
-            email: 'tranthib@email.com',
-            subject: 'Sample request for Summer White',
-            status: 'in_progress',
-            source: 'color_inquiry',
-            createdAt: new Date(Date.now() - 86400000).toISOString(),
-          },
-          {
-            id: 3,
-            firstName: 'Lê',
-            lastName: 'Văn C',
-            email: 'levanc@email.com',
-            subject: 'Professional application',
-            status: 'resolved',
-            source: 'professional_application',
-            createdAt: new Date(Date.now() - 172800000).toISOString(),
-          },
-        ])
-
-        setLoading(false)
-      }, 500)
+      setLoading(true)
+      // Fetch song song các API
+      const [catRes, colorRes, prodRes, artRes, contactRes] = await Promise.all([
+        fetch('/api/categories'),
+        fetch('/api/colors'),
+        fetch('/api/products'),
+        fetch('/api/articles'),
+        fetch('/api/contacts'),
+      ])
+      const [catData, colorData, prodData, artData, contactData] = await Promise.all([
+        catRes.json(), colorRes.json(), prodRes.json(), artRes.json(), contactRes.json()
+      ])
+      // Categories
+      const categories = catData.data || []
+      const activeCategories = categories.filter((c: any) => c.status !== 'inactive').length
+      // Colors
+      const colors = colorData.data || colorData.data?.colors || []
+      const activeColors = colors.filter((c: any) => c.status !== 'inactive').length
+      const popularColors = colors.filter((c: any) => c.isPopular || c.popular).length
+      // Products
+      const products = prodData.data || prodData.data?.products || []
+      const activeProducts = products.filter((p: any) => p.status !== 'inactive').length
+      const inStockProducts = products.filter((p: any) => (p.stock ?? 1) > 0).length
+      // Articles
+      const articles = artData.data || []
+      const publishedArticles = articles.filter((a: any) => a.status === 'published').length
+      const draftArticles = articles.filter((a: any) => a.status === 'draft').length
+      // Contacts
+      const contacts = contactData.data || []
+      const newContacts = contacts.filter((c: any) => c.status === 'new').length
+      const inProgressContacts = contacts.filter((c: any) => c.status === 'in_progress').length
+      const resolvedContacts = contacts.filter((c: any) => c.status === 'resolved').length
+      // Tổng hợp stats
+      setStats({
+        categories: {
+          total: categories.length,
+          active: activeCategories,
+        },
+        colors: {
+          total: colors.length,
+          active: activeColors,
+          popular: popularColors,
+        },
+        products: {
+          total: products.length,
+          active: activeProducts,
+          inStock: inStockProducts,
+        },
+        articles: {
+          total: articles.length,
+          published: publishedArticles,
+          draft: draftArticles,
+        },
+        contacts: {
+          total: contacts.length,
+          new: newContacts,
+          inProgress: inProgressContacts,
+          resolved: resolvedContacts,
+        },
+      })
+      // Recent contacts (3 mới nhất)
+      const sortedContacts = [...contacts].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      setRecentContacts(sortedContacts.slice(0, 3))
+      setLoading(false)
     } catch (error) {
       console.error('Error fetching dashboard data:', error)
       setLoading(false)

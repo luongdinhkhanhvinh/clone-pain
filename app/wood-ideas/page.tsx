@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -12,83 +12,32 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Heart, Search, Bookmark, Share2, TrendingUp } from "lucide-react"
 import { useLanguage } from "@/components/providers/language-provider"
 
-// These will be replaced with translated versions in the component
+// State cho dữ liệu API
+const [trendingColors, setTrendingColors] = useState<any[]>([]);
+const [colorSchemes, setColorSchemes] = useState<any[]>([]);
+const [woodIdeas, setWoodIdeas] = useState<any[]>([]);
+const [tipsData, setTipsData] = useState<any[]>([]);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState("");
 
-const trendingColors = [
-  { name: "Aegean Teal", code: "2136-40", hex: "#4A90A4", trend: "Ocean Inspired" },
-  { name: "October Mist", code: "1495", hex: "#C5B8A5", trend: "Warm Neutrals" },
-  { name: "Forest Green", code: "2047-10", hex: "#355E3B", trend: "Nature's Palette" },
-  { name: "Raspberry Blush", code: "2008-30", hex: "#D4A5A5", trend: "Soft Romance" },
-]
-
-const colorSchemes = [
-  {
-    id: 1,
-    name: "Serene Sanctuary",
-    description: "Calming blues and soft whites create a peaceful retreat",
-    colors: ["#E8F4F8", "#B8D4E3", "#7FB3D3", "#4A90A4"],
-    room: "Bedroom",
-    style: "Modern",
-    image: "/placeholder.svg?height=300&width=400",
-    likes: 245,
-    saves: 89,
-  },
-  {
-    id: 2,
-    name: "Warm Earth Tones",
-    description: "Rich terracotta and warm beiges for a cozy atmosphere",
-    colors: ["#F5E6D3", "#E8C5A0", "#D4A574", "#B8956A"],
-    room: "Living Room",
-    style: "Traditional",
-    image: "/placeholder.svg?height=300&width=400",
-    likes: 312,
-    saves: 156,
-  },
-  {
-    id: 3,
-    name: "Fresh Kitchen Greens",
-    description: "Sage and mint greens with crisp white accents",
-    colors: ["#FFFFFF", "#F0F4F0", "#C8D5C8", "#87A96B"],
-    room: "Kitchen",
-    style: "Farmhouse",
-    image: "/placeholder.svg?height=300&width=400",
-    likes: 189,
-    saves: 203,
-  },
-  {
-    id: 4,
-    name: "Bold Statement Wall",
-    description: "Deep navy creates drama with gold accents",
-    colors: ["#F8F6F0", "#D4AF37", "#2C3E50", "#1B2951"],
-    room: "Dining Room",
-    style: "Modern",
-    image: "/placeholder.svg?height=300&width=400",
-    likes: 278,
-    saves: 134,
-  },
-  {
-    id: 5,
-    name: "Spa-Like Bathroom",
-    description: "Soft grays and whites for a clean, relaxing feel",
-    colors: ["#FFFFFF", "#F5F5F5", "#D3D3D3", "#9B9B9B"],
-    room: "Bathroom",
-    style: "Minimalist",
-    image: "/placeholder.svg?height=300&width=400",
-    likes: 156,
-    saves: 98,
-  },
-  {
-    id: 6,
-    name: "Cozy Home Office",
-    description: "Warm grays with pops of energizing orange",
-    colors: ["#F7F4F2", "#E5DDD5", "#D4A574", "#FF8C42"],
-    room: "Home Office",
-    style: "Industrial",
-    image: "/placeholder.svg?height=300&width=400",
-    likes: 134,
-    saves: 67,
-  },
-]
+useEffect(() => {
+  setLoading(true);
+  setError("");
+  Promise.all([
+    fetch("/api/wood-ideas").then(r => r.json()),
+    fetch("/api/wood-ideas/schemes").then(r => r.json()),
+    fetch("/api/wood-ideas/trending").then(r => r.json()),
+    fetch("/api/wood-ideas/tips").then(r => r.json()),
+  ])
+    .then(([ideas, schemes, trending, tips]) => {
+      setWoodIdeas(ideas.data || []);
+      setColorSchemes((schemes.data || []).map((s: any) => ({ ...s, colors: typeof s.colors === 'string' ? JSON.parse(s.colors) : s.colors })));
+      setTrendingColors(trending.data || []);
+      setTipsData(tips.data || []);
+    })
+    .catch(() => setError("Failed to fetch inspiration data"))
+    .finally(() => setLoading(false));
+}, []);
 
 // Expert tips will be generated dynamically with translations
 
@@ -122,7 +71,7 @@ export default function woodIdeasPage() {
     t('styles.coastal', 'wood-ideas')
   ]
 
-  const filteredSchemes = colorSchemes.filter((scheme) => {
+  const filteredSchemes = colorSchemes.filter((scheme: any) => {
     const matchesRoom = selectedRoom === t('rooms.allRooms', 'wood-ideas') || scheme.room === selectedRoom
     const matchesStyle = selectedStyle === t('styles.allStyles', 'wood-ideas') || scheme.style === selectedStyle
     const matchesSearch =
@@ -139,23 +88,14 @@ export default function woodIdeasPage() {
     setSaved((prev) => (prev.includes(id) ? prev.filter((save) => save !== id) : [...prev, id]))
   }
 
-  const expertTips = [
-    {
-      title: t('tips.quickTips.rule60-30-10.title', 'wood-ideas'),
-      description: t('tips.quickTips.rule60-30-10.description', 'wood-ideas'),
-      image: "/placeholder.svg?height=200&width=300",
-    },
-    {
-      title: t('tips.quickTips.testColors.title', 'wood-ideas'),
-      description: t('tips.quickTips.testColors.description', 'wood-ideas'),
-      image: "/placeholder.svg?height=200&width=300",
-    },
-    {
-      title: t('tips.quickTips.considerFunction.title', 'wood-ideas'),
-      description: t('tips.quickTips.considerFunction.description', 'wood-ideas'),
-      image: "/placeholder.svg?height=200&width=300",
-    },
-  ]
+  const expertTips = tipsData;
+
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center text-gray-500">Loading inspiration...</div>;
+  }
+  if (error) {
+    return <div className="min-h-screen flex items-center justify-center text-red-500">{error}</div>;
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -264,7 +204,7 @@ export default function woodIdeasPage() {
 
                       {/* Color Palette */}
                       <div className="flex gap-2">
-                        {scheme.colors.map((color, index) => (
+                        {scheme.colors.map((color: any, index: number) => (
                           <div
                             key={index}
                             className="w-8 h-8 rounded-full border-2 border-white shadow-sm"

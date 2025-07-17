@@ -9,7 +9,7 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Install dependencies based on the preferred package manager
+# Copy only package manager files for better cache
 COPY package.json pnpm-lock.yaml* ./
 RUN pnpm install --frozen-lockfile
 
@@ -17,7 +17,7 @@ RUN pnpm install --frozen-lockfile
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-# Copy source code excluding server folder
+# Copy config and source code in separate steps for better cache
 COPY package.json pnpm-lock.yaml* next.config.js tsconfig.json tailwind.config.ts postcss.config.mjs ./
 COPY next-i18next.config.js components.json .nextignore ./
 COPY app ./app
@@ -54,7 +54,7 @@ COPY --from=builder /app/public ./public
 RUN mkdir .next
 RUN chown nextjs:nodejs .next
 
-# Copy built application
+# Copy built application only
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 

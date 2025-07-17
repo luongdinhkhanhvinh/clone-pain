@@ -25,72 +25,35 @@ export default function UsersPage() {
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
 
+  // Thêm các state cho form
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [editingUser, setEditingUser] = useState<AdminUser | null>(null);
+  const [formData, setFormData] = useState<Partial<AdminUser & { password?: string }>>({});
+  const [formLoading, setFormLoading] = useState(false);
+  const [error, setError] = useState('');
+
   useEffect(() => {
     fetchUsers()
   }, [])
 
   const fetchUsers = async () => {
     try {
-      // Mock data for demo purposes
-      setTimeout(() => {
-        const mockUsers = [
-          {
-            id: 1,
-            username: 'admin',
-            email: 'admin@woodpanel.com',
-            firstName: 'Admin',
-            lastName: 'User',
-            role: 'admin' as const,
-            isActive: true,
-            lastLogin: new Date().toISOString(),
-            createdAt: new Date(Date.now() - 86400000 * 30).toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-          {
-            id: 2,
-            username: 'manager',
-            email: 'manager@woodpanel.com',
-            firstName: 'Manager',
-            lastName: 'User',
-            role: 'manager' as const,
-            isActive: true,
-            lastLogin: new Date(Date.now() - 3600000).toISOString(),
-            createdAt: new Date(Date.now() - 86400000 * 20).toISOString(),
-            updatedAt: new Date(Date.now() - 3600000).toISOString(),
-          },
-          {
-            id: 3,
-            username: 'editor1',
-            email: 'editor1@woodpanel.com',
-            firstName: 'Content',
-            lastName: 'Editor',
-            role: 'editor' as const,
-            isActive: true,
-            lastLogin: new Date(Date.now() - 86400000).toISOString(),
-            createdAt: new Date(Date.now() - 86400000 * 15).toISOString(),
-            updatedAt: new Date(Date.now() - 86400000).toISOString(),
-          },
-          {
-            id: 4,
-            username: 'editor2',
-            email: 'editor2@woodpanel.com',
-            firstName: 'Marketing',
-            lastName: 'Editor',
-            role: 'editor' as const,
-            isActive: false,
-            lastLogin: new Date(Date.now() - 86400000 * 7).toISOString(),
-            createdAt: new Date(Date.now() - 86400000 * 10).toISOString(),
-            updatedAt: new Date(Date.now() - 86400000 * 2).toISOString(),
-          },
-        ]
-        setUsers(mockUsers)
-        setLoading(false)
-      }, 500)
+      setLoading(true);
+      const token = localStorage.getItem('admin_token');
+      const response = await fetch('/api/users', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) throw new Error('Failed to fetch users');
+      const { data } = await response.json();
+      setUsers(data);
+      setLoading(false);
     } catch (error) {
-      console.error('Error fetching users:', error)
-      setLoading(false)
+      console.error('Error fetching users:', error);
+      setLoading(false);
     }
-  }
+  };
 
   const filteredUsers = users.filter(user =>
     user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -130,6 +93,83 @@ export default function UsersPage() {
     return loginDate.toLocaleDateString('vi-VN')
   }
 
+  const handleAddUser = () => {
+    setEditingUser(null);
+    setFormData({ role: 'editor', isActive: true });
+    setIsDialogOpen(true);
+  };
+
+  const handleEditUser = (user: AdminUser) => {
+    setEditingUser(user);
+    setFormData({ ...user });
+    setIsDialogOpen(true);
+  };
+
+  const handleDeleteUser = async (user: AdminUser) => {
+    if (!confirm(`Are you sure you want to delete user ${user.email}?`)) return;
+    try {
+      setFormLoading(true);
+      const token = localStorage.getItem('admin_token');
+      const response = await fetch(`/api/users/${user.id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` },
+      });
+      if (response.ok) {
+        await fetchUsers();
+      } else {
+        const data = await response.json();
+        alert(data.error || 'Failed to delete user');
+      }
+    } catch (error) {
+      alert('Network error');
+    } finally {
+      setFormLoading(false);
+    }
+  };
+
+  const handleFormChange = (field: string, value: any) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormLoading(true);
+    setError('');
+    try {
+      const token = localStorage.getItem('admin_token');
+      const isEdit = !!editingUser;
+      const url = isEdit ? `/api/users/${editingUser!.id}` : '/api/users';
+      const method = isEdit ? 'PUT' : 'POST';
+      const body: any = { ...formData };
+      if (!isEdit && !body.password) {
+        setError('Password is required');
+        setFormLoading(false);
+        return;
+      }
+      const response = await fetch(url, {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify(body),
+      });
+      if (response.ok) {
+        await fetchUsers();
+        setIsDialogOpen(false);
+        setEditingUser(null);
+        setFormData({});
+      } else {
+        const data = await response.json();
+        setError(data.error || 'Failed to save user');
+      }
+    } catch (error) {
+      setError('Network error');
+    } finally {
+      setFormLoading(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -142,7 +182,7 @@ export default function UsersPage() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">Users Management</h1>
-        <Button>
+        <Button onClick={handleAddUser}>
           <Plus className="mr-2 h-4 w-4" />
           Add User
         </Button>
@@ -203,13 +243,10 @@ export default function UsersPage() {
                     </td>
                     <td className="p-2">
                       <div className="flex space-x-2">
-                        <Button variant="outline" size="sm">
+                        <Button variant="outline" size="sm" onClick={() => handleEditUser(user)}>
                           <Edit className="h-4 w-4" />
                         </Button>
-                        <Button variant="outline" size="sm">
-                          <Shield className="h-4 w-4" />
-                        </Button>
-                        <Button variant="outline" size="sm" disabled={user.role === 'admin'}>
+                        <Button variant="outline" size="sm" onClick={() => handleDeleteUser(user)} disabled={user.role === 'admin'}>
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </div>
@@ -274,6 +311,55 @@ export default function UsersPage() {
           </div>
         </CardContent>
       </Card>
+
+      {isDialogOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">
+          <form onSubmit={handleFormSubmit} className="bg-white rounded-lg p-6 w-full max-w-md space-y-4 shadow-lg">
+            <h2 className="text-xl font-bold mb-2">{editingUser ? 'Edit User' : 'Add User'}</h2>
+            {error && <div className="text-red-500 text-sm mb-2">{error}</div>}
+            <div className="space-y-2">
+              <Input
+                placeholder="Email"
+                value={formData.email || ''}
+                onChange={e => handleFormChange('email', e.target.value)}
+                required
+              />
+              <Input
+                placeholder="Full Name"
+                value={(formData as any).fullName || ''}
+                onChange={e => handleFormChange('fullName', e.target.value)}
+              />
+              <Input
+                placeholder="Role (admin, manager, editor)"
+                value={formData.role || ''}
+                onChange={e => handleFormChange('role', e.target.value)}
+                required
+              />
+              {!editingUser && (
+                <Input
+                  placeholder="Password"
+                  type="password"
+                  value={formData.password || ''}
+                  onChange={e => handleFormChange('password', e.target.value)}
+                  required
+                />
+              )}
+              <label className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={formData.isActive ?? true}
+                  onChange={e => handleFormChange('isActive', e.target.checked)}
+                />
+                Active
+              </label>
+            </div>
+            <div className="flex gap-2 justify-end">
+              <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)} disabled={formLoading}>Cancel</Button>
+              <Button type="submit" disabled={formLoading}>{formLoading ? 'Saving...' : (editingUser ? 'Save' : 'Add')}</Button>
+            </div>
+          </form>
+        </div>
+      )}
     </div>
   )
 }

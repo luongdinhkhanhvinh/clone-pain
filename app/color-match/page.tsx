@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -10,13 +10,6 @@ import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Upload, Camera } from "lucide-react"
 import { useLanguage } from "@/components/providers/language-provider"
-
-const suggestedColors = [
-  { name: "White Dove", code: "OC-17", hex: "#F8F6F0", match: "95%" },
-  { name: "Cloud White", code: "OC-130", hex: "#F7F4F2", match: "92%" },
-  { name: "Classic Gray", code: "OC-23", hex: "#9B9B9B", match: "88%" },
-  { name: "Revere Pewter", code: "HC-172", hex: "#A69B8C", match: "85%" },
-]
 
 const complementaryColors = [
   { name: "Hale Navy", code: "HC-154", hex: "#1B2951" },
@@ -29,6 +22,32 @@ export default function ColorMatchPage() {
   const { t } = useLanguage()
   const [selectedColor, setSelectedColor] = useState("#F8F6F0")
   const [uploadedImage, setUploadedImage] = useState<string | null>(null)
+  const [suggestedColors, setSuggestedColors] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState("")
+
+  useEffect(() => {
+    const fetchColors = async () => {
+      setLoading(true)
+      setError("")
+      try {
+        const res = await fetch("/api/colors")
+        const json = await res.json()
+        if (res.ok && json.data && Array.isArray(json.data)) {
+          setSuggestedColors(json.data)
+        } else if (res.ok && json.data && Array.isArray(json.data.colors)) {
+          setSuggestedColors(json.data.colors)
+        } else {
+          setError("No color data found")
+        }
+      } catch (e) {
+        setError("Failed to fetch colors")
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchColors()
+  }, [])
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
@@ -135,23 +154,31 @@ export default function ColorMatchPage() {
                   <CardTitle>Matching Colors</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-4">
-                    {suggestedColors.map((color, index) => (
-                      <div key={index} className="flex items-center gap-4 p-3 border rounded-lg hover:bg-gray-50">
-                        <div
-                          className="w-12 h-12 rounded-lg border-2 border-gray-200"
-                          style={{ backgroundColor: color.hex }}
-                        ></div>
-                        <div className="flex-1">
-                          <h3 className="font-semibold">{color.name}</h3>
-                          <p className="text-sm text-gray-600">{color.code}</p>
+                  {loading ? (
+                    <div className="text-center py-8 text-gray-500">Loading colors...</div>
+                  ) : error ? (
+                    <div className="text-center py-8 text-red-500">{error}</div>
+                  ) : (
+                    <div className="space-y-4">
+                      {suggestedColors.map((color, index) => (
+                        <div key={color.id || index} className="flex items-center gap-4 p-3 border rounded-lg hover:bg-gray-50">
+                          <div
+                            className="w-12 h-12 rounded-lg border-2 border-gray-200"
+                            style={{ backgroundColor: color.hex || color.hexCode || color.code || "#fff" }}
+                          ></div>
+                          <div className="flex-1">
+                            <h3 className="font-semibold">{color.name}</h3>
+                            <p className="text-sm text-gray-600">{color.code}</p>
+                          </div>
+                          {color.match && (
+                            <div className="text-right">
+                              <span className="text-sm font-medium text-green-600">{color.match} match</span>
+                            </div>
+                          )}
                         </div>
-                        <div className="text-right">
-                          <span className="text-sm font-medium text-green-600">{color.match} match</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </div>

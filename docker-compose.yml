@@ -24,32 +24,32 @@ services:
       timeout: 5s
       retries: 5
 
-  # Backend API
+  # Backend API Server
   backend:
     build:
-      context: ./server
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile.backend
+      target: runner
     container_name: woodpanel-backend
     restart: unless-stopped
     environment:
-      DATABASE_URL: postgresql://postgres:postgres123@postgres:5432/woodpanel_db
-      JWT_SECRET: your-super-secret-jwt-key-change-this-in-production
-      PORT: 3001
       NODE_ENV: production
-      FRONTEND_URL: http://frontend:3000
-      UPLOAD_DIR: /app/uploads
-      MAX_FILE_SIZE: 10485760
-    volumes:
-      - backend_uploads:/app/uploads
+      PORT: 3001
+      DATABASE_URL: postgresql://postgres:postgres123@postgres:5432/woodpanel_db?schema=public
+      JWT_SECRET: your_jwt_secret_key_here
+      JWT_EXPIRES_IN: 30d
+      FRONTEND_URL: http://localhost:3000
     ports:
       - "3001:3001"
+    volumes:
+      - ./uploads:/app/uploads
     networks:
       - woodpanel-network
     depends_on:
       postgres:
         condition: service_healthy
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:3001/api/health || exit 1"]
+      test: ["CMD", "node", "server/healthcheck.js"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -59,6 +59,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: runner
     container_name: woodpanel-frontend
     restart: unless-stopped
     environment:
@@ -73,37 +74,13 @@ services:
       backend:
         condition: service_healthy
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:3000 || exit 1"]
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
       interval: 30s
       timeout: 10s
       retries: 3
 
-  # pgAdmin for database management (optional)
-  pgadmin:
-    image: dpage/pgadmin4:latest
-    container_name: woodpanel-pgadmin
-    restart: unless-stopped
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@woodpanel.com
-      PGADMIN_DEFAULT_PASSWORD: admin123
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
-    volumes:
-      - pgadmin_data:/var/lib/pgadmin
-    ports:
-      - "5050:80"
-    networks:
-      - woodpanel-network
-    depends_on:
-      - postgres
-    profiles:
-      - tools
-
 volumes:
   postgres_data:
-    driver: local
-  backend_uploads:
-    driver: local
-  pgadmin_data:
     driver: local
 
 networks:

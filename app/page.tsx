@@ -5,17 +5,26 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Palette, Paintbrush, Users, Lightbulb, ArrowRight, CheckCircle } from "lucide-react"
+import { Palette, Paintbrush, Users, Lightbulb, ArrowRight, CheckCircle, Loader2 } from "lucide-react"
 import { useLanguage } from "@/components/providers/language-provider"
-import { woodPanelColors } from "@/data/wood-panel-colors"
-
+import { useHomeData } from "@/hooks/useHomeData"
+import { Color } from "@/lib/api"
 
 export default function HomePage() {
   const { t } = useLanguage()
+  const { featuredProducts, popularColors, isLoading, error } = useHomeData()
 
-  // Get featured colors from data
-  const warmGrey = woodPanelColors.find(color => color.name === "Warm Grey")
-  const featuredColors = woodPanelColors.filter(color => color.popular).slice(0, 6)
+  // Get warm grey color as featured
+  const warmGrey = popularColors.length > 0 
+    ? popularColors.find(color => color.name.toLowerCase().includes('warm grey')) || popularColors[0] 
+    : {
+        id: 'fallback',
+        name: 'Warm Grey',
+        code: '#8B8680',
+        imageUrl: '/colors/WarmGrey.png',
+        isPopular: true,
+        description: 'Signature Color'
+      } as Color
 
   return (
     <div className="min-h-screen bg-white">
@@ -85,20 +94,26 @@ export default function HomePage() {
 
             <div className="relative">
               <div className="relative rounded-sm overflow-hidden shadow-2xl">
-                <Image
-                  src="/colors/WarmGrey.png?height=700&width=700"
-                  alt={t('hero.imageAlt', 'home')}
-                  width={600}
-                  height={700}
-                  className="object-cover"
-                  priority
-                />
+                {warmGrey ? (
+                  <Image
+                    src={warmGrey.imageUrl}
+                    alt={warmGrey.name}
+                    width={600}
+                    height={700}
+                    className="object-cover"
+                    priority
+                  />
+                ) : (
+                  <div className="w-full h-[700px] bg-stone-100 flex items-center justify-center">
+                    <Loader2 className="h-12 w-12 animate-spin text-stone-400" />
+                  </div>
+                )}
                 <div className="absolute bottom-8 left-8 bg-white/95 backdrop-blur-sm p-6 rounded-sm shadow-lg border border-white/20">
                   <div className="flex items-center gap-4">
                     <div className="w-16 h-16 rounded-sm overflow-hidden relative">
                       {warmGrey && (
                         <Image
-                          src={warmGrey.image}
+                          src={warmGrey.imageUrl}
                           alt={warmGrey.name}
                           fill
                           className="object-cover"
@@ -110,7 +125,7 @@ export default function HomePage() {
                       <h3 className="font-display text-lg font-medium text-slate-900">
                         {warmGrey?.name || t('hero.colorName', 'home')}
                       </h3>
-                      <p className="text-stone-600">{warmGrey?.code || t('hero.colorCode', 'home')}</p>
+                      <p className="text-stone-600">{warmGrey?.code || '#8B8680'}</p>
                       <Badge variant="secondary" className="mt-2 text-xs">
                         {warmGrey?.description || t('hero.signatureColor', 'home')}
                       </Badge>
@@ -174,59 +189,69 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured Colors Section */}
-      <section className="py-24 bg-white">
+      {/* Popular Colors Section */}
+      <section className="py-24 bg-stone-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-display font-medium text-slate-900 mb-6">{t('signatureCollection.title', 'home')}</h2>
+            <h2 className="text-3xl font-display font-medium text-slate-900 mb-6">
+              {t('colors.popular', 'home')}
+            </h2>
             <p className="text-lg text-stone-600 max-w-2xl mx-auto leading-relaxed">
-              {t('signatureCollection.description', 'home')}
+              {t('colors.description', 'home')}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {featuredColors.map((color) => (
-              <Link key={color.id} href={`/colors/${color.name.toLowerCase().replace(/\s+/g, "-")}`}>
-                <Card className="group cursor-pointer overflow-hidden hover:shadow-lg transition-all duration-300">
-                  <CardContent className="p-0">
-                    <div className="w-full h-32 relative group-hover:scale-105 transition-transform duration-300 overflow-hidden">
-                      <Image
-                        src={color.image}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {isLoading ? (
+              // Loading skeleton
+              Array(3).fill(0).map((_, index) => (
+                <div key={index} className="aspect-square bg-stone-200 animate-pulse rounded-lg"></div>
+              ))
+            ) : error ? (
+              <div className="col-span-full text-center py-8">
+                <p className="text-stone-500">Failed to load colors. Please try again later.</p>
+              </div>
+            ) : (
+              popularColors.map((color) => (
+                <div key={color.id} className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                  <div 
+                    className="aspect-square w-full flex items-center justify-center"
+                    style={{ backgroundColor: color.code }}
+                  >
+                    {color.imageUrl && (
+                      <Image 
+                        src={color.imageUrl} 
                         alt={color.name}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 16vw"
+                        width={300}
+                        height={300}
+                        className="object-contain max-w-[80%] max-h-[80%]"
                       />
-                      <Badge variant="secondary" className="absolute top-3 left-3 text-xs bg-white/90 backdrop-blur-sm">
-                        {color.category}
-                      </Badge>
-                      {color.popular && (
-                        <Badge className="absolute top-3 right-3 text-xs bg-blue-600 text-white">
-                          {t('colorCard.popular', 'components')}
-                        </Badge>
-                      )}
+                    )}
+                  </div>
+                  <div className="p-6 bg-white">
+                    <h3 className="text-xl font-medium text-slate-900 mb-1">{color.name}</h3>
+                    {color.description && (
+                      <p className="text-stone-600 mb-4">{color.description}</p>
+                    )}
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-stone-500">{color.code}</span>
+                      <Button variant="outline" size="sm" asChild>
+                        <Link href={`/colors/${color.id}`}>
+                          {t('common.viewDetails', 'home')}
+                        </Link>
+                      </Button>
                     </div>
-                    <div className="p-4">
-                      <h3 className="font-display font-medium text-slate-900">{color.name}</h3>
-                      <p className="text-sm text-stone-600">{color.code}</p>
-                      <p className="text-xs text-stone-500 mt-1">{color.description}</p>
-                      {color.orderPercentage && (
-                        <Badge variant="outline" className="mt-2 text-xs">
-                          {color.orderPercentage}
-                        </Badge>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
+                  </div>
+                </div>
+              ))
+            )}
           </div>
 
-          <div className="text-center mt-12">
+          <div className="mt-12 text-center">
             <Button asChild variant="outline" size="lg">
-              <Link href="/colors">
-                {t('buttons.viewComplete')}
-                <ArrowRight className="ml-2 w-4 h-4" />
+              <Link href="/colors" className="flex items-center gap-2">
+                {t('colors.viewAll', 'home')}
+                <ArrowRight className="h-4 w-4" />
               </Link>
             </Button>
           </div>

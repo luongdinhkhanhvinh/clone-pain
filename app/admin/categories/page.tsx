@@ -1,21 +1,9 @@
 "use client"
 
-import { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
-import { Switch } from '@/components/ui/switch'
-import { Textarea } from '@/components/ui/textarea'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Dialog,
   DialogContent,
@@ -33,40 +21,46 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Alert, AlertDescription } from '@/components/ui/alert'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
+import { Textarea } from '@/components/ui/textarea'
+import {
+  AlertCircle,
+  Edit,
+  Loader2,
+  MoreHorizontal,
   Plus,
   Search,
-  MoreHorizontal,
-  Edit,
-  Trash2,
-  Eye,
-  Loader2,
-  AlertCircle,
+  Trash2
 } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
 interface Category {
-  id: number
+  id: string
   name: string
-  nameVi: string
-  description?: string
-  descriptionVi?: string
   slug: string
-  isActive: boolean
-  createdAt: string
-  updatedAt: string
-  colorsCount?: number
-  productsCount?: number
-  articlesCount?: number
+  description?: string
+  parentId?: string | null
+  imageUrl?: string | null
+  isFeatured?: boolean
+  createdAt?: string
+  updatedAt?: string
+  productCount?: number
+  children?: Category[]
 }
 
 interface CategoryFormData {
   name: string
-  nameVi: string
   description: string
-  descriptionVi: string
   slug: string
-  isActive: boolean
 }
 
 export default function CategoriesPage() {
@@ -77,11 +71,8 @@ export default function CategoriesPage() {
   const [editingCategory, setEditingCategory] = useState<Category | null>(null)
   const [formData, setFormData] = useState<CategoryFormData>({
     name: '',
-    nameVi: '',
     description: '',
-    descriptionVi: '',
     slug: '',
-    isActive: true,
   })
   const [formLoading, setFormLoading] = useState(false)
   const [error, setError] = useState('')
@@ -92,50 +83,18 @@ export default function CategoriesPage() {
 
   const fetchCategories = async () => {
     try {
-      // Mock data for demo purposes
-      setTimeout(() => {
-        const mockCategories = [
-          {
-            id: 1,
-            name: 'Premium Silkluxs',
-            nameVi: 'Ván Gỗ Cao Cấp',
-            slug: 'premium-wood-panels',
-            description: 'High-quality premium Silkluxs for luxury applications',
-            descriptionVi: 'Ván gỗ cao cấp chất lượng cao cho các ứng dụng sang trọng',
-            isActive: true,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-          {
-            id: 2,
-            name: 'Standard Silkluxs',
-            nameVi: 'Ván Gỗ Tiêu Chuẩn',
-            slug: 'standard-wood-panels',
-            description: 'Reliable standard Silkluxs for everyday use',
-            descriptionVi: 'Ván gỗ tiêu chuẩn đáng tin cậy cho sử dụng hàng ngày',
-            isActive: true,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-          {
-            id: 3,
-            name: 'Specialty Finishes',
-            nameVi: 'Hoàn Thiện Đặc Biệt',
-            slug: 'specialty-finishes',
-            description: 'Unique specialty finishes and textures',
-            descriptionVi: 'Hoàn thiện và kết cấu đặc biệt độc đáo',
-            isActive: false,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-        ]
-        setCategories(mockCategories)
-        setLoading(false)
-      }, 500)
-    } catch (error) {
-      console.error('Error fetching categories:', error)
-      setError('Network error')
+      setLoading(true)
+      const token = localStorage.getItem('admin_token')
+      const res = await fetch('/api/categories', {
+        headers: token ? { 'Authorization': `Bearer ${token}` } : {},
+      })
+      if (!res.ok) throw new Error('Failed to fetch categories')
+      const json = await res.json()
+      setCategories(json.data)
       setLoading(false)
+    } catch (error) {
+      setLoading(false)
+      setError('Network error')
     }
   }
 
@@ -152,11 +111,8 @@ export default function CategoriesPage() {
   const resetForm = () => {
     setFormData({
       name: '',
-      nameVi: '',
       description: '',
-      descriptionVi: '',
       slug: '',
-      isActive: true,
     })
     setEditingCategory(null)
     setError('')
@@ -166,26 +122,21 @@ export default function CategoriesPage() {
     e.preventDefault()
     setFormLoading(true)
     setError('')
-
     try {
       const token = localStorage.getItem('admin_token')
       const url = editingCategory 
         ? `/api/categories/${editingCategory.id}`
         : '/api/categories'
-      
       const method = editingCategory ? 'PUT' : 'POST'
-
       const response = await fetch(url, {
         method,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
         },
         body: JSON.stringify(formData),
       })
-
       const data = await response.json()
-
       if (response.ok) {
         await fetchCategories()
         setIsDialogOpen(false)
@@ -194,7 +145,6 @@ export default function CategoriesPage() {
         setError(data.error || 'Failed to save category')
       }
     } catch (error) {
-      console.error('Error saving category:', error)
       setError('Network error')
     } finally {
       setFormLoading(false)
@@ -205,29 +155,21 @@ export default function CategoriesPage() {
     setEditingCategory(category)
     setFormData({
       name: category.name,
-      nameVi: category.nameVi,
       description: category.description || '',
-      descriptionVi: category.descriptionVi || '',
       slug: category.slug,
-      isActive: category.isActive,
     })
     setIsDialogOpen(true)
   }
 
   const handleDelete = async (category: Category) => {
-    if (!confirm(`Are you sure you want to delete "${category.name}"?`)) {
-      return
-    }
-
+    if (!confirm(`Are you sure you want to delete category "${category.name}"?`)) return
+    setFormLoading(true)
     try {
       const token = localStorage.getItem('admin_token')
       const response = await fetch(`/api/categories/${category.id}`, {
         method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
+        headers: token ? { 'Authorization': `Bearer ${token}` } : {},
       })
-
       if (response.ok) {
         await fetchCategories()
       } else {
@@ -235,14 +177,14 @@ export default function CategoriesPage() {
         alert(data.error || 'Failed to delete category')
       }
     } catch (error) {
-      console.error('Error deleting category:', error)
       alert('Network error')
+    } finally {
+      setFormLoading(false)
     }
   }
 
   const filteredCategories = categories.filter(category =>
     category.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    category.nameVi.toLowerCase().includes(searchTerm.toLowerCase()) ||
     category.slug.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
@@ -290,7 +232,7 @@ export default function CategoriesPage() {
                   </Alert>
                 )}
                 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4">
                   <div>
                     <Label htmlFor="name">Name (English)</Label>
                     <Input
@@ -298,16 +240,6 @@ export default function CategoriesPage() {
                       value={formData.name}
                       onChange={(e) => handleInputChange('name', e.target.value)}
                       placeholder="Category name in English"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="nameVi">Name (Vietnamese)</Label>
-                    <Input
-                      id="nameVi"
-                      value={formData.nameVi}
-                      onChange={(e) => handleInputChange('nameVi', e.target.value)}
-                      placeholder="Tên danh mục tiếng Việt"
                       required
                     />
                   </div>
@@ -335,25 +267,6 @@ export default function CategoriesPage() {
                       rows={3}
                     />
                   </div>
-                  <div>
-                    <Label htmlFor="descriptionVi">Description (Vietnamese)</Label>
-                    <Textarea
-                      id="descriptionVi"
-                      value={formData.descriptionVi}
-                      onChange={(e) => handleInputChange('descriptionVi', e.target.value)}
-                      placeholder="Mô tả danh mục tiếng Việt"
-                      rows={3}
-                    />
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-2">
-                  <Switch
-                    id="isActive"
-                    checked={formData.isActive}
-                    onCheckedChange={(checked) => handleInputChange('isActive', checked)}
-                  />
-                  <Label htmlFor="isActive">Active</Label>
                 </div>
               </div>
               <DialogFooter>
@@ -424,7 +337,6 @@ export default function CategoriesPage() {
                   <TableCell>
                     <div>
                       <div className="font-medium">{category.name}</div>
-                      <div className="text-sm text-gray-500">{category.nameVi}</div>
                     </div>
                   </TableCell>
                   <TableCell>
@@ -433,19 +345,17 @@ export default function CategoriesPage() {
                     </code>
                   </TableCell>
                   <TableCell>
-                    <Badge variant={category.isActive ? 'default' : 'secondary'}>
-                      {category.isActive ? 'Active' : 'Inactive'}
+                    <Badge variant={category.isFeatured ? 'default' : 'secondary'}>
+                      {category.isFeatured ? 'Featured' : 'Not Featured'}
                     </Badge>
                   </TableCell>
                   <TableCell>
                     <div className="text-sm">
-                      <div>{category.colorsCount || 0} colors</div>
-                      <div>{category.productsCount || 0} products</div>
-                      <div>{category.articlesCount || 0} articles</div>
+                      <div>{category.productCount || 0} products</div>
                     </div>
                   </TableCell>
                   <TableCell>
-                    {new Date(category.createdAt).toLocaleDateString()}
+                    {new Date(category.createdAt || '').toLocaleDateString()}
                   </TableCell>
                   <TableCell>
                     <DropdownMenu>

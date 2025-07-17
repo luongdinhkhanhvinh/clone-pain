@@ -29,7 +29,7 @@ import {
 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 // Professional products will be generated dynamically with translations
 
@@ -46,6 +46,32 @@ export default function ProfessionalsPage() {
     experience: "",
     message: "",
   })
+  const [products, setProducts] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState("")
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true)
+      setError("")
+      try {
+        const res = await fetch("/api/products")
+        const json = await res.json()
+        if (res.ok && json.data && Array.isArray(json.data)) {
+          setProducts(json.data)
+        } else if (res.ok && json.data && Array.isArray(json.data.products)) {
+          setProducts(json.data.products)
+        } else {
+          setError("No product data found")
+        }
+      } catch (e) {
+        setError("Failed to fetch products")
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchProducts()
+  }, [])
 
   const benefits = [
     {
@@ -83,51 +109,6 @@ export default function ProfessionalsPage() {
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
-
-  const professionalProducts = [
-    {
-      name: t('products.advanceWaterborne.name', 'professionals'),
-      category: t('products.advanceWaterborne.category', 'professionals'),
-      description: t('products.advanceWaterborne.description', 'professionals'),
-      features: [
-        t('products.advanceWaterborne.features.selfLeveling', 'professionals'),
-        t('products.advanceWaterborne.features.excellentFlow', 'professionals'),
-        t('products.advanceWaterborne.features.durableFinish', 'professionals'),
-        t('products.advanceWaterborne.features.lowOdor', 'professionals')
-      ],
-      coverage: t('products.advanceWaterborne.coverage', 'professionals'),
-      price: t('products.contactForPricing', 'professionals'),
-      image: "/placeholder.svg?height=200&width=300",
-    },
-    {
-      name: t('products.auraGrandEntrance.name', 'professionals'),
-      category: t('products.auraGrandEntrance.category', 'professionals'),
-      description: t('products.auraGrandEntrance.description', 'professionals'),
-      features: [
-        t('products.auraGrandEntrance.features.fadeResistant', 'professionals'),
-        t('products.auraGrandEntrance.features.selfPriming', 'professionals'),
-        t('products.auraGrandEntrance.features.mildewResistant', 'professionals'),
-        t('products.auraGrandEntrance.features.easyCleanup', 'professionals')
-      ],
-      coverage: t('products.auraGrandEntrance.coverage', 'professionals'),
-      price: t('products.contactForPricing', 'professionals'),
-      image: "/placeholder.svg?height=200&width=300",
-    },
-    {
-      name: t('products.corotechV160.name', 'professionals'),
-      category: t('products.corotechV160.category', 'professionals'),
-      description: t('products.corotechV160.description', 'professionals'),
-      features: [
-        t('products.corotechV160.features.highDurability', 'professionals'),
-        t('products.corotechV160.features.chemicalResistant', 'professionals'),
-        t('products.corotechV160.features.easyMaintenance', 'professionals'),
-        t('products.corotechV160.features.vocCompliant', 'professionals')
-      ],
-      coverage: t('products.corotechV160.coverage', 'professionals'),
-      price: t('products.contactForPricing', 'professionals'),
-      image: "/placeholder.svg?height=200&width=300",
-    },
-  ]
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -253,47 +234,55 @@ export default function ProfessionalsPage() {
                 {t('products.description', 'professionals')}
               </p>
             </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {professionalProducts.map((product, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow">
-                  <CardContent className="p-0">
-                    <Image
-                      src={product.image || "/placeholder.svg"}
-                      alt={product.name}
-                      width={300}
-                      height={200}
-                      className="w-full h-48 object-cover rounded-t-lg"
-                    />
-                    <div className="p-6 space-y-4">
-                      <div>
-                        <Badge variant="secondary" className="mb-2">
-                          {product.category}
-                        </Badge>
-                        <h3 className="font-semibold text-lg">{product.name}</h3>
-                        <p className="text-gray-600 text-sm">{product.description}</p>
-                      </div>
-
-                      <div className="space-y-2">
-                        <p className="text-sm text-gray-600">{t('products.coverage', 'professionals')}: {product.coverage}</p>
-                        <div className="flex flex-wrap gap-1">
-                          {product.features.slice(0, 2).map((feature, featureIndex) => (
-                            <Badge key={featureIndex} variant="outline" className="text-xs">
-                              {feature}
-                            </Badge>
-                          ))}
+            {loading ? (
+              <div className="text-center py-8 text-gray-500">Loading products...</div>
+            ) : error ? (
+              <div className="text-center py-8 text-red-500">{error}</div>
+            ) : (
+              <div className="grid md:grid-cols-3 gap-8">
+                {products.map((product, index) => (
+                  <Card key={product.id || index} className="hover:shadow-lg transition-shadow">
+                    <CardContent className="p-0">
+                      <Image
+                        src={product.imageUrl || "/placeholder.svg"}
+                        alt={product.name}
+                        width={300}
+                        height={200}
+                        className="w-full h-48 object-cover rounded-t-lg"
+                      />
+                      <div className="p-6 space-y-4">
+                        <div>
+                          <Badge variant="secondary" className="mb-2">
+                            {product.category || product.categories?.[0]?.name || ""}
+                          </Badge>
+                          <h3 className="font-semibold text-lg">{product.name}</h3>
+                          <p className="text-gray-600 text-sm">{product.description}</p>
+                        </div>
+                        <div className="space-y-2">
+                          {/* Nếu có trường coverage hoặc features thì hiển thị, nếu không thì bỏ qua */}
+                          {product.coverage && (
+                            <p className="text-sm text-gray-600">{t('products.coverage', 'professionals')}: {product.coverage}</p>
+                          )}
+                          {product.features && Array.isArray(product.features) && (
+                            <div className="flex flex-wrap gap-1">
+                              {product.features.slice(0, 2).map((feature: string, featureIndex: number) => (
+                                <Badge key={featureIndex} variant="outline" className="text-xs">
+                                  {feature}
+                                </Badge>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                        <div className="flex items-center justify-between pt-4 border-t">
+                          <span className="font-semibold text-gray-900">{product.price || t('products.contactForPricing', 'professionals')}</span>
+                          <Button size="sm">{t('products.getQuote', 'professionals')}</Button>
                         </div>
                       </div>
-
-                      <div className="flex items-center justify-between pt-4 border-t">
-                        <span className="font-semibold text-gray-900">{product.price}</span>
-                        <Button size="sm">{t('products.getQuote', 'professionals')}</Button>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            )}
 
             {/* Product Categories */}
             <div className="grid md:grid-cols-4 gap-6 mt-12">

@@ -10,7 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ArrowLeft, Heart, Share2, Download, MessageCircle, Mail } from "lucide-react"
 import { ColorCard } from "@/components/colors/color-card"
 import { useLanguage } from "@/components/providers/language-provider"
-import { woodPanelColors } from "@/data/wood-panel-colors"
+import { useEffect } from "react"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
@@ -51,18 +51,54 @@ export default function ColorDetailPage() {
     selectedColor: "",
   })
 
-  // Find the color by slug
   const colorSlug = params.slug as string
-  const color = woodPanelColors.find(c => 
-    c.name.toLowerCase().replace(/\s+/g, "-") === colorSlug ||
-    c.code.toLowerCase().replace(/\s+/g, "-") === colorSlug
-  )
+  const [color, setColor] = useState<any | null>(null)
+  const [relatedColors, setRelatedColors] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState("")
 
-  if (!color) {
+  useEffect(() => {
+    const fetchColor = async () => {
+      setLoading(true)
+      setError("")
+      try {
+        // Fetch chi tiết màu theo slug
+        const res = await fetch(`/api/colors/${colorSlug}`)
+        const json = await res.json()
+        if (res.ok && json.data) {
+          setColor(json.data)
+          // Fetch all colors để lấy related
+          const allRes = await fetch('/api/colors')
+          const allJson = await allRes.json()
+          let allColors = allJson.data
+          if (allColors && Array.isArray(allColors.colors)) allColors = allColors.colors
+          if (allColors && Array.isArray(allColors)) {
+            setRelatedColors(
+              allColors.filter((c: any) => c.category === json.data.category && c.id !== json.data.id).slice(0, 4)
+            )
+          } else {
+            setRelatedColors([])
+          }
+        } else {
+          setError("Không tìm thấy màu")
+        }
+      } catch (e) {
+        setError("Lỗi khi tải dữ liệu màu")
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchColor()
+  }, [colorSlug])
+
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center text-gray-500">Đang tải dữ liệu màu...</div>
+  }
+  if (error || !color) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Không tìm thấy màu</h1>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">{error || "Không tìm thấy màu"}</h1>
           <Button onClick={() => router.push('/colors')}>
             <ArrowLeft className="w-4 h-4 mr-2" />
             Quay lại danh sách màu
@@ -71,11 +107,6 @@ export default function ColorDetailPage() {
       </div>
     )
   }
-
-  // Get related colors from same category
-  const relatedColors = woodPanelColors
-    .filter(c => c.category === color.category && c.id !== color.id)
-    .slice(0, 4)
 
   const toggleFavorite = () => {
     setIsFavorited(!isFavorited)

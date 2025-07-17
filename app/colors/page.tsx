@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -15,6 +15,32 @@ export default function ColorsPage() {
   const [selectedCategory, setSelectedCategory] = useState(t('categories.allColors', 'colors'))
   const [searchTerm, setSearchTerm] = useState("")
   const [favorites, setFavorites] = useState<string[]>([])
+  const [colors, setColors] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState("")
+
+  useEffect(() => {
+    const fetchColors = async () => {
+      setLoading(true)
+      setError("")
+      try {
+        const res = await fetch("/api/colors")
+        const json = await res.json()
+        if (res.ok && json.data && Array.isArray(json.data)) {
+          setColors(json.data)
+        } else if (res.ok && json.data && Array.isArray(json.data.colors)) {
+          setColors(json.data.colors)
+        } else {
+          setError("No color data found")
+        }
+      } catch (e) {
+        setError("Failed to fetch colors")
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchColors()
+  }, [])
 
   // Use imported color categories with translations
   const translatedCategories = colorCategories.map(category => {
@@ -34,12 +60,12 @@ export default function ColorsPage() {
     }
   })
 
-  const filteredColors = woodPanelColors.filter((color) => {
+  const filteredColors = colors.filter((color) => {
     const matchesCategory = selectedCategory === t('categories.allColors', 'colors') || color.category === selectedCategory
     const matchesSearch =
       color.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       color.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      color.description.toLowerCase().includes(searchTerm.toLowerCase())
+      (color.description || "").toLowerCase().includes(searchTerm.toLowerCase())
     return matchesCategory && matchesSearch
   })
 
@@ -85,13 +111,19 @@ export default function ColorsPage() {
         {selectedCategory === t('categories.allColors', 'colors') && (
           <div className="mb-12 pt-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('popularColors', 'colors')}</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {woodPanelColors
-                .filter((color) => color.popular)
-                .map((color) => (
-                  <ColorCard key={color.code} color={color} size="large" />
-                ))}
-            </div>
+            {loading ? (
+              <div className="text-center py-8 text-gray-500">Loading colors...</div>
+            ) : error ? (
+              <div className="text-center py-8 text-red-500">{error}</div>
+            ) : (
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {colors
+                  .filter((color) => color.isPopular)
+                  .map((color) => (
+                    <ColorCard key={color.code} color={color} size="large" />
+                  ))}
+              </div>
+            )}
           </div>
         )}
 
@@ -104,11 +136,17 @@ export default function ColorsPage() {
             <p className="text-gray-600">{filteredColors.length} {t('colorsFound', 'colors')}</p>
           </div>
 
-          <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {filteredColors.map((color) => (
-              <ColorCard key={color.code} color={color} size="small" />
-            ))}
-          </div>
+          {loading ? (
+            <div className="text-center py-8 text-gray-500">Loading colors...</div>
+          ) : error ? (
+            <div className="text-center py-8 text-red-500">{error}</div>
+          ) : (
+            <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {filteredColors.map((color) => (
+                <ColorCard key={color.code} color={color} size="small" />
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Action Buttons */}

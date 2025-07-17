@@ -28,69 +28,107 @@ export default function ProductsPage() {
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
 
+  // Thêm các state cho form
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+  const [formData, setFormData] = useState<Partial<Product>>({});
+  const [formLoading, setFormLoading] = useState(false);
+  const [error, setError] = useState('');
+
   useEffect(() => {
     fetchProducts()
   }, [])
 
   const fetchProducts = async () => {
     try {
-      // Mock data for demo purposes
-      setTimeout(() => {
-        const mockProducts = [
-          {
-            id: 1,
-            name: 'Premium Jet Black Panel',
-            nameVi: 'Tấm Ván Đen Tuyền Cao Cấp',
-            sku: 'WP-JB-001',
-            description: 'High-quality jet black Silklux',
-            descriptionVi: 'Tấm ván gỗ đen tuyền chất lượng cao',
-            price: 299000,
-            categoryId: 1,
-            colorId: 1,
-            isActive: true,
-            stock: 150,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-          {
-            id: 2,
-            name: 'Summer White Panel',
-            nameVi: 'Tấm Ván Trắng Mùa Hè',
-            sku: 'WP-SW-002',
-            description: 'Clean bright white Silklux',
-            descriptionVi: 'Tấm ván gỗ trắng sạch sáng',
-            price: 279000,
-            categoryId: 1,
-            colorId: 2,
-            isActive: true,
-            stock: 200,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-          {
-            id: 3,
-            name: 'Chocolate Brown Panel',
-            nameVi: 'Tấm Ván Nâu Sô-cô-la',
-            sku: 'WP-CH-003',
-            description: 'Rich chocolate brown Silklux',
-            descriptionVi: 'Tấm ván gỗ nâu sô-cô-la đậm đà',
-            price: 259000,
-            categoryId: 2,
-            colorId: 3,
-            isActive: false,
-            stock: 75,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-        ]
-        setProducts(mockProducts)
-        setLoading(false)
-      }, 500)
+      setLoading(true);
+      const token = localStorage.getItem('admin_token');
+      const response = await fetch('/api/products', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) throw new Error('Failed to fetch products');
+      const { data } = await response.json();
+      setProducts(data);
+      setLoading(false);
     } catch (error) {
-      console.error('Error fetching products:', error)
-      setLoading(false)
+      console.error('Error fetching products:', error);
+      setLoading(false);
     }
-  }
+  };
+
+  const handleAddProduct = () => {
+    setEditingProduct(null);
+    setFormData({ isActive: true, stock: 0 });
+    setIsDialogOpen(true);
+  };
+
+  const handleEditProduct = (product: Product) => {
+    setEditingProduct(product);
+    setFormData({ ...product });
+    setIsDialogOpen(true);
+  };
+
+  const handleDeleteProduct = async (product: Product) => {
+    if (!confirm(`Are you sure you want to delete product "${product.name}"?`)) return;
+    try {
+      setFormLoading(true);
+      const token = localStorage.getItem('admin_token');
+      const response = await fetch(`/api/products/${product.id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` },
+      });
+      if (response.ok) {
+        await fetchProducts();
+      } else {
+        const data = await response.json();
+        alert(data.error || 'Failed to delete product');
+      }
+    } catch (error) {
+      alert('Network error');
+    } finally {
+      setFormLoading(false);
+    }
+  };
+
+  const handleFormChange = (field: string, value: any) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormLoading(true);
+    setError('');
+    try {
+      const token = localStorage.getItem('admin_token');
+      const isEdit = !!editingProduct;
+      const url = isEdit ? `/api/products/${editingProduct!.id}` : '/api/products';
+      const method = isEdit ? 'PUT' : 'POST';
+      const body: any = { ...formData };
+      const response = await fetch(url, {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify(body),
+      });
+      if (response.ok) {
+        await fetchProducts();
+        setIsDialogOpen(false);
+        setEditingProduct(null);
+        setFormData({});
+      } else {
+        const data = await response.json();
+        setError(data.error || 'Failed to save product');
+      }
+    } catch (error) {
+      setError('Network error');
+    } finally {
+      setFormLoading(false);
+    }
+  };
 
   const filteredProducts = products.filter(product =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -110,7 +148,7 @@ export default function ProductsPage() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">Products Management</h1>
-        <Button>
+        <Button onClick={handleAddProduct}>
           <Plus className="mr-2 h-4 w-4" />
           Add Product
         </Button>
@@ -168,10 +206,10 @@ export default function ProductsPage() {
                         <Button variant="outline" size="sm">
                           <Eye className="h-4 w-4" />
                         </Button>
-                        <Button variant="outline" size="sm">
+                        <Button variant="outline" size="sm" onClick={() => handleEditProduct(product)}>
                           <Edit className="h-4 w-4" />
                         </Button>
-                        <Button variant="outline" size="sm">
+                        <Button variant="outline" size="sm" onClick={() => handleDeleteProduct(product)}>
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </div>
@@ -183,6 +221,79 @@ export default function ProductsPage() {
           </div>
         </CardContent>
       </Card>
+
+      {isDialogOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">
+          <form onSubmit={handleFormSubmit} className="bg-white rounded-lg p-6 w-full max-w-md space-y-4 shadow-lg">
+            <h2 className="text-xl font-bold mb-2">{editingProduct ? 'Edit Product' : 'Add Product'}</h2>
+            {error && <div className="text-red-500 text-sm mb-2">{error}</div>}
+            <div className="space-y-2">
+              <Input
+                placeholder="Name"
+                value={formData.name || ''}
+                onChange={e => handleFormChange('name', e.target.value)}
+                required
+              />
+              <Input
+                placeholder="Name (Vietnamese)"
+                value={formData.nameVi || ''}
+                onChange={e => handleFormChange('nameVi', e.target.value)}
+              />
+              <Input
+                placeholder="SKU"
+                value={formData.sku || ''}
+                onChange={e => handleFormChange('sku', e.target.value)}
+                required
+              />
+              <Input
+                placeholder="Description"
+                value={formData.description || ''}
+                onChange={e => handleFormChange('description', e.target.value)}
+              />
+              <Input
+                placeholder="Description (Vietnamese)"
+                value={formData.descriptionVi || ''}
+                onChange={e => handleFormChange('descriptionVi', e.target.value)}
+              />
+              <Input
+                placeholder="Price"
+                type="number"
+                value={formData.price || ''}
+                onChange={e => handleFormChange('price', Number(e.target.value))}
+                required
+              />
+              <Input
+                placeholder="Category ID"
+                value={formData.categoryId || ''}
+                onChange={e => handleFormChange('categoryId', e.target.value)}
+              />
+              <Input
+                placeholder="Color ID"
+                value={formData.colorId || ''}
+                onChange={e => handleFormChange('colorId', e.target.value)}
+              />
+              <Input
+                placeholder="Stock"
+                type="number"
+                value={formData.stock || 0}
+                onChange={e => handleFormChange('stock', Number(e.target.value))}
+              />
+              <label className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={formData.isActive ?? true}
+                  onChange={e => handleFormChange('isActive', e.target.checked)}
+                />
+                Active
+              </label>
+            </div>
+            <div className="flex gap-2 justify-end">
+              <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)} disabled={formLoading}>Cancel</Button>
+              <Button type="submit" disabled={formLoading}>{formLoading ? 'Saving...' : (editingProduct ? 'Save' : 'Add')}</Button>
+            </div>
+          </form>
+        </div>
+      )}
     </div>
   )
 }

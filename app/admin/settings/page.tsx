@@ -58,66 +58,43 @@ export default function SettingsPage() {
 
   const fetchSettings = async () => {
     try {
-      // Mock data for demo purposes
-      setTimeout(() => {
-        const mockSettings: Settings = {
-          general: {
-            siteName: 'Silklux Pro',
-            siteNameVi: 'Ván Gỗ Chuyên Nghiệp',
-            siteDescription: 'Premium Silklux solutions for modern spaces',
-            siteDescriptionVi: 'Giải pháp ván gỗ cao cấp cho không gian hiện đại',
-            contactEmail: 'dd@diepduong.vn',
-            supportPhone: '+0433678888',
-            address: '123 Wood Street, District 1, Ho Chi Minh City',
-            addressVi: '123 Đường Gỗ, Quận 1, TP. Hồ Chí Minh',
-          },
-          features: {
-            enableRegistration: false,
-            enableComments: true,
-            enableNewsletter: true,
-            enableAnalytics: true,
-            enableSampleOrders: true,
-            enableProfessionalProgram: true,
-          },
-          email: {
-            smtpHost: 'smtp.gmail.com',
-            smtpPort: 587,
-            smtpUser: 'noreply@silklux.com',
-            smtpPassword: '••••••••',
-            fromEmail: 'noreply@silklux.com',
-            fromName: 'Silklux Pro',
-          },
-          seo: {
-            metaTitle: 'Silklux Pro - Premium Silklux Solutions',
-            metaTitleVi: 'Ván Gỗ Chuyên Nghiệp - Giải Pháp Ván Gỗ Cao Cấp',
-            metaDescription: 'Discover premium Silkluxs with natural finishes. High-quality Silklux colors and professional-grade products.',
-            metaDescriptionVi: 'Khám phá ván gỗ cao cấp với hoàn thiện tự nhiên. Màu ván gỗ chất lượng cao và sản phẩm chuyên nghiệp.',
-            keywords: 'Silkluxs, interior design, home renovation, premium wood',
-            keywordsVi: 'ván gỗ, thiết kế nội thất, cải tạo nhà, gỗ cao cấp',
-          },
-        }
-        setSettings(mockSettings)
-        setLoading(false)
-      }, 500)
+      setLoading(true);
+      const token = localStorage.getItem('admin_token');
+      const response = await fetch('/api/settings', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) throw new Error('Failed to fetch settings');
+      const { data } = await response.json();
+      setSettings(data);
+      setLoading(false);
     } catch (error) {
-      console.error('Error fetching settings:', error)
-      setLoading(false)
+      console.error('Error fetching settings:', error);
+      setLoading(false);
     }
-  }
+  };
 
   const handleSave = async () => {
-    setSaving(true)
+    setSaving(true);
     try {
-      // Mock save operation
-      setTimeout(() => {
-        setSaving(false)
-        alert('Settings saved successfully!')
-      }, 1000)
+      const token = localStorage.getItem('admin_token');
+      const response = await fetch('/api/settings', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify(settings),
+      });
+      if (!response.ok) throw new Error('Failed to save settings');
+      setSaving(false);
+      alert('Settings saved successfully!');
     } catch (error) {
-      console.error('Error saving settings:', error)
-      setSaving(false)
+      console.error('Error saving settings:', error);
+      setSaving(false);
     }
-  }
+  };
 
   const updateSettings = (section: keyof Settings, field: string, value: any) => {
     if (!settings) return

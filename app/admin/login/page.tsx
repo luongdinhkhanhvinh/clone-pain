@@ -11,7 +11,7 @@ import { Eye, EyeOff, LogIn, Loader2 } from 'lucide-react'
 
 export default function AdminLogin() {
   const [formData, setFormData] = useState({
-    username: '',
+    email: '',
     password: '',
   })
   const [showPassword, setShowPassword] = useState(false)
@@ -28,33 +28,25 @@ export default function AdminLogin() {
     e.preventDefault()
     setLoading(true)
     setError('')
-
-    // Hard-coded bypass for demo
-    if (formData.username === 'admin' && formData.password === 'admin123') {
-      // Simulate loading delay
-      setTimeout(() => {
-        // Create fake token and user data
-        const fakeToken = 'fake-jwt-token-for-demo'
-        const fakeUser = {
-          id: 1,
-          username: 'admin',
-          email: 'admin@woodpanel.com',
-          firstName: 'Admin',
-          lastName: 'User',
-          role: 'admin'
-        }
-
-        localStorage.setItem('admin_token', fakeToken)
-        localStorage.setItem('admin_user', JSON.stringify(fakeUser))
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: formData.email, password: formData.password }),
+      })
+      const data = await res.json()
+      if (res.ok && data.token) {
+        localStorage.setItem('admin_token', data.token)
+        if (data.data) localStorage.setItem('admin_user', JSON.stringify(data.data))
         router.push('/admin')
-        setLoading(false)
-      }, 1000)
-      return
+      } else {
+        setError(data.message || data.error || 'Invalid credentials')
+      }
+    } catch (error) {
+      setError('Network error')
+    } finally {
+      setLoading(false)
     }
-
-    // If not the bypass credentials, show error
-    setError('Invalid credentials. Use admin / admin123')
-    setLoading(false)
   }
 
   return (
@@ -82,13 +74,13 @@ export default function AdminLogin() {
 
               <div className="space-y-4">
                 <div>
-                  <Label htmlFor="username">Username</Label>
+                  <Label htmlFor="email">Email</Label>
                   <Input
-                    id="username"
-                    type="text"
-                    value={formData.username}
-                    onChange={(e) => handleInputChange('username', e.target.value)}
-                    placeholder="Enter your username"
+                    id="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => handleInputChange('email', e.target.value)}
+                    placeholder="Enter your email"
                     required
                     disabled={loading}
                     className="mt-1"
@@ -129,7 +121,7 @@ export default function AdminLogin() {
               <Button
                 type="submit"
                 className="w-full"
-                disabled={loading || !formData.username || !formData.password}
+                disabled={loading || !formData.email || !formData.password}
               >
                 {loading ? (
                   <>
@@ -144,14 +136,6 @@ export default function AdminLogin() {
                 )}
               </Button>
             </form>
-
-            <div className="mt-6 text-center text-sm text-gray-600">
-              <p>Demo credentials:</p>
-              <p className="font-mono text-xs bg-gray-100 p-2 rounded mt-2">
-                Username: admin<br />
-                Password: admin123
-              </p>
-            </div>
           </CardContent>
         </Card>
 

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.supabase.com/database/tables.json",
+  "dialect": "postgresql",
+  "schema": "./server/db/schema.ts",
+  "out": "./server/db/migrations",
+  "dbCredentials": {
+    "host": "localhost",
+    "port": 5432,
+    "user": "postgres",
+    "password": "postgres",
+    "database": "woodpanel_db",
+    "ssl": false
+  },
+  "breakpoints": true
+}

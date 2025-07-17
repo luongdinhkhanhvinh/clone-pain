@@ -10,6 +10,17 @@ const nextConfig = {
     }
   }),
 
+  // Server-side optimization configurations
+  compiler: {
+    styledComponents: true,
+  },
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '2mb',
+    },
+    optimizeCss: true,
+  },
+
   // Exclude server folder from Next.js compilation
   webpack: (config, { isServer }) => {
     if (!isServer) {
@@ -18,6 +29,26 @@ const nextConfig = {
         fs: false,
         net: false,
         tls: false,
+      }
+    }
+
+    // Handle CSS modules for server-side rendering
+    if (isServer) {
+      const rules = config.module.rules
+        .find((rule) => typeof rule.oneOf === 'object')
+        ?.oneOf?.filter((rule) => Array.isArray(rule.use));
+
+      if (rules) {
+        rules.forEach((rule) => {
+          rule.use?.forEach((moduleLoader) => {
+            if (typeof moduleLoader === 'object' && 
+                moduleLoader.loader?.includes('css-loader') && 
+                !moduleLoader.loader?.includes('postcss-loader') &&
+                moduleLoader.options?.modules) {
+              moduleLoader.options.modules.exportOnlyLocals = false;
+            }
+          });
+        });
       }
     }
 

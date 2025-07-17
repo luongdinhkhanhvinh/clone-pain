@@ -37,30 +37,10 @@ services:
     volumes:
       - redis_dev_data:/data
 
-  # pgAdmin for database management
-  pgadmin-dev:
-    image: dpage/pgadmin4:latest
-    container_name: woodpanel-pgadmin-dev
-    restart: unless-stopped
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@woodpanel.com
-      PGADMIN_DEFAULT_PASSWORD: admin123
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
-    volumes:
-      - pgadmin_dev_data:/var/lib/pgadmin
-    ports:
-      - "5051:80"
-    networks:
-      - woodpanel-dev-network
-    depends_on:
-      - postgres-dev
-
 volumes:
   postgres_dev_data:
     driver: local
   redis_dev_data:
-    driver: local
-  pgadmin_dev_data:
     driver: local
 
 networks:

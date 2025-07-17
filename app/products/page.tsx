@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Filter } from "lucide-react"
@@ -16,8 +16,34 @@ export default function ProductsPage() {
   const [selectedType, setSelectedType] = useState(t('types.allTypes', 'products'))
   const [sortBy, setSortBy] = useState("featured")
   const [showFilters, setShowFilters] = useState(false)
+  const [products, setProducts] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState("")
 
-  const filteredProducts = generatedProducts.filter((product) => {
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true)
+      setError("")
+      try {
+        const res = await fetch("/api/products")
+        const json = await res.json()
+        if (res.ok && json.data && Array.isArray(json.data)) {
+          setProducts(json.data)
+        } else if (res.ok && json.data && Array.isArray(json.data.products)) {
+          setProducts(json.data.products)
+        } else {
+          setError("No product data found")
+        }
+      } catch (e) {
+        setError("Failed to fetch products")
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchProducts()
+  }, [])
+
+  const filteredProducts = products.filter((product) => {
     const matchesCategory = selectedCategory === t('categories.allProducts', 'products') || product.category === selectedCategory
     const matchesType = selectedType === t('types.allTypes', 'products') || product.type === selectedType
     return matchesCategory && matchesType
@@ -26,7 +52,7 @@ export default function ProductsPage() {
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     switch (sortBy) {
       case "rating":
-        return b.rating - a.rating
+        return (b.rating || 0) - (a.rating || 0)
       case "name":
         return a.name.localeCompare(b.name)
       default:
@@ -92,7 +118,7 @@ export default function ProductsPage() {
           </div>
 
           <div className="text-sm text-gray-600">
-            {t('filters.showing', 'products')} {sortedProducts.length} {t('filters.of', 'products')} {generatedProducts.length} {t('filters.products', 'products')}
+            {t('filters.showing', 'products')} {sortedProducts.length} {t('filters.of', 'products')} {products.length} {t('filters.products', 'products')}
           </div>
         </div>
 
@@ -100,14 +126,20 @@ export default function ProductsPage() {
         {selectedCategory === t('categories.allProducts', 'products') && (
           <div className="mb-12 pt-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('sections.featuredProducts', 'products')}</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {generatedProducts
-                .filter((product) => product.rating >= 4.7)
-                .slice(0, 4)
-                .map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-            </div>
+            {loading ? (
+              <div className="text-center py-8 text-gray-500">Loading products...</div>
+            ) : error ? (
+              <div className="text-center py-8 text-red-500">{error}</div>
+            ) : (
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {products
+                  .filter((product) => product.rating >= 4.7)
+                  .slice(0, 4)
+                  .map((product) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))}
+              </div>
+            )}
           </div>
         )}
 
@@ -120,11 +152,17 @@ export default function ProductsPage() {
             <p className="text-gray-600">{sortedProducts.length} {t('filters.products', 'products')}</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {sortedProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+          {loading ? (
+            <div className="text-center py-8 text-gray-500">Loading products...</div>
+          ) : error ? (
+            <div className="text-center py-8 text-red-500">{error}</div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {sortedProducts.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Load More */}
